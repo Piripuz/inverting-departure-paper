@@ -164,6 +164,7 @@ the two cases are separated, so that they can be studied independently.
 Please note that in general,
 optimal early and late arrivals may not exist,
 depending on the choice of the travel time function and the parameters.
+The zones in which these minima exist will be studied later.
 
 For studying where these minima occur, consider now the case of an early arrival \(t_a = t_0 < t^*\).
 Since
@@ -230,7 +231,8 @@ This reasoning leads to the following lemma:
 
 Note that this has some trivial implication on the value of the derivative of the travel time function at the optimal points:
 \begin{obs}
-  The derivative of the travel time function \(tt_a'\) is fixed in the optimal points:
+  \label{obs:foc}
+  The derivative of the travel time function \(tt_a'\) is fixed at the optimal points:
   \begin{itemize}
   \item \(tt_a'(t_e^{opt}) = \beta\)
   \item \(tt_a'(t_l^{opt}) = -\gamma\)
@@ -251,7 +253,41 @@ The case for late arrival is analogous.
 While not particularly difficult to retrieve,
 the expression in Lemma~\ref{lemma:cost_decoupled} is useful,
 since it makes a clearer decoupling of the dependencies of the point that minimizes the cost on the parameters \(\beta, \gamma\) and \(t^*\).
-We can indeed see how changing the parameters affects the 
+We can indeed see how changing the parameters affects the location of the points \(t_e^{opt}, t_l^{opt}\):
+for instance, when moving the desired arrival time \(t^*\) left to right,
+the point \(t_e^{opt}\) will do one of the following:
+\begin{itemize}
+\item Remain constant,
+  when the travel time is above the line of slope \(\beta\) as shown in figure~\ref{fig:early_arrivals_cost}
+\item Disappear, when the travel time goes below the line of slope \(\beta\).
+  In this case, no optimal early arrival exists,
+  since the closer the arrival time \(t_a\) will be to the desired arrival time \(t^*\) the lower the cost will be
+\item Appear again, yielding another constant zone,
+  when a point in which the condition described in Observation~\ref{obs:foc} is satisfied,
+  that is, \(tt_a'(t_a) = \beta\)
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{early_arrivals_jump}
+  \caption{How the optimal early arrival changes,
+    when changing the parameter \(t^*\).
+    When \(t^*\) is in one of the shaded zones,
+    the optimal early arrival time \(t_e^{opt}\) will be constant and equal to the time that yielded the zone.
+  Otherwise, the optimal early arrival does not exist.}
+  \label{fig:early_arrivals_jump}
+\end{figure}
+
+Figure~\ref{fig:early_arrivals_jump} shows this behaviour:
+when \(t^*\) falls in the shaded zones,
+the optimal early arrival \(t_e^{opt}\) is constant (in each of the zones).
+If \(t^*\) is not in the zones,
+the optimal early arrival is not defined:
+for these values of the parameter,
+the global minimum will be realized by either an on-time arrival (that is, \(t^{opt} = t^*\))
+or by a late arrival.
+
+The case of late arrival is, as expected, exactly symmetrical.
 
 %%% Local Variables:
 %%% mode: LaTeX

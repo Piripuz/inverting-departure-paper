@@ -5,6 +5,8 @@ plt.rcParams.update({
 import matplotlib as mpl
 
 import numpy as np
+from jax import numpy as jnp
+from jaxopt import GradientDescent, Bisection
 
 from scripts.travel_times import asymm_gaussian, asymm_gaussian_plateau
 #%%
@@ -50,3 +52,48 @@ ax.axis('off')
 ax.legend()
 fig.savefig("../img/early_arrivals_cost.png", dpi=quality)
 plt.close()
+
+#%%
+
+tt = lambda x: x + jnp.exp(-(x+.2)**2*4)/2 + jnp.exp(-(x-1.5)**2*5)/.9 + jnp.exp(-(x-.7)**2*7)/1.25
+
+beta = 1.7
+f = lambda x: tt(x) - beta*x
+
+bs = jnp.r_[GradientDescent(f).run(0.).params, GradientDescent(f).run(1.25).params]
+def find_end(start, tt):
+    curr = start+.1
+    old = start
+    while tt(start) + beta*(curr - start) < tt(curr):
+        old = curr
+        curr += .1
+    res = Bisection(lambda curr: tt(start) + beta*(curr - start) - tt(curr), old, curr).run()
+    return res.params
+bs_end = np.r_[find_end(bs[0], tt), find_end(bs[1], tt)]
+#%%
+
+x = np.linspace(0, 2, 200)
+
+fig, ax = plt.subplots(figsize=(6, 4))
+
+ax.plot(x, tt(x), color=tt_color, label=r"Travel Time Function $tt_a(t_a)$")
+
+colors = mpl.color_sequences['Dark2']
+
+for i in range(2):
+    ax.plot([bs[i], bs_end[i]], tt(np.r_[bs[i], bs_end[i]]), color=colors[i])
+    ax.vlines(bs[i], .3, tt(bs[i]), linestyle="dashed", color=colors[i])
+    ax.fill_between(
+        [bs[i], bs_end[i]],
+        2.7,
+        .3,
+        color=colors[i],
+        alpha=.15,
+        edgecolor="none",
+        label=fr"Zone in which $t_e^{{opt}} = t_{i}$"
+    )
+    ax.text(bs[i] + .03, .4, fr"$t_{i}$", color=colors[i])
+ax.axis('off')
+ax.legend()
+fig.savefig("../img/early_arrivals_jump.png", dpi=quality)
+plt.show()
