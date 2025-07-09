@@ -348,6 +348,24 @@ and after which the arrivals can only be late or on-time:
     C(t_e^{opt}(\beta, \gamma, t_s)) = C(t_l^{opt}(\beta, \gamma, t_s))
   \end{equation*}
 \end{prop}
+\begin{proof}
+  
+  
+  % To prove the first part of the proposition,
+  % it is enough to show that if 
+  If there is no point realizing a late arrival, that is
+  \begin{equation*}
+    \nexists\, t^* |\, t^{opt}(t^*) = t_l^{opt}(t^*)\footnote{For the scope of this proposition, how the parameters \(\beta, \gamma\) change is not relevant:
+  for notational simplicity, the dependency of the points \(t^{opt}, t_e^{opt}, t_l^{opt}\) on these parameters are thus hidden,
+  and the only dependency to be explicitly denoted will be the one on the desired arrival time \(t^*\).}
+  \end{equation*}
+  then the proposition is true, for \(t_s = \infty\).
+
+  Otherwise, consider a point \(t_0\) realizing a late arrival:
+  \begin{equation*}
+    t^{opt}(t_0) = t_l^{opt}(t_0)
+  \end{equation*}
+\end{proof}
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
