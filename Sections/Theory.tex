@@ -180,9 +180,9 @@ the cost simplifies, becoming
 \begin{figure}
   \centering
   \includegraphics[width=.8\textwidth]{early_arrivals_cost}
-  \caption{Dependency of the cost on the arrival time.
+  \caption{Dependency of the cost on the arrival time, for early arrival.
     The solid lines are parallel, of slope \(\beta\).
-  Note that their distance is thus the only factor affecting the cost of an early arrival}
+  Note that their distance is the only factor affecting the cost of an early arrival}
   \label{fig:early_arrivals_cost}
 \end{figure}
 
@@ -241,13 +241,12 @@ Note that this has some trivial implication on the value of the derivative of th
 
 This follows from the Lemma above:
 if the function \(tt_a\) is differentiable, being the minima computed over an open set,
-if they exist they necessarily satisfy the first order conditions:
-for the early arrivals, they are
+if they exist they necessarily satisfy the first order conditions.
+For the early arrivals, they are
 \begin{align*}
   \diffp{}{{t_a}} \left(tt_a(t_a) - \beta t_a\right) & = 0 \\
   tt_a'(t_a) & = \beta
 \end{align*}
-
 The case for late arrival is analogous.
 
 While not particularly difficult to retrieve,
