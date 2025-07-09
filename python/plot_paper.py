@@ -36,7 +36,7 @@ ax.text(x[-1] + .01, tt(star), r"$C(t^*)$", va="center", color=ot_color)
 
 f = lambda x: tt(x) + beta*(star - x)
 ts = np.r_[8.2, 8.6, 8.85]
-colors = iter(mpl.color_sequences['Set1'])
+colors = iter(mpl.color_sequences['Dark2'])
 for i, t in enumerate(ts):
     col = next(colors)
     ax.plot([t, star], [tt(t), f(t)], color=col)
