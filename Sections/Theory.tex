@@ -66,6 +66,7 @@ The assumption of the traffic following a FIFO logic has different implications,
 on the functions \(tt\) and \(tt_a\):
 
 \begin{lemma}
+  \label{lemma:bounded-der-tt}
   Suppose the travel time functions \(tt, tt_a\) to be differentiable.
   
   The traffic follows a First In First Out logic if and only if the function \(tt\) satisfies
@@ -146,15 +147,15 @@ the two cases are separated, so that they can be studied independently.
 \begin{definition}
   Let values for the parameters \(\beta, \gamma, t^*\) be fixed.
   \begin{itemize}
-  \item The \textit{optimal early arrival} \(t_e^{opt}\) is the early arrival realizing the least cost:
+  \item The \textbf{optimal early arrival} \(t_e^{opt}\) is the early arrival realizing the least cost:
     \begin{equation*}
       t_e^{opt}(\beta, \gamma ,t^*) = \argmin_{t_a < t^*}C(t_a; \beta, \gamma, t^*)
     \end{equation*}
-  \item The \textit{optimal late arrival} \(t_l^{opt}\) is the late arrival realizing the least cost:
+  \item The \textbf{optimal late arrival} \(t_l^{opt}\) is the late arrival realizing the least cost:
     \begin{equation*}
       t_l^{opt}(\beta, \gamma ,t^*) = \argmin_{t_a > t^*}C(t_a; \beta, \gamma, t^*)
     \end{equation*}
-  \item The \textit{optimal arrival} \(t^{opt}\) is the arrival realizing the least cost:
+  \item The \textbf{optimal arrival} \(t^{opt}\) is the arrival realizing the least cost:
     \begin{equation*}
       t^{opt}(\beta, \gamma ,t^*) = \argmin_{t_a}C(t_a; \beta, \gamma, t^*)
     \end{equation*}
