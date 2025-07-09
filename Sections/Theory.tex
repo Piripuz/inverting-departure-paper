@@ -365,6 +365,162 @@ and after which the arrivals can only be late or on-time:
   \begin{equation*}
     t^{opt}(t_0) = t_l^{opt}(t_0)
   \end{equation*}
+
+  We will now prove that a desired arrival time later than \(t_0\) cannot yield an early arrival:
+  in the following, is shown that, given \(t_1 > t_0\),
+  \begin{equation*}
+    t^{opt}(t_1) \neq t_e^{opt}(t_0)
+  \end{equation*}
+
+  The proof will be divided in two different cases:
+  \(t_1\) can be either greater or smaller than \(t_l^{opt}(t_0)\).
+
+  At first, we suppose it to be smaller: \[t_1 \leq t_l^{opt}(t_0)\]
+
+  This case will be again divided in two different cases:
+  \(t_e^{opt}(t_1)\) can be either greater than \(t_0\) or smaller.
+
+  Suppose now the second case:
+  \begin{equation*}
+    t_e^{opt}(t_1) \leq t_0
+  \end{equation*}
+  In this case, arrival at \(t_l^{opt}(t_0)\) is a realizable late arrival when the desired arrival time is \(t_1\) as well.
+  Its cost will be lower than the cost of the same arrival,
+  when the desired arrival time is \(t_0\):
+  this is because the cost decreases on the distance between the desired arrival time (in this case, \(t_1\)) and the actual arrival time (in this case, \(t_l^{opt}(t_0)\)).
+  \begin{align*}
+    C(t_l^{opt}(t_0); \beta, \gamma, t_1) & = tt_a(t_l^{opt}(t_0)) + \gamma(t_l^{opt}(t_0) - t_1) \\
+                                          & < tt_a(t_l^{opt}(t_0)) + \gamma(t_l^{opt}(t_0) - t_0) \\
+                                          & = C(t_l^{opt}(t_0); \beta, \gamma, t_0)
+  \end{align*}
+  Moreover, the cost of every possible early arrival increases:
+  the arrival time \(t_e^{opt}(t_1)\) is, on top of this, a realizable early arrival even when the desired arrival time is \(t_0\),
+  and its cost is lower in this case:
+  similarly, to the earlier computations,
+  \begin{align*}
+    C(t_e^{opt}(t_1); \beta, \gamma, t_1) & = tt_a(t_e^{opt}(t_1)) + \beta(t_1 - t_e^{opt}(t_1)) \\
+                                          & > tt_a(t_e^{opt}(t_1)) + \beta(t_0 - t_e^{opt}(t_1)) \\
+                                          & = C(t_e^{opt}(t_1); \beta, \gamma, t_0)
+  \end{align*}
+  There exists thus, when the desired arrival time is \(t_0\),
+  a late arrival whose cost is lower than the one of the best early arrival:
+  \begin{align*}
+    C(t_l^{opt}(t_0); \beta, \gamma, t_1) & < C(t_l^{opt}(t_0); \beta, \gamma, t_0) \\
+                                          & < C(t_e^{opt}(t_1); \beta, \gamma, t_0) \\
+                                          & < C(t_e^{opt}(t_1); \beta, \gamma, t_1)
+  \end{align*}
+
+  Consider now the case in which the optimal early arrival is greater than the desired arrival \(t_0\):
+  \begin{equation*}
+    t_e^{opt}(t_1) > t_0
+  \end{equation*}
+
+  In this case, the travel time function has to be increasing at \(t_e^{opt}(t_1)\),
+  being it an early arrival (as shown in Observation~\ref{obs:foc}),
+  and by unimodality it has to be increasing at \(t_0\) as well.
+  The cost of a late arrival at \(t_l^{opt}(t_0)\) is, on the other hand, decreasing:
+  \begin{equation}
+    \label{eq:cost-comp-1}
+    \begin{split}
+      C(t_l^{opt}(t_0); \beta, \gamma, t_1) & = tt_a(t_l^{opt}(t_0)) + \gamma(t_l^{opt}(t_0) - t_1) \\
+                                            & < tt_a(t_l^{opt}(t_0)) + \gamma(t_l^{opt}(t_0) - t_0) \\
+                                            & = C(t_l^{opt}(t_0); \beta, \gamma, t_0)
+    \end{split}
+  \end{equation}
+
+  Moreover, the optimality of \(t_l^{opt}(t_0)\), when the desired arrival time is \(t_0\), yields
+  \begin{equation}
+    \label{eq:cost-comp-2}
+    \begin{split}
+      C(t_l^{opt}(t_0); \beta, \gamma, t_0) & < C(t_0; \beta, \gamma, t_0) \\
+                                            & = tt_a(t_0)
+    \end{split}
+  \end{equation}
+
+  Suppose now \(t_e^{opt}(t_1) > t_0\).
+
+  Being the function \(tt_a\) increasing, its value in \(t_e^{opt}(t_1)\) will be greater than at \(t_0\):
+  \begin{equation}
+    \label{eq:decreasing-tt_a}
+    tt_a(t_0) \leq tt_a(t_e^{opt}(t_1))
+  \end{equation}
+
+  Finally, the cost of an arrival at \(t_e^{opt}(t_1)\) will be lower bounded by the travel time:
+  \begin{equation}
+    \label{eq:cost-low-bound}
+    \begin{split}
+      C(t_e^{opt}(t_1); \beta, \gamma, t_1) & = tt_a(t_e^{opt}(t_1)) + \beta(t_1 - t_e^{opt}(t_1)) \\
+                                            & > tt_a(t_e^{opt}(t_1))
+    \end{split}
+  \end{equation}
+
+  By using equations \eqref{eq:cost-comp-1}, \eqref{eq:cost-comp-2}, \eqref{eq:decreasing-tt_a} and \eqref{eq:cost-low-bound},
+  we get
+  \begin{align*}
+    C(t_e^{opt}(t_1); \beta, \gamma, t_1) & > tt_a(t_e^{opt}(t_1)) \\
+                                          & \geq tt_a(t_0) \\
+                                          & > C(t_l^{opt}; \beta, \gamma, t_0) \\
+                                          & > C(t_l^{opt}(t_0); \beta, \gamma, t_1)
+  \end{align*}
+  showing that there is a late arrival whose cost is smaller than the best early arrival for \(t_1\).
+
+
+  Consider, finally, the case in which \[t_1 > t_l^{opt}(t_0)\]
+
+  Note that the reasoning above shows, given the arbitrariness of the choice of \(t_1\),
+  \begin{align*}
+    C(t_e^{opt}(t_1); \beta, \gamma, t_1) & > C(t_l^{opt}(t_0); \beta, \gamma, t_l^{opt}(t_0)) \\
+                                          & = tt_a(t_l^{opt}(t_0))
+  \end{align*}
+  where, in the last line, the cost has been computed.
+
+  Note now that the function \(tt_a\) has to be decreasing (again, given Observation~\ref{obs:foc}) at \(t_l^{opt}(t_0)\) and,
+  as a consequence of unimodality,
+  will be so until \(t_1\). This implies
+  \begin{equation*}
+    tt_a(t_1) \leq tt_a(t_l^{opt}(t_0))
+  \end{equation*}
+
+  The value of the travel time is a lower bound for the optimal cost,
+  being it the cost of an on-time arrival.
+  An early arrival will thus not be realized,
+  since the cost for an on-time arrival will be lower:
+  \begin{align*}
+    C(t_1; \beta, \gamma, t_1) & = tt_a(t_1) \\
+                               & \leq tt_a(t_l^{opt}(t_0)) \\
+                               & = C(t_l^{opt}(t_0); \beta, \gamma, t_l^{opt}(t_0)) \\
+                               & < C(t_e^{opt}(t_1); \beta, \gamma, t_1)
+  \end{align*}
+
+  This shows that \(t_1\) cannot yield an early arrival,
+  if the function \(tt_a\) is decreasing at \(t_0\).
+
+  This reasoning shows that, given a desired arrival time that realizes a late arrival,
+  a greater desired arrival time will never yield an early arrival.
+
+  A symmetric reasoning will show the same for early arrivals:
+  given a desired arrival time that yields an early arrival,
+  no earlier desired arrival times will yield late arrivals.
+
+  These two statements prove the first part of the proposition:
+  let indeed
+  \begin{align*}
+    t_{s, l} & = \inf\{t^* |\, t^{opt}(t^*) = t_l^{opt}(t^*)\} \\
+    t_{s, e} & = \sup\{t^* |\, t^{opt}(t^*) = t_e^{opt}(t^*)\}
+  \end{align*}
+
+  Any choice of \(t_s \in [t_{s, e}, t_{s, l}]\) will satisfy the two requirements for \(t_s\).
+
+  Regarding the second part of the proposition,
+  that is, that the cost of arriving early or late at \(t_s\) is the same,
+  it simply follows from a careful choice of the value \(t_s\).
+
+  Note indeed that the cost of arriving early continuously grows as the value of \(t_s\) is increased from \(t_{s, e}\),
+  while the cost of arriving late continuously grows as \(t_s\) is decreased from \(t_{s, l}\).
+
+  Since the cost of arriving late when desiring \(t_{s, e}\) is greater than the cost of arriving early,
+  and the cost of arriving early when desiring \(t_{s, l}\) is greater than the cost of arriving late,
+  there has to be a value for \(t_s\) that satisfies the claim.\todo{Better argue this}
 \end{proof}
 %%% Local Variables:
 %%% mode: LaTeX
