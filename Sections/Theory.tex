@@ -289,6 +289,65 @@ or by a late arrival.
 
 The case of late arrival is, as expected, exactly symmetrical.
 
+Once the dependency of the points \(t_e^{opt}, t_l^{opt}\) on the parameters has been explained,
+the global minimum \(t^{opt}\) has to be characterized.
+To this end, note that the optimum can only be smaller, greater or equal to \(t^*\):
+\begin{obs}
+  \label{obs:t_opt-dep}
+  Given values for the parameters \(\beta, \gamma, t^*\) one out of the following is always true:
+  \begin{itemize}
+  \item \(t^{opt} = t_e^{opt}\) that is, the optimal arrival is an early arrival
+  \item \(t^{opt} = t_l^{opt}\) that is, the optimal arrival is a late arrival
+  \item \(t^{opt} = t^*\) that is, the optimal arrival is an on-time arrival
+  \end{itemize}
+\end{obs}
+
+While the characterization of the points \(t_e^{opt}, t_l^{opt}\) is straightforward and done above,
+describing the interaction between early and late arrivals is in general not easy,
+and can be made simpler by assuming the travel time function to have some realistic features.
+
+\begin{definition}
+  \label{def:gen-tt-fun}
+  Consider a function
+  \begin{equation*}
+    tt_a: \R \rightarrow \R
+  \end{equation*}
+
+  \(tt_a\) is said a \textbf{general travel time function} if it satisfies the following:
+  \begin{enumerate}
+  \item \(tt_a \in C^1(\R)\)\todo{Add limits to \(\pm\infty\). Adapt later, where it says \textit{first requirement} etc}
+  \item \(tt_a'(t_a) < 1\ \forall\, t_a\in \R\)
+  \item \(tt_a\) is unimodal
+  \end{enumerate}
+\end{definition}
+
+The first requirement is not restrictive,
+since the space \(C^1(\R)\) is dense in the space of continuous functions,
+and the travel time function can be assumed to be continuous.
+Requirement about the bounded derivative arises from Lemma~\ref{lemma:bounded-der-tt}.
+Unimodality, finally, is a restrictive requirement that has never been mentioned earlier,
+and simplifies the problem of describing the interactions of early and late arrivals.
+It is anyway realistic:
+if considering only one out of the morning and evening peak (that can be treated separately),
+we indeed expect the traffic pattern to be unimodal\todo{Cite something}.
+
+Under these assumptions, when a set of parameters results in an early or late arrival can be clearly stated:
+it is indeed possible to find a point before which the arrivals can only be either early or on-time,
+and after which the arrivals can only be late or on-time:
+
+\begin{prop}
+  Let \(tt_a\) be a general travel time function, the parameters \(\beta, \gamma\) be given.
+  There exists a point \(t_s(\beta, \gamma) \in \bar{\R} = \{\R \cup \pm \infty\}\) that satisfies
+  \begin{itemize}
+  \item \(t^{opt}(\beta, \gamma, t^*) \neq t_e^{opt}(\beta, \gamma, t^*)\) if \(t^* > t_s(\beta, \gamma)\)
+  \item \(t^{opt}(\beta, \gamma, t^*) \neq t_l^{opt}(\beta, \gamma, t^*)\) if \(t^* < t_s(\beta, \gamma)\)
+  \end{itemize}
+
+  Moreover, when \(t^* = t_s(\beta, \gamma)\) arriving early or late yields the same cost:
+  \begin{equation*}
+    C(t_e^{opt}(\beta, \gamma, t_s)) = C(t_l^{opt}(\beta, \gamma, t_s))
+  \end{equation*}
+\end{prop}
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
