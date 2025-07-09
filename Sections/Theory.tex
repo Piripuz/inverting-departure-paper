@@ -37,17 +37,18 @@ Let thus
 be the function linking the departure time to the arrival time.
 The following holds:
 \begin{obs}
+  \label{obs:inv-t_a}
   The function \(t_a(t_d)\) is invertible
 \end{obs}
 This simply follows from noting that  \(t_a(t_d)\) must be strictly increasing:
 this corresponds to the traffic following a First In First Out (FIFO) logic,
 that is, a later departure cannot result in an earlier arrival:
-a reasonable assumption that we make on the travel time function\footnote{Note that this assumption is equivalent to assuming the decrease of the travel time function to be bounded: computing the derivative of the function \(t_a\), we find that it being increasing is equivalent to \(tt'(t_d) > -1\ \forall\. t_d\)}.
+a reasonable assumption that we make on the travel time function.
 
 The function \(t_d(t_a)\) that, given an arrival time,
 yields the unique departure time that would result in the given arrival,
 is thus well defined.
-The travel time function can thus be defined in term of the arrival time:
+The travel time function can hence be defined in term of the arrival time:
 \begin{definition}
   \label{def:tta}
   Let
@@ -61,8 +62,50 @@ The travel time function can thus be defined in term of the arrival time:
   \end{equation*}
 \end{definition}
 
-By using equation \eqref{eq:t_a-t_d} and Definition~\ref{def:tta}, the expression for the cost in~\eqref{eq:cost-t_d} simplifies,
-trivially becoming
+The assumption of the traffic following a FIFO logic has different implications,
+on the functions \(tt\) and \(tt_a\):
+
+\begin{lemma}
+  Suppose the travel time functions \(tt, tt_a\) to be differentiable.
+  
+  The traffic follows a First In First Out logic if and only if the function \(tt\) satisfies
+  \begin{equation*}
+    tt'(t_d) > -1\quad \forall \, t_d
+  \end{equation*}
+  or, equivalently, the function on arrival time \(tt_a\) satisfies
+  \begin{equation*}
+    tt_a'(t_a) < 1\quad \forall \, t_a
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  Note that the traffic follows a FIFO logic if and only if the function \(t_a(t_d)\) is strictly increasing,
+  and, once defined, its inverse \(t_d(t_a)\) will be so.
+  
+  Being \(t_a(t_d)\) differentiable, it is increasing if and only if its derivative is positive:
+  \begin{align*}
+    \diffp{}{{t_d}} t_a(t_d) & > 0 \\
+    1 + tt'(t_d) & > 0 \\
+    tt'(t_d) & > -1
+  \end{align*}
+  
+  Alternatively, consider its inverse
+  \begin{equation*}
+    t_d(t_a) = t_a - tt_a(t_a)
+  \end{equation*}
+
+  Again, it is increasing if and only if it has positive derivative:
+  \begin{align*}
+    \diffp{}{{t_a}} t_d(t_a) & > 0 \\
+    1 - tt_a'(t_a) & > 0 \\
+    tt_a'(t_a) < 1
+  \end{align*}
+\end{proof}
+
+Once this needed property on the travel time function was stated,
+the cost function can be simplified by expressing it in function of the arrival time:
+by using equation \eqref{eq:t_a-t_d} and Definition~\ref{def:tta},
+the expression for the cost in~\eqref{eq:cost-t_d} indeed simplifies,
+becoming
 
 \begin{equation}
   \label{eq:cost-t_a}
