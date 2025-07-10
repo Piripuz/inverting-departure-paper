@@ -201,13 +201,13 @@ This reasoning leads to the following lemma:
   If an optimal early arrival \(t_e^{opt}\) exists,
   it can be found by solving a simple minimization problem:
   \begin{equation*}
-    t_e^{opt} = \argmin_{t_a < t^*} tt_a(t_a) - \beta t_a
+    t_e^{opt} = \argmin_{t_a < t^*} (tt_a(t_a) - \beta t_a)
   \end{equation*}
 
   Similarly, if an optimal late arrival exists,
   it is
   \begin{equation*}
-    t_l^{opt} = \argmin_{t_a > t^*} tt_a(t_a) + \gamma t_a
+    t_l^{opt} = \argmin_{t_a > t^*} (tt_a(t_a) + \gamma t_a)
   \end{equation*}
 \end{lemma}
 \begin{proof}
@@ -223,8 +223,8 @@ This reasoning leads to the following lemma:
   This yields
   \begin{align*}
     t_e^{opt} & = \argmin_{t_a < t^*} C(t_a) \\
-              & = \argmin_{t_a < t^*} tt_a(t_a) + \beta t^* - \beta t_a \\
-              & = \argmin_{t_a < t^*} tt_a(t_a) - \beta t_a
+              & = \argmin_{t_a < t^*} (tt_a(t_a) + \beta t^* - \beta t_a) \\
+              & = \argmin_{t_a < t^*} (tt_a(t_a) - \beta t_a)
   \end{align*}
 
   Regarding late arrivals, the argument is symmetrical and thus omitted.
@@ -522,6 +522,8 @@ and after which the arrivals can only be late or on-time:
   and the cost of arriving early when desiring \(t_{s, l}\) is greater than the cost of arriving late,
   there has to be a value for \(t_s\) that satisfies the claim.\todo{Better argue this}
 \end{proof}
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
