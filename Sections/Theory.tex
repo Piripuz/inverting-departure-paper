@@ -272,7 +272,163 @@ This is described by the following proposition:
 \end{prop}
 
 \begin{proof}
-  Proof
+  If there is no \(t^*\) for which an optimal early arrival is defined,
+  then setting \(n = 0\) trivially proves the proposition.
+
+  Suppose now that there exist a desired arrival time \(t_0\) such that \(t_e^{opt}(\beta, \gamma, t_0)\) is defined.
+
+  Since we are assuming \(tt_a\) to be continuous\todo{Where is this assumption stated?},
+  the cost will be continuous as well,
+  and early arrivals can approximate arbitrarily well the cost of an on-time arrival:
+  \begin{equation*}
+    \forall\, \varepsilon > 0\ \exists\, t < t_0 |\ C(t_\varepsilon; \beta, \gamma, t_0) < C(t_0; \beta, \gamma, t_0) + \varepsilon
+  \end{equation*}
+
+  Note now that the cost of arriving at the desired arrival time \(t_0\) is equal to the value of the travel time function at that point:
+  \begin{align*}
+     C(t_\varepsilon; \beta, \gamma, t_0) & < C(t_0; \beta, \gamma, t_0) + \varepsilon \\
+                              & = tt_a(t_0) + \varepsilon
+  \end{align*}
+  but since arrival at \(t_e^{opt}(t_0)\)\footnote{Note that, for the content of this proof, dependency of \(t_e^{opt}\) on the parameters \(\beta, \gamma\) is not relevant, and thus hidden.} minimizes the cost for \(t < t_0\),
+  it costs in particular less than arriving at \(t_\varepsilon\).
+  By using this, and the definition of the cost, we get
+  \begin{align*}
+    tt_a(t_e^{opt}(t_0)) & < tt_a(t_e^{opt}(t_0)) + \beta(t_0 - t_e^{opt}(t_0)) \\
+                                        & = C(t_e^{opt}(t_0)) \\
+                                        & < C(t_\varepsilon) \\
+                                        & < tt_a(t_0) + \varepsilon
+  \end{align*}
+  for every choice of \(\varepsilon > 0\).
+  The soft inequality holds thus for \(\varepsilon = 0\):
+  \begin{equation*}
+    tt_a(t_e^{opt}(t_0)) \leq tt_a(t_0)
+  \end{equation*}
+
+  Suppose now the desired arrival time to be in between \(t_e^{opt}(t_0)\) and \(t_0\):
+  \begin{equation*}
+    t^* \in (t_e^{opt}(t_0), t_0]
+  \end{equation*}
+  The optimal early arrival, when the desired arrival time is \(t^*\),
+  will be defined and equal to \(t_e^{opt}(t_0)\).
+  
+  Suppose indeed by contradiction
+  \begin{equation*}
+    t_e^{opt}(t^*) \neq t_e^{opt}(t_0)
+  \end{equation*}
+
+  Necessarily, \(t_e^{opt}((t^*) < t_0\), since
+  \begin{equation*}
+    t_e^{opt}((t^*) < t^* < t_0
+  \end{equation*}
+  \(t_e^{opt}(t^*)\) is thus a realizable early arrival when desired arrival time is \(t_0\) as well,
+  and its cost will be lower than the cost of arriving at \(t_e^{opt}(t_0)\):
+  \begin{align*}
+    C(t_e^{opt}(t_0); \beta, \gamma, t^*) & = tt_a(t_e^{opt}(t_0)) + \beta(t^* - t_e^{opt}(t^*)) \\
+    & < tt_a(t_e^{opt}(t_0)) + \beta(t_0 - t_e^{opt}(t^*)) \\
+    & = C(t_e^{opt}(t_0); \beta, \gamma, t_0)
+  \end{align*}
+
+  But this is a contradiction, since \(t_e^{opt}(t_0)\) realizes the minimal cost for an early arrival for desired arrival time \(t_0\).
+  As the desired arrival time changes in the interval \((t_e^{opt}(t_0), t_0]\),
+  the optimal early arrival will thus be constant and equal to \(t_e^{opt}(t_0)\).
+
+  Let now \(\bar{t_e}\) be the first time point in which the cost of arriving early is equal to the cost of arriving on time:
+  \begin{equation*}
+    \bar{t_e} = \inf\{t |\ C(t_e^{opt}(t_0); \beta, \gamma, t) = tt_a(t), t > t_e^{opt}(t_0)\}
+  \end{equation*}
+
+  Note that \(\bar{t_e}\) is well defined:
+  there exists indeed at least one value of \(t > t_e^{opt}(t_0)\) for which \(C(t_e^{opt}(t_0); \beta, \gamma, t) = tt_a(t)\),
+  and this is a trivial consequence of the fact that the travel time is bounded\todo{Should this be in the hypotheses as well? Is it trivially assumed?}.
+
+  Suppose now the desired arrival time to be in between \(t_0\) and \(\bar{t_e}\):
+  \begin{equation*}
+    t^* \in [t_0, \bar{t_e})
+  \end{equation*}
+  and again, towards a contradiction, suppose
+  \begin{equation*}
+    t_e^{opt}(t^*) \neq t_e^{opt}(t_0)
+  \end{equation*}
+
+  If \(t_e^{opt}(t^*) < t_0\), a similar argument to the one in the preceding case can be used:
+  
+  Early arrival at \(t_e^{opt}(t^*)\) is still realizable with desired arrival time \(t_0\).
+  Note now that arriving at the same time point,
+  while desiring a later arrival, increases the cost by a factor that is linear in how later the arrival is:
+  it is indeed true
+  \begin{equation}
+    \label{eq:shifting_desired}
+    \begin{split}
+      C(t_e^{opt}(t_0); \beta, \gamma, t^*) & = tt_a(t_e^{opt}(t_0)) + \beta(t^* - t_e^{opt}(t^*)) \\
+                                            & = tt_a(t_e^{opt}(t_0)) + \beta(t_0 - t_e^{opt}(t^*)) + \beta(t^* - t_0) \\
+                                            & = C(t_e^{opt}(t_0); \beta, \gamma, t_0) + \beta(t^* - t_0)
+    \end{split}
+  \end{equation}
+  and, similarly,
+  \begin{equation*}
+    C(t_e^{opt}(t^*); \beta, \gamma, t^*) = C(t_e^{opt}(t^*); \beta, \gamma, t_0) + \beta(t^* - t_0)
+  \end{equation*}
+
+  But since \(t_e^{opt}(t^*)\) is the minimizer for the cost when desiring arrival at \(t^*\),
+  allowing the inequality to be strict would mean
+  \begin{align*}
+    C(t_e^{opt}(t^*); \beta, \gamma, t^*) & < C(t_e^{opt}(t_0); \beta, \gamma, t^*) \\
+    C(t_e^{opt}(t^*); \beta, \gamma, t_0) + \beta(t^* - t_0) & < C(t_e^{opt}(t_0); \beta, \gamma, t_0) + \beta(t^* - t_0) \\
+    C(t_e^{opt}(t^*); \beta, \gamma, t_0) & < C(t_e^{opt}(t_0); \beta, \gamma, t_0)
+  \end{align*}
+  that is a contradiction, since \(t_e^{opt}(t_0)\) is the minimizer when desiring arrival at \(t_0\).
+
+  The last remaining case is when \(t_e^{opt}(t^*) \in [t_0, \bar{t_e})\).
+  
+  In this case, the continuity of the travel time function and the minimality of \(t_e\) imply that the value of the travel time function at \(t_e^{opt}(t^*)\) to be larger than the cost of an hypothetical early arrival at \(t_e^{opt}(t_0)\) when desiring arriving at \(t_e^{opt}(t^*)\).
+  \footnote{This substantially means that in Figure~\ref{fig:early_arrivals_cost}, on the vertical line corresponding to \(t_e^{opt}(t_0)\), the function is above the lowest possible inclined line.}
+  More formally,
+  \begin{align*}
+    tt_a(t_e^{opt}(t^*)) & > C(t_e^{opt}(t_0); \beta, \gamma, t_e^{opt}(t^*)) \\
+    & = tt_a(t_e^{opt}(t^*)) + \beta(t_e^{opt}(t^*) - t_e^{opt}(t_0)) \\
+    & > tt_a(t_e^{opt}(t_0))
+  \end{align*}
+
+  By using what shown in equation~\eqref{eq:shifting_desired}, we can thus prove the proposition:
+  \begin{align*}
+    C(t_e^{opt}(t_0); \beta, \gamma, t^*) & = C(t_e^{opt}(t_0); \beta, \gamma, t_e^{opt}(t^*)) + \beta(t^* - t_e^{opt}(t^*)) \\
+                                          & < tt_a(t_e^{opt}(t_0)) + \beta(t^* - t_e^{opt}(t^*)) \\
+                                          & < tt_a(t_e^{opt}(t^*)) + \beta(t^* - t_e^{opt}(t^*)) \\
+                                          & = C(t_e^{opt}(t^*); \beta, \gamma, t^*)
+  \end{align*}
+
+  This shows that the cost of arriving at \(t_e^{opt}(t_0)\),
+  when desired arrival time is \(t^*\),
+  is lower than the cost of arriving at \(t_e^{opt}(t^*)\).
+  It yields thus a contradiction,
+  and proves the claim.
+
+  If an early arrival is realized for some desired arrival time \(t_0\),
+  we proved that there exists an interval \((t_e, \bar{t_e})\),
+  where \(t_e = t_e^{opt}(t_0)\),
+  such that
+  \begin{equation*}
+    t^* \in (t_e, \bar{t_e}) \implies t_e^{opt}(t^*) = t_e
+  \end{equation*}
+
+  Note now that the intervals have to be disjoint.
+  To this end, suppose, again towards a contradiction,
+  that exists one point that is in two different intervals:
+  \begin{equation*}
+    t_0 \in (t_e^1, \bar{t_e^1}) \cup (t_e^2, \bar{t_e^2})
+  \end{equation*}
+
+  For what proved above,
+  every point in the same interval as \(t_0\) will have the same optimal early arrival as \(t_0\).
+  But this means that all the points in the two intervals will share the same optimal early arrival,
+  and this arrival can only be the minimum between \(t_e^1, t_e^2\).
+  The points in one of the two intervals can thus be considered to belong to a single interval,
+  namely
+  \begin{equation*}
+    (\min\{t_e^1, t_e^2\}, \max\{\bar{t_e^1}, \bar{t_e^2}\}) = (t_e^1, \bar{t_e^1}) \cap (t_e^2, \bar{t_e^2})
+  \end{equation*}
+
+  This proves the proposition.
 \end{proof}
 
 \begin{figure}
@@ -345,7 +501,7 @@ and after which the arrivals can only be late or on-time:
 
 \begin{prop}
   Let \(tt_a\) be a general travel time function, the parameters \(\beta, \gamma\) be given.
-  There exists a point \(t_s(\beta, \gamma) \in \bar{\R} = \{\R \cup \pm \infty\}\) that satisfies
+  There exists a critical arrival time \(t_s(\beta, \gamma) \in \bar{\R} = \{\R \cup \pm \infty\}\) that satisfies
   \begin{itemize}
   \item \(t^{opt}(\beta, \gamma, t^*) \neq t_e^{opt}(\beta, \gamma, t^*)\) if \(t^* > t_s(\beta, \gamma)\)
   \item \(t^{opt}(\beta, \gamma, t^*) \neq t_l^{opt}(\beta, \gamma, t^*)\) if \(t^* < t_s(\beta, \gamma)\)
