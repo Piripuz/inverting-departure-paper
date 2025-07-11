@@ -256,6 +256,7 @@ since it makes a clearer decoupling of the dependencies of the point that minimi
 We can indeed see how changing the parameters affects the location of the points \(t_e^{opt}, t_l^{opt}\).
 This is described by the following proposition:
 \begin{prop}
+  \label{prop:into-early-late}
   Given a value for the parameters \(\beta, \gamma\),
   there exist two collections of disjoint intervals
   \begin{align*}
@@ -475,7 +476,41 @@ To this end, note that the optimum can only be smaller, greater or equal to \(t^
   \end{itemize}
 \end{obs}
 
-While the characterization of the points \(t_e^{opt}, t_l^{opt}\) is straightforward and done above,
+The following lemma gives a strong condition on when an on-time arrival can be realized:
+\begin{lemma}
+  Given the values for the parameters \(\beta, \gamma, t^*\),
+  the optimal arrival time can be an on-time arrival (that is, \(t^{opt} = t^*\)) only if the neither the optimal early arrival \(t_e^{opt}\) nor the optimal late arrival \(t_l^{opt}\) are defined.
+\end{lemma}
+\begin{proof}
+  Suppose the optimal early arrival \(t_e^{opt}\) to be defined,
+  and \(t^*\) to be a local minimum of the cost function \(C(t_a)\)
+
+  Note that the cost function is continuous,
+  if the travel time function is so.
+  This means that, in particular,
+  \begin{equation*}
+    \forall\, \varepsilon > 0,\ \exists \delta > 0 |\, C(t^* - \delta) < C(t^*) + \varepsilon
+  \end{equation*}
+  that is, there exist early arrivals whose cost approximate arbitrarily well the cost of the on-time arrival.
+
+  Remind now that the arrival time \(t_e^{opt}\) is the best possible early arrival:
+  this means that, for every choice of \(\delta > 0\),
+  \begin{equation*}
+    C(t_e^{opt}) \leq C(t^* - \delta)
+  \end{equation*}
+  and, finally, that for every choice of \(\varepsilon > 0\),
+  \begin{equation*}
+    C(t_e^{opt}) < C(t^*) + \varepsilon
+  \end{equation*}
+
+  This means that the soft equality holds for \(\varepsilon = 0\):
+  \begin{equation*}
+    C(t_e^{opt}) \leq C(t^*)
+  \end{equation*}
+  that proves the lemma.
+\end{proof}
+
+While the characterization of the points \(t_e^{opt}, t_l^{opt}\) was done in the proposition above,
 describing the interaction between early and late arrivals is in general not easy,
 and can be made simpler by assuming the travel time function to have some realistic features.
 
@@ -509,6 +544,7 @@ it is indeed possible to find a point before which the arrivals can only be eith
 and after which the arrivals can only be late or on-time:
 
 \begin{prop}
+  \label{prop:split-early-late}
   Let \(tt_a\) be a general travel time function, the parameters \(\beta, \gamma\) be given.
   There exists a critical arrival time \(t_s(\beta, \gamma) \in \bar{\R} = \{\R \cup \pm \infty\}\) that satisfies
   \begin{itemize}
