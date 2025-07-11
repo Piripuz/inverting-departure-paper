@@ -257,18 +257,25 @@ We can indeed see how changing the parameters affects the location of the points
 This is described by the following proposition:
 \begin{prop}
   Given a value for the parameters \(\beta, \gamma\),
-  there exists a collection of disjoint intervals
-  \begin{equation*}
-    E = \{(t_e^i, \bar{t_e^i})\}_i,\quad i = 1, \dots, n
-  \end{equation*}
+  there exist two collections of disjoint intervals
+  \begin{align*}
+    E & = \{(t_e^i, \bar{t_e^i})\}_i,\quad i = 1, \dots, n \\
+    L & = \{(\bar{t_l^j}, t_l^j)\}_j,\quad j = 1, \dots, m \\
+  \end{align*}
   such that, if exists a value for \(i\) such that \(t^* \in (t_e^i, \bar{t_e^i})\),
   the optimal early arrival will be the lower bound of the interval:
   \begin{equation*}
     t_e^{opt}(\beta, \gamma, t^*) = t_e^{i}
   \end{equation*}
 
-  If such a value for \(i\) does not exist,
-  then the optimal early arrival is not defined.
+  Similarly, if exists a value for \(j\) such that \(t^* \in (\bar{t_l^j}, t_l^j)\),
+  the optimal late arrival will be the upper bound of the interval:
+  \begin{equation*}
+    t_l^{opt}(\beta, \gamma, t^*) = t_l^{j}
+  \end{equation*}
+
+  If such a value for \(i\) (or \(j\)) does not exist,
+  then the optimal early (respectively, late) arrival is not defined.
 \end{prop}
 
 \begin{proof}
@@ -428,7 +435,9 @@ This is described by the following proposition:
     (\min\{t_e^1, t_e^2\}, \max\{\bar{t_e^1}, \bar{t_e^2}\}) = (t_e^1, \bar{t_e^1}) \cap (t_e^2, \bar{t_e^2})
   \end{equation*}
 
-  This proves the proposition.
+  This proves the proposition for the early arrivals.
+  For the case of late arrivals,
+  the proof is symmetrical.
 \end{proof}
 
 \begin{figure}
