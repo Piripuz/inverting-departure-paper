@@ -1,5 +1,89 @@
 \section{Likelihood}
 
+In the current section,
+the parameters \(\beta, \gamma, t^*\) will be considered to be distributed, according to some known distribution.
+This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed itself.
+
+The goal of the section is thus to find an analytical expression for the Probability Density Function that characterizes the distribution of the outcomes of the function \(t^{opt}\).
+To this end, the characterization developed in the preceding section will be employed,
+in a slightly simpler setting, in which some additional hypotheses on the travel time function are made.
+
+The assumptions that simplify the estimation are shown in the following definition:
+\begin{definition}
+  \label{def:proper_tt}
+  Let \(tt_a:\R\rightarrow\R\).
+
+  \(tt_a\) is a \textbf{Proper Travel Time Function} if \(tt_a\) is a General Travel Time Function and,
+  on top of this, 
+  two points \(k_1\neq k_2 \in \R\) can be found such that
+  \begin{itemize}
+  \item \(tt_a|_{(k_1, k_2)}\) is concave
+  \item \(tt_a|_{\R\setminus(k_1, k_2)}\) is convex
+  \end{itemize}
+\end{definition}
+\todo{Why is proper tt even realistic?}
+
+For a proper travel time function,
+the estimation of the optimal arrival time \(t^{opt}\) considerably simplifies:
+the following observation shows how.
+\begin{obs}
+  Consider the problem of choosing an optimal departure time
+  with a proper travel time function, and let \(\beta, \gamma\) be fixed.
+
+  There exist two intervals \((t_e, \bar{t_e}), (\bar{t_l}, t_l)\) such that an on-time arrival \(t^{opt} = t^*\) is realized if and only if
+  \begin{equation*}
+    t^* \notin (t_e, \bar{t_e}) \cup (\bar{t_l}, t_l)
+  \end{equation*}
+\end{obs}
+
+Note that this is exactly what said by Proposition~\ref{prop:into-early-late},
+with a single difference:
+the intervals are indeed here at most one (for each type of arrival), rather than an arbitrary number.
+
+This is a consequence of the hypothesis on the travel time function:
+the point \(t_e\) must indeed be an eligible early arrival and,
+as shown in Lemma~\ref{lemma:bounded-der-tt} and~\ref{lemma:cost_decoupled},
+any possible early arrival must satisfy two simple conditions:
+\begin{enumerate}
+\item \(tt_a'(t_e) = \beta\)
+\item \(tt_a''(t_e) \geq 0\)
+\end{enumerate}
+where the second one derives from being a minimum:
+if the second derivative was negative, the point was indeed a maximum.
+
+But for a proper travel time function,
+a point satisfying the conditions above can occur only once:
+given the unimodality,
+the function will be as shown in Figure\todo{ref}: increasing, with an increasing derivative,
+for \(t < k_1\), and decreasing with an increasing derivative for \(t > k_2\).
+Its derivative will thus be injective on the convex part \(\R \setminus (k_1, k_2)\),
+that is the part we are interested in.
+This shows that the set of possible \(t^*\) for which early arrivals occur is a single interval.
+A similar reasoning holds for late arrivals.
+
+Consider thus now the problem of finding the intervals \((t_e, \bar{t_e})\), \((\bar{t_l}, t_l)\).
+The points in which the arrivals occur are now easy to estimate. Let
+\begin{equation*}
+  \beta_{max} = \max_t tt_a'(t)\qquad \gamma_{max} = -\min_t tt_a'(t)
+\end{equation*}
+
+The following functions are well defined:
+\begin{align*}
+  b_i: (0, \beta_{max}) & \rightarrow \R  & g_e: (0, \gamma_{max}) & \rightarrow \R \\
+       \beta & \mapsto (tt_a' |_{(-\infty, k_1)})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{(k_2, \infty)})^{-1}(\gamma)
+\end{align*}
+
+Given \(\beta \in (0, \beta_{max})\),
+the time \(b_i(\beta)\) will be the starting point of the interval in which early arrivals occur.
+
+Similarly, given \(\gamma\) the time \(g_e(\gamma)\) will be the ending point of the interval in which the late arrivals occur.
+
+Estimating the remaining point is slightly more difficult.
+The expression in the proof of Proposition~\ref{prop:into-early-late} can anyway be used:
+the function \(b_e(\beta)\) (and \(g_i(\gamma)\))
+are thus defined as the points in which the line tangent to the travel time function in \(b_i(\beta)\) (or, respectively, in \(g_e(\gamma)\)) intersects again with the travel time function.
+
+A graphical representation of the functions \(b_i, b_e, g_i, g_e\) is shown in figure\todo{ref}
 
 %%% Local Variables:
 %%% mode: LaTeX
