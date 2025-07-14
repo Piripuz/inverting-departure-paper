@@ -79,10 +79,10 @@ on the functions \(tt\) and \(tt_a\):
   \end{equation*}
 \end{lemma}
 \begin{proof}
-  Note that the traffic follows a FIFO logic if and only if the function \(t_a(t_d)\) is strictly increasing,
+  Note that the traffic follows a FIFO logic if and only if the function \(t_a(t_d)\) is strictly increasing,\todo{split sentence}
   and, once defined, its inverse \(t_d(t_a)\) will be so.
   
-  Being \(t_a(t_d)\) differentiable, it is increasing if and only if its derivative is positive:
+  Being \(t_a(t_d)\) differentiable, it is strictly increasing if and only if its derivative is positive:
   \begin{align*}
     \diffp{}{{t_d}} t_a(t_d) & > 0 \\
     1 + tt'(t_d) & > 0 \\
@@ -478,8 +478,9 @@ To this end, note that the optimum can only be smaller, greater or equal to \(t^
 
 The following lemma gives a strong condition on when an on-time arrival can be realized:
 \begin{lemma}
+  \label{lemma:where-no-ot}
   Given the values for the parameters \(\beta, \gamma, t^*\),
-  the optimal arrival time can be an on-time arrival (that is, \(t^{opt} = t^*\)) only if the neither the optimal early arrival \(t_e^{opt}\) nor the optimal late arrival \(t_l^{opt}\) are defined.
+  the optimal arrival time can be an on-time arrival (that is, \(t^{opt} = t^*\)) only if neither the optimal early arrival \(t_e^{opt}\) nor the optimal late arrival \(t_l^{opt}\) exist.
 \end{lemma}
 \begin{proof}
   Suppose the optimal early arrival \(t_e^{opt}\) to be defined,
