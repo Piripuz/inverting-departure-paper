@@ -1,0 +1,14 @@
+\section{Introduction}
+
+ 
+Many travel demand management (TDM) schemes depend on information about travelers’ scheduling preferences. However, obtaining these preferences through traditional methods such as stated-preference (SP) surveys is often costly and time-consuming. In contrast, revealed-preference (RP) data—such as historical traffic counts and travel times—are relatively easy to access. This raises a key research question: Can commuters’ scheduling preferences be inferred from large-scale, readily available RP data rather than direct surveys?
+
+Transport modeling initially relied on static models, which assume that congestion levels remain constant across time. Despite this strong assumption, static models are still widely used in practice (see also \citealp{duranton2011fundamental}). This assumption was first challenged by \citet{Vickrey1963, Vickrey1969}, who introduced the \textit{bottleneck model}, in which users trade off congestion costs against early or late arrivals relative to a preferred arrival time \( t^* \). Building on this, \citet{arnott1993structural} extended the framework to incorporate elastic demand, simple networks, and user heterogeneity (see \citealp{Li2020} for a comprehensive synthesis).
+
+To reflect observed variations in departure times, \citet{de1983stochastic} introduced a \textit{stochastic departure time model}, known as the \(\alpha\)–\(\beta\)–\(\gamma\) model. In this model, \(\alpha\) denotes the value of time (used as the numéraire), while \(\beta\) and \(\gamma\) represent the penalties for early and late arrivals, respectively.
+
+More recently, large-scale simulation tools such as METROPOLIS 1 \& 2 have incorporated departure time choice into integrated travel behavior modeling. These tools simulate users' learning processes and day-to-day adaptations until a stationary state is reached—i.e., where anticipated and experienced travel times converge throughout the day (see \citealp{javaudin2024metropolis2}).
+
+Despite these advances, a central challenge remains: estimating the parameters \(\beta\), \(\gamma\), and \( t^* \) \textit{from RP data alone}. In large-scale networks, travel times for a given origin-destination (O-D) pair are not necessarily in equilibrium even at stationarity. This complicates the inference of user preferences based solely on observed data.
+
+To address this challenge, we develop a methodology for calibrating \(\beta\)–\(\gamma\) and \( t^* \) in dynamic departure time models. Our approach targets specific population groups defined by socio-economic attributes and trip purposes and uses only attainable RP data, offering a scalable and cost-efficient alternative to survey-based methods.

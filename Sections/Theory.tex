@@ -1,11 +1,39 @@
-\section{Theory}
+\section{Settings}
+In this section, we start by presenting the departure time choices problem for individual users. Then we proceed by characterizing the optimal departure time under different scheduling preferences and exogenous travel time profiles.
 
-\subsection{The Cost Function }
+
+\subsection{Departure time choices}
 \label{sec:cost_fn}
 
 \label{sec:theory}
 
-** the model in (ADL, 1993),
+Consider some users commuting between an origin and a destination. The travel time between the origin-destination (OD) pair fluctuates across the time of the day. To hedge against time-varying congestion, some users may be motivated to arrive early and later at their destinations to avoid the rush hours. An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time. Thus, we can denote the experienced travel time for travelers arriving at different times $t_a$ of the day by $tt_a(t_a)$.  
+ 
+ 
+ 
+ 
+ To capture such trade-offs, the departure time choice model \citep{arnott1993structural} considers that each user chooses an arrival time $t_a$ at their destination that minimizes their individual travel cost
+\begin{equation}
+  \label{eq:cost_ta}
+  C(t_a) = \alpha tt_a(t_a) + \beta[t^*-t_a]^+ + \gamma[t_a-t^*]^+,
+\end{equation}
+where \(t^*\) is the desired arrival time at the destination,  \(\alpha\) is the value of travel time, and \(\beta\) and \(\gamma\) are respectively the unit costs of arriving early and late at the destination. Without loss of generally, from now on, we normalize the value of $\alpha$ to 1. 
+
+Further, we consider that the congestion pattern, described by the travel time profile, is such that a traveler will not arrive earlier than anyone who departs earlier than her/him, which is termed as the first-in-first-out (FIFO) rule in literature. Thus, we impose the following assumption regarding the travel time function  $tt_a(t_a)$.
+
+
+
+\begin{assumption}\label{ass:FIFO}
+The travel time profile function $tt_a(t_a)$ is differentiable, and $tt'_a(t_a) \le 1$. 
+\end{assumption}
+
+
+Under Assumption \ref{ass:FIFO}, the FIFO principle is always satisfied. To see this, it is equivalent to show that the arrival time $t_a$ is weakly increasing in the departure time $t_d$, i.e., $\partial t_d / \partial t_a \ge 0$ under Assumption \ref{ass:FIFO}.  Note that by definition, we have $ t_d = t_a - tt_a(t_a)  $.  Obviously, when $tt'_a(t_a) \le 1$, we have $\partial t_d / \partial t_a = 1 - tt_a'(t_a) \ge 0$. Therefore, a traveler will arrive earlier if she departs earlier. 
+
+
+
+$C(t_a)$, i.e.,  $t_a^* = \text{arg} \min C(t_a)$. The individual travel cost $C(t_a)$ is defined as 
+
 we consider a cost function of the form
 
 \begin{equation}
@@ -19,7 +47,7 @@ where
 \item \(\alpha\) is the value of time spent travelling
 \item \(\beta\) is the value of time spent waiting there
 \item \(\gamma\) is the value of time arriving late
-\item \(tt(t_d)\) is the time spent travelling if leaving at time \(t_d\)
+\item \(tt(t_d)\) is the time spent traveling if leaving at time \(t_d\)
 \item \([x]^+ = \max(0, x)\)
 \end{itemize}
 
