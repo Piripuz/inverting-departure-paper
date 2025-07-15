@@ -151,6 +151,69 @@ by using the sum rule, the pdf for the random variable \(T^{opt}\) can be decomp
 
 The single addends are easier to describe,
 and will be individually studied in the following.
+
+\subsubsection{On-time Arrivals}
+
+How likely a point is to be an on-time arrival will be here computed.
+This is, the value of the function
+\begin{equation*}
+  f_{T^{opt}, Q}(t, 0)
+\end{equation*}
+
+Note that Observation~\ref{obs:simplified-char} fully characterizes the values of the parameters for which the on-time arrivals are realized:
+we are able, by using this characterization, to better describe the event at issue.
+
+In particular, we note that the arrival time \(t\) is an optimal on-time arrival if and only if two conditions are satisfied:
+the time \(t\) has to be a realization of the desired arrival time \(T^*\),
+and it has to  be out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\).
+
+Being the random variable \(T^*\) independent from \(B, \Gamma\),
+the two events above are independent and their likelihood can be multiplied:
+\begin{equation}
+  \label{eq:on-time-intro}
+  f_{T^{opt}, Q}(t, 0) = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma)))
+\end{equation}
+where \(f_{T^*}\) is the pdf of the random variable \(T^*\), and is known.
+
+Expression~\eqref{eq:on-time-intro} leads to a straightforward way of computing the desired value:
+the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\) can indeed be simply evaluated by integrating it
+
+\begin{equation}
+  \label{eq:prob-not-intervals}
+  \prob( t \not\in (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) = \int_{b\in \R \vert t \not\in (b_i(b), b_e(b))}\int_{g \in \R \vert t \not\in (g_i(g), g_e(g))}f_B(b)f_\Gamma(g)\, dg\, db
+\end{equation}
+where \(f_B, f_\Gamma\) are the pdf of, respectively, the random variables \(B, \Gamma\).
+
+
+It is now possible to take advantage of Proposition\todo{Need to add this proposition somewhere...}:
+the monotonicity of the intervals imply that there exist two functions representing the maximum values \(\beta\) and \(\gamma\) can assume while keeping a given point into the defined intervals:
+\begin{equation}
+  \label{eq:def_b_0_g_0}
+  \begin{split}
+    \beta_0:\R&\rightarrow(0, \beta_{max}) \\
+    t&\mapsto \sup\{b | t \in (b_i(b), b_e(b))\} \\[1em]
+    \gamma_0:\R&\rightarrow(0, \gamma_{max}) \\
+    t&\mapsto \sup\{g | t \in (g_i(g), g_e(g))\}
+  \end{split}
+\end{equation}
+
+The definition of these functions simplifies the integrals in~\eqref{eq:prob-not-intervals}, that become
+
+\begin{equation}
+  \label{eq:on-time-monot}
+  \prob( t \not\in (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) = \int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
+\end{equation}
+
+By exploiting the expression obtained in equation~\eqref{eq:on-time-monot},
+the joint pdf in equation~\eqref{eq:on-time-intro} can be analytically evaluated:
+\begin{equation}
+  \label{eq:on-time-final}
+  \begin{split}
+    f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) \\
+    & = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
+  \end{split}
+\end{equation}
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
