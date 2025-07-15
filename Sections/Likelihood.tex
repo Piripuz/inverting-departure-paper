@@ -302,6 +302,19 @@ For the late arrivals, an analogous reasoning finds a similar expression:
   f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 
+This last expression terminates the possible values for the variable \(Q\),
+and allows us to write an expression for the probability density function of the variable \(T^{opt}\) alone.
+
+\subsubsection{Expression for the Probability Density Function}
+
+By substituting the expressions found for the joint probabilities in equation~\eqref{eq:pdf-decomposed-q},
+we find the following:
+\begin{multline}
+    f_{T^{opt}}(t) = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db \\
+    + \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ \\
+    + \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
+\end{multline}
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
