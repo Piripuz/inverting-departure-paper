@@ -146,7 +146,7 @@ Since an optimal arrival can only be early, on-time or late,
 by using the sum rule, the pdf for the random variable \(T^{opt}\) can be decomposed into three different parts:
 \begin{equation}
   \label{eq:pdf-decomposed-q}
-  f_{t^{opt}}(t) = f_{T^{opt}, Q}(t, -1) + f_{T^{opt}, Q}(t, 0) + f_{T^{opt}, Q}(t, 1)
+  f_{T^{opt}}(t) = f_{T^{opt}, Q}(t, -1) + f_{T^{opt}, Q}(t, 0) + f_{T^{opt}, Q}(t, 1)
 \end{equation}
 
 The single addends are easier to describe,
@@ -298,7 +298,7 @@ yields an explicit expression for the desired pdf:
 
 For the late arrivals, an analogous reasoning finds a similar expression:
 \begin{equation}
-  \label{late-final}
+  \label{eq:late-final}
   f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 
