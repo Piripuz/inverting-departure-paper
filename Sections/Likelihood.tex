@@ -73,7 +73,7 @@ The points in which the arrivals occur are now easy to estimate. Let
 
 The following functions are well defined:
 \begin{align*}
-  b_i: (0, \beta_{max}) & \rightarrow \R  & g_e: (0, \gamma_{max}) & \rightarrow \R \\
+  b_i: (0, \beta_{max}) & \rightarrow (-\infty, k_1)  & g_e: (0, \gamma_{max}) & \rightarrow (k_2, \infty) \\
        \beta & \mapsto (tt_a' |_{(-\infty, k_1)})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{(k_2, \infty)})^{-1}(\gamma)
 \end{align*}
 
@@ -212,6 +212,31 @@ the joint pdf in equation~\eqref{eq:on-time-intro} can be analytically evaluated
     f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) \\
     & = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
   \end{split}
+\end{equation}
+
+Note that all the functions used in the right hand side can be evaluated.
+This concludes thus the evaluation of the likelihood of being an on-time arrival.
+In the following part, the likelihood of being an early or late arrival will be computed.
+
+\subsubsection{Early and Late Arrivals}
+
+Consider now the value of the function
+\begin{equation*}
+  f_{T^{opt}, Q}(t, -1)
+\end{equation*}
+
+Observation\todo{an observation on the definition of \(t_s\)} shows that the arrival time \(t\) is an early arrival if and only if two conditions,
+similar to the ones in the preceding case,
+are realized:
+the time \(t\) has to be a realization of the optimal early arrival time \(b_i(B)\),
+and it has to be into the interval \((b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})\).
+
+Differently from the last case, the random variable \(B\) appears in both conditions:
+the events are thus not independent anymore,
+and their joint pdf will be computed via its decomposition in conditional densities:
+\begin{equation}
+  \label{eq:late-joint-decomp}
+  f_{T^{opt}, Q}(t, -1) = \prob\left(t^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
 \end{equation}
 
 %%% Local Variables:
