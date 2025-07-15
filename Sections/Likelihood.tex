@@ -2,9 +2,12 @@
 
 In the current section,
 the parameters \(\beta, \gamma, t^*\) will be considered to be distributed, according to some known distribution.
-This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed itself.
+This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed themselves.
 
-The goal of the section is thus to find an analytical expression for the Probability Density Function that characterizes the distribution of the outcomes of the function \(t^{opt}\).
+\subsection{Theoretical Prerequisites}
+
+
+The goal of the section is thus to find an analytical expression for the Probability Density Function (pdf) that characterizes the distribution of the outcomes of the function \(t^{opt}\).
 To this end, the characterization developed in the preceding section will be employed,
 in a slightly simpler setting, in which some additional hypotheses on the travel time function are made.
 
@@ -84,6 +87,23 @@ the function \(b_e(\beta)\) (and \(g_i(\gamma)\))
 are thus defined as the points in which the line tangent to the travel time function in \(b_i(\beta)\) (or, respectively, in \(g_e(\gamma)\)) intersects again with the travel time function.
 
 A graphical representation of the functions \(b_i, b_e, g_i, g_e\) is shown in figure\todo{ref}
+\todo{Here, how \(t_s\) is computed has to be explained. These things are to be put in this or in the theory section?? Maybe theory}
+Once these functions have been defined,
+the pdf that characterizes the distribution of the optimal departure time \(t^{opt}\) can be computed.
+
+\subsection{The Probability Density Function}
+
+Consider now the same problem in which,
+instead of the parameters \(\beta, \gamma, t^*\),
+we consider three random variables \(B, \Gamma, T^*\).
+
+A random variable for the optimal arrival will be defined as follows:
+\begin{equation}
+  \label{eq:rv-opt-arr}
+  T^{opt} = t^{opt}(B, \Gamma, T^*)
+\end{equation}
+
+The goal of this section will be finding the pdf \(f_{t^{opt}}\) of the variable \(T^{opt}\).
 
 %%% Local Variables:
 %%% mode: LaTeX
