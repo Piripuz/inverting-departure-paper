@@ -105,6 +105,30 @@ A random variable for the optimal arrival will be defined as follows:
 
 The goal of this section will be finding the pdf \(f_{t^{opt}}\) of the variable \(T^{opt}\).
 
+It is, in the first place,
+convenient to distinguish between early, late and on-time arrivals.
+In order to distinguish them, we define another random variable:
+\begin{definition}
+  Consider the function
+  \begin{equation*}
+    q(\beta, \gamma, t^*) =
+    \begin{cases}
+      -1 & \text{if } t^{opt}(\beta, \gamma, t^*) = t_e^{opt}(\beta, \gamma, t^*) \\
+      0 & \text{if } t^{opt}(\beta, \gamma, t^*) = t^* \\
+      1 & \text{if } t^{opt}(\beta, \gamma, t^*) = t_l^{opt}(\beta, \gamma, t^*)
+    \end{cases}
+  \end{equation*}
+
+  Given the random variables \(B, \Gamma, T^*\), another random variable \(Q\) is defined as follows:
+  \begin{equation*}
+    Q  = q(B, \Gamma, T^*)
+  \end{equation*}
+\end{definition}
+
+In practical terms, the random variable \(Q\) shows whether an early, on-time or late arrival is realized,
+and takes the value \(-1\) if the optimal arrival is an early arrival,
+\(1\) if it is a late arrival and \(0\) if it is an on-time one.
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
