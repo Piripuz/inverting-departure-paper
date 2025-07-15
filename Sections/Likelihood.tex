@@ -7,7 +7,7 @@ This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined 
 \subsection{Theoretical Prerequisites}
 
 
-The goal of the section is thus to find an analytical expression for the Probability Density Function (pdf) that characterizes the distribution of the outcomes of the function \(t^{opt}\).
+The goal of the section is thus to find an analytical expression for the Probability Density Function (pdf)\todo{Is it ok to write pdf or is it informal?} that characterizes the distribution of the outcomes of the function \(t^{opt}\).
 To this end, the characterization developed in the preceding section will be employed,
 in a slightly simpler setting, in which some additional hypotheses on the travel time function are made.
 
@@ -129,6 +129,15 @@ In practical terms, the random variable \(Q\) shows whether an early, on-time or
 and takes the value \(-1\) if the optimal arrival is an early arrival,
 \(1\) if it is a late arrival and \(0\) if it is an on-time one.
 
+Since an optimal arrival can only be early, on-time or late,
+by using the sum rule, the pdf for the random variable \(T^{opt}\) can be decomposed into three different parts:
+\begin{equation}
+  \label{eq:pdf-decomposed-q}
+  f_{t^{opt}}(t) = f_{T^{opt}, Q}(t, -1) + f_{T^{opt}, Q}(t, 0) + f_{T^{opt}, Q}(t, 1)
+\end{equation}
+
+The single addends are easier to describe,
+and will be individually studied in the following.
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
