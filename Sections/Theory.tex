@@ -2,22 +2,37 @@
 In this section, we start by presenting the departure time choices problem for individual users. Then we proceed by characterizing the optimal departure time under different scheduling preferences and exogenous travel time profiles.
 
 
-\subsection{Departure time choices}
+\subsection{Arrival times and travel costs}
 \label{sec:cost_fn}
 
 \label{sec:theory}
 
-Consider some users commuting between an origin and a destination. The travel time between the origin-destination (OD) pair fluctuates across the time of the day. To hedge against time-varying congestion, some users may be motivated to arrive early and later at their destinations to avoid the rush hours. An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time. Thus, we can denote the experienced travel time for travelers arriving at different times $t_a$ of the day by $tt_a(t_a)$.  
- 
- 
- 
- 
- To capture such trade-offs, the departure time choice model \citep{arnott1993structural} considers that each user chooses an arrival time $t_a$ at their destination that minimizes their individual travel cost
+Consider some users commuting between an origin and a destination. The travel time between the origin-destination (OD) pair fluctuates across the time of the day. To hedge against time-varying congestion, some users may be motivated to arrive early and later at their destinations to avoid the rush hours.
+
+
+
+To capture such trade-offs, we follow the bottleneck model by considering that each user chooses an arrival time $t_a$ at their destination that minimizes their individual travel cost  \footnote{When $tt_a'(t_a) < 1$ for all $t \in \mathcal{T}$, it is consistent with the departure time choice problem in \cite{arnott1993structural}. The reason is that there will be a one-to-one correspondence between any arrival time $t_a$ and the departure time $t_d = t_a - tt_a(t_a)$ because $\partial t_d/\partial t_a > 0$ in this case. }. Let $\mathcal{T}$ be the set of all possible arrival times. The travel cost by arriving at any time $t_a 
+ \in \mathcal{T}$ is defined as 
 \begin{equation}
   \label{eq:cost_ta}
   C(t_a) = \alpha tt_a(t_a) + \beta[t^*-t_a]^+ + \gamma[t_a-t^*]^+,
 \end{equation}
-where \(t^*\) is the desired arrival time at the destination,  \(\alpha\) is the value of travel time, and \(\beta\) and \(\gamma\) are respectively the unit costs of arriving early and late at the destination. Without loss of generally, from now on, we normalize the value of $\alpha$ to 1. 
+where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at time $t_a$, \(t^*\) is the desired arrival time at the destination,  \(\alpha\) is the value of travel time, and \(\beta\) and \(\gamma\) are respectively the unit costs of arriving early and late at the destination. Without loss of generally, from now on, we normalize the value of $\alpha$ to 1.
+
+
+ An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time, which enables the definition of $tt_a(t_a)$.  In addition, we start with a representative congestion pattern such that the travel time profile function is subject to the following assumption. 
+
+
+\begin{assumption}
+   The travel time profile function $tt_a(t_a)$ is differentiable at all $t_a \in \mathcal{T}$.
+\end{assumption}
+
+
+ 
+
+
+\subsection{d}
+
 
 Further, we consider that the congestion pattern, described by the travel time profile, is such that a traveler will not arrive earlier than anyone who departs earlier than her/him, which is termed as the first-in-first-out (FIFO) rule in literature. Thus, we impose the following assumption regarding the travel time function  $tt_a(t_a)$.
 
