@@ -236,7 +236,7 @@ the events are thus not independent anymore,
 and their joint pdf will be computed via its decomposition in conditional densities:
 \begin{equation}
   \label{eq:late-joint-decomp}
-  f_{T^{opt}, Q}(t, -1) = \prob\left(t^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
+  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
 \end{equation}
 
 The probability density function \(f_{b_i(B)}(t)\) for the transformed random variable \(b_i(B)\) can be simply evaluated by changing variable from the known density \(f_B\):
@@ -271,7 +271,30 @@ The pdf for the transformed random variable will thus be
 \end{equation}
 where the employment of the function \([\bullet]^+\) ensures the pdf to be equal to zero where the travel time function is concave.
 
+We will now study the probability
+\begin{equation*}
+  \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right)
+\end{equation*}
 
+The condition \(t = b_i(B)\) implies, for the reasons above,
+\begin{align*}
+  B & = b_i^{-1}(t) \\
+    & = tt_a'(t)
+\end{align*}
+
+By substituting these in the original expression, we get
+\begin{equation}
+  \label{eq:early-subst}
+  f_{T^{opt}, Q}(t, -1) = \prob(T^* \in (t, \min\{b_e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{b_i(B)}(t)
+\end{equation}
+
+Integrating the random variables,
+and substituting what found in equation~\eqref{eq:pdf-b-changed-var},
+yields an explicit expression for the desired pdf:
+\begin{equation}
+  \label{eq:early_integrated}
+  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
+\end{equation}
 
 %%% Local Variables:
 %%% mode: LaTeX
