@@ -292,8 +292,14 @@ Integrating the random variables,
 and substituting what found in equation~\eqref{eq:pdf-b-changed-var},
 yields an explicit expression for the desired pdf:
 \begin{equation}
-  \label{eq:early_integrated}
+  \label{eq:early-final}
   f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
+\end{equation}
+
+For the late arrivals, an analogous reasoning finds a similar expression:
+\begin{equation}
+  \label{late-final}
+  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 
 %%% Local Variables:
