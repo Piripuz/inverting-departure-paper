@@ -98,6 +98,18 @@ Consider now the same problem in which,
 instead of the parameters \(\beta, \gamma, t^*\),
 we consider three random variables \(B, \Gamma, T^*\).
 
+In order to simplify the estimation process, an assumption (which is, indeed, quite restrictive)
+is made on these random variable:
+
+\begin{assumption}
+  The random variables \(B, \Gamma, T^*\) are pairwise independent
+\end{assumption}
+
+Note that this assumption is rather significant,
+but not as significant as it may sound:
+remind indeed that, being the parameter \(\alpha\) in equation~\eqref{eq:cost_ta} normalized to 1,
+the parameters \(\beta, \gamma\) represent the normalized values of the early and late arrival penalties instead of the actual ones.
+
 A random variable for the optimal arrival will be defined as follows:
 \begin{equation}
   \label{eq:rv-opt-arr}
