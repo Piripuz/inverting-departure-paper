@@ -239,6 +239,40 @@ and their joint pdf will be computed via its decomposition in conditional densit
   f_{T^{opt}, Q}(t, -1) = \prob\left(t^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
 \end{equation}
 
+The probability density function \(f_{b_i(B)}(t)\) for the transformed random variable \(b_i(B)\) can be simply evaluated by changing variable from the known density \(f_B\):
+\begin{equation}
+  \label{eq:pdf-b-change-var}
+  f_{b_i(B)}(t) = f_B(b_i^{-1}(t)) \left| \diff{}{t}(b_i^{-1}(t)) \right|
+\end{equation}
+
+From the definition of \(b_i\) follows that the function acts,
+on its domain, exactly as the inverse of the derivative of the travel time function \((tt_a')^{-1}\).
+
+From this observation follows that, as long as we don't consider times that are out of the image of the function \(b_i\),
+we can set
+\begin{equation*}
+  b_i^{-1}(t) = tt_a'(t)
+\end{equation*}
+
+The arrival times out of the image of \(b_i\) are exactly the ones for which the function is concave
+\footnote{
+  Depending on whether the parameter \(\beta\) is allowed to be negative,
+  the interval in which the derivative of the travel time \(tt_a'(t)\) is negative can be considered out of the image as well.
+  This is not considered relevant herein,
+  since the case in which the parameter \(\beta\) is negative is not considered:
+  the probability that a realization of the random variable \(B\) is negative will thus be neglectable.
+},
+that is, \(tt_a''(t) < 0\).
+
+The pdf for the transformed random variable will thus be
+\begin{equation}
+  \label{eq:pdf-b-changed-var}
+  f_{b_i(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
+\end{equation}
+where the employment of the function \([\bullet]^+\) ensures the pdf to be equal to zero where the travel time function is concave.
+
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
