@@ -20,22 +20,23 @@ To capture such trade-offs, we follow the bottleneck model by considering that e
 where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at time $t_a$, \(t^*\) is the desired arrival time at the destination,  \(\alpha\) is the value of travel time, and \(\beta\) and \(\gamma\) are respectively the unit costs of arriving early and late at the destination. Without loss of generally, from now on, we normalize the value of $\alpha$ to 1.
 
 
- An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time, which enables the definition of $tt_a(t_a)$.  In addition, we start with a representative congestion pattern such that the travel time profile function is subject to the following assumption. 
+ An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time, which enables the definition of $tt_a(t_a)$. The travel time profile is assumed to be exogenous, which is not affected by an individual traveler's choices.  In addition, we start with a representative congestion pattern such that the travel time profile function is subject to the following assumption. 
 
 
 \begin{assumption}\label{ass:quasiconc}
-   The travel time profile function $tt_a(t_a)$ is unimodal and differentiable. 
+   The travel time profile function $tt_a(t_a)$ is differentiable and unimodal. 
 \end{assumption}
 
 Roughly speaking, under Assumption \ref{ass:quasiconc}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards.
  
 \begin{assumption}\label{ass:twiceDiff}
-   The travel time profile function $tt_a(t_a)$ is convex. 
+  There exists an interval $[t_e, t_l]$ such that the travel time profile function $tt_a(t_a)$ is concave in $[t_e, t_l ]$, and convex otherwise. 
 \end{assumption}
 
-Assumption \ref{ass:twiceDiff} imposes an additional condition regarding the travel time profile. 
+Assumption \ref{ass:twiceDiff} imposes an additional condition on the travel time profile. In other words, it requires the derivative of the travel time to be unimodal both before and after the peak.
 
-\subsection{d}
+\subsection{Minimum of the cost function}
+\label{sec:cost_minima}
 
 
 Further, we consider that the congestion pattern, described by the travel time profile, is such that a traveler will not arrive earlier than anyone who departs earlier than her/him, which is termed as the first-in-first-out (FIFO) rule in literature. Thus, we impose the following assumption regarding the travel time function  $tt_a(t_a)$.
