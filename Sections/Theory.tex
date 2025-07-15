@@ -23,13 +23,17 @@ where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at 
  An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time, which enables the definition of $tt_a(t_a)$.  In addition, we start with a representative congestion pattern such that the travel time profile function is subject to the following assumption. 
 
 
-\begin{assumption}
-   The travel time profile function $tt_a(t_a)$ is differentiable at all $t_a \in \mathcal{T}$.
+\begin{assumption}\label{ass:quasiconc}
+   The travel time profile function $tt_a(t_a)$ is unimodal and differentiable. 
 \end{assumption}
 
-
+Roughly speaking, under Assumption \ref{ass:quasiconc}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards.
  
+\begin{assumption}\label{ass:twiceDiff}
+   The travel time profile function $tt_a(t_a)$ is convex. 
+\end{assumption}
 
+Assumption \ref{ass:twiceDiff} imposes an additional condition regarding the travel time profile. 
 
 \subsection{d}
 
