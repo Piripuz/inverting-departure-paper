@@ -1,8 +1,15 @@
-\section{Likelihood}
+\section{Maximum Likelihood Estimation}
 
 In the current section,
 the parameters \(\beta, \gamma, t^*\) will be considered to be distributed, according to some known distribution.
-This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed themselves.
+This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed themselves,
+according to a distribution that can be explicitly characterized,
+by finding an expression for its probability density function.
+
+Once the probability density function has been found,
+its evaluation can yield an expression for the likelihood of a given dataset of arrival times.
+This allows the estimation of parameters that have an influence on the original distribution,
+by doing a Maximum Likelihood Estimation.
 
 \subsection{Theoretical Prerequisites}
 
@@ -318,6 +325,7 @@ and allows us to write an expression for the probability density function of the
 By substituting the expressions found for the joint probabilities in equation~\eqref{eq:pdf-decomposed-q},
 we find the following:
 \begin{multline}
+  \label{eq:pdf-final}
     f_{T^{opt}}(t) = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db \\
     + \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ \\
     + \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
@@ -330,6 +338,44 @@ which minimizes the cost faced by the traveller when choosing a departure time.
 If we suppose the distributions of the parameters to be parametrized by some parameter \(\theta\),
 this allows a maximum likelihood estimation of the parameter,
 that will be performed in the following.
+
+\subsection{MLE Configuration}
+
+The expression found in equation~\eqref{eq:pdf-final} can be used to perform a Maximum Likelihood Estimation,
+to estimate a parameter that has an impact on the distribution of the random variables \(B, \Gamma, T^*\).
+
+Suppose thus the distribution of the random variables being dependant on a parameter \(\theta \in \R^d\):
+\begin{align*}
+  B \sim f_B(x; \theta) && \Gamma \sim f_\Gamma(x; \theta) && T^* \sim f_{T^*}(x; \theta)
+\end{align*}
+
+The probability density function in equation~\eqref{eq:pdf-final} will itself depend on the parameter \(\theta\):
+\begin{equation*}
+  f_{T^{opt}}(t) = f_{T^{opt}}(t; \theta)
+\end{equation*}
+
+By fixing the parameter \(\theta\),
+the likelihood of an observed arrival time \(t_0\) can be computed:
+\begin{equation}
+  \label{eq:lik-single}
+  \mathcal{L}(\theta | t) = f_{T^{opt}}(t; \theta)
+\end{equation}
+
+If a dataset of observations is given
+\begin{equation*}
+  T = \{t_i\}_i
+\end{equation*}
+the definition in~\eqref{eq:lik-single} can be extended to the whole dataset:
+\begin{equation}
+  \label{eq:lik-final}
+  \mathcal{L}(\theta | T) = \prod_i \mathcal{L}(\theta | t_i)
+\end{equation}
+
+An estimate \(\hat{\theta}\) for the parameter \(\theta\) will thus be found by maximising the likelihood:
+\begin{equation}
+  \label{eq:max-lik}
+  \hat{\theta} = \argmax \mathcal{L}(\theta | T)
+\end{equation}
 
 %%% Local Variables:
 %%% mode: LaTeX
