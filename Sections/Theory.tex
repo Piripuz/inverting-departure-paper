@@ -377,13 +377,19 @@ This is described by the following proposition:
     t_e^{opt}((t^*) < t^* < t_0
   \end{equation*}
   \(t_e^{opt}(t^*)\) is thus a realizable early arrival when desired arrival time is \(t_0\) as well,
-  and its cost will be lower than the cost of arriving at \(t_e^{opt}(t_0)\):
-  \begin{align*}
-    C(t_e^{opt}(t_0); \beta, \gamma, t^*) & = tt_a(t_e^{opt}(t_0)) + \beta(t^* - t_e^{opt}(t^*)) \\
-    & < tt_a(t_e^{opt}(t_0)) + \beta(t_0 - t_e^{opt}(t^*)) \\
-    & = C(t_e^{opt}(t_0); \beta, \gamma, t_0)
-  \end{align*}
+  and its cost will be lower than the cost of arriving at \(t_e^{opt}(t_0)\).
 
+  By hypothesis, since \(t_e^{opt}(t^*) \neq t_e^{opt}(t_0)\),
+  the cost of arriving at \(t_e^{opt}(t^*)\) will be lower.
+  By doing some simple arithmetic,
+  \begin{align*}
+    C(t_e^{opt}(t^*); \beta, \gamma, t^*) & < C(t_e^{opt}(t_0); \beta, \gamma, t^*) \\
+    tt_a(t_e^{opt}(t^*)) + \beta(t^* - t_e^{opt}(t^*)) & < tt_a(t_e^{opt}(t_0)) + \beta(t^* - t_e^{opt}(t_0)) \\
+    tt_a(t_e^{opt}(t^*)) - \beta t_e^{opt}(t^*) & < tt_a(t_e^{opt}(t_0)) - \beta t_e^{opt}(t_0) \\
+     tt_a(t_e^{opt}(t^*)) + \beta(t_0 - t_e^{opt}(t^*)) & < tt_a(t_e^{opt}(t_0)) + \beta(t_0 - t_e^{opt}(t_0)) \\
+    C(t_e^{opt}(t^*); \beta, \gamma, t_0) & < C(t_e^{opt}(t_0); \beta, \gamma, t_0)
+  \end{align*}
+  
   But this is a contradiction, since \(t_e^{opt}(t_0)\) realizes the minimal cost for an early arrival for desired arrival time \(t_0\).
   As the desired arrival time changes in the interval \((t_e^{opt}(t_0), t_0]\),
   the optimal early arrival will thus be constant and equal to \(t_e^{opt}(t_0)\).
