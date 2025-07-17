@@ -6,6 +6,7 @@ import matplotlib as mpl
 
 import numpy as np
 from jax import numpy as jnp
+from jax import grad, vmap
 from jaxopt import GradientDescent, Bisection
 
 from scripts.travel_times import asymm_gaussian, asymm_gaussian_plateau
@@ -70,7 +71,7 @@ def find_end(start, tt):
     res = Bisection(lambda curr: tt(start) + beta*(curr - start) - tt(curr), old, curr).run()
     return res.params
 bs_end = np.r_[find_end(bs[0], tt), find_end(bs[1], tt)]
-#%%
+
 
 x = np.linspace(0, 2, 200)
 
@@ -97,3 +98,20 @@ ax.axis('off')
 ax.legend()
 fig.savefig("../img/early_arrivals_jump.png", dpi=quality)
 plt.show()
+
+#%%
+
+x = np.linspace(8.5, 10.5, 200)
+tt = asymm_gaussian()
+
+fig, ax = plt.subplots(figsize=(6, 4))
+dtt_plot = ax.plot(mpl.dates.num2date(x/24), vmap(grad(tt))(x), alpha=.5, label=r"Derivative of the Travel Time Function $tt'(t)$")
+tt_plot = ax.plot(mpl.dates.num2date(x/24), tt(x), color=tt_color, label=r"Travel Time Function $tt(t)$")
+
+ax.xaxis.set_major_formatter(mpl.dates.DateFormatter("%H:%M"))
+ax.set_xlabel(r"$t$ (h)")
+ax.set_ylabel("Travel Time (min)")
+ax.legend(handles=[*tt_plot, *dtt_plot], loc=3)
+
+fig.savefig("../img/theo_tt.png", dpi=quality)
+fig.show()
