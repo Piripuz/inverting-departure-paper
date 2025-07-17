@@ -24,7 +24,7 @@ where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at 
 
 
 \begin{assumption}\label{ass:quasiconc}
-   The travel time profile function $tt_a(t_a)$ is unimodal. 
+   The travel time profile function $tt_a(t_a)$ is continuous and unimodal. 
 \end{assumption}
 
 Roughly speaking, under Assumption \ref{ass:quasiconc}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards.
@@ -38,6 +38,43 @@ Assumption \ref{ass:twiceDiff} imposes an additional condition on the travel tim
 \subsection{Minimum of the cost function}
 \label{sec:cost_minima}
 
+Next, we characterize the optimal arrival time for an individual user with given scheduling preferences parameterized by $\beta, \gamma$, and $t^*$.  The optimal arrival \(t^{opt}\) time minimizes the travel cost, i.e., 
+    \begin{equation*}
+      t^{opt} = \argmin_{t_a \in \mathcal{T}}C(t_a).
+    \end{equation*} 
+
+To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the optimal early arrival time (OEAT) $$t_e^{opt}  = \argmin_{t_a < t^*}C(t_a)$$ and the optimal late arrival time (OLAT)$$t_l^{opt} =  \argmin_{t_a > t^*}C(t_a).$$ 
+
+Note that $t_e^{opt}$ and $t_l^{opt}$ are defined over open intervals and, as such, do not necessarily exist. 
+\begin{lemma}
+Given any $\beta$, $\gamma$ and $t^*$, the conditional optimum $t_e^{opt}$ exists if and only $tt(t_e^{opt})$. 
+\end{lemma}
+\begin{prop}
+  \label{prop:into-early-late}
+Under Assumption \ref{ass:quasiconc}, given  \(\beta\) and \( \gamma\),
+  there exist two collections of disjoint intervals
+  \begin{align*}
+    E & = \{(t_e^i, \bar{t_e^i})\}_i,\quad i = 1, \dots, n \\
+    L & = \{(\bar{t_l^j}, t_l^j)\}_j,\quad j = 1, \dots, m 
+  \end{align*}
+  such that, if exists some \(i\) such that \(t^* \in (t_e^i, \bar{t_e^i})\),
+  the optimal early arrival time (OEAT) will be the lower bound of the interval:
+  \begin{equation*}
+    t_e^{opt}(\beta, \gamma, t^*) = t_e^{i}
+  \end{equation*}
+
+  Similarly, if exists a value for \(j\) such that \(t^* \in (\bar{t_l^j}, t_l^j)\),
+  the optimal late arrival will be the upper bound of the interval:
+  \begin{equation*}
+    t_l^{opt}(\beta, \gamma, t^*) = t_l^{j}
+  \end{equation*}
+
+  If such a value for \(i\) (or \(j\)) does not exist,
+  then the optimal early (respectively, late) arrival is not defined.
+\end{prop}
+\begin{proof}
+
+\end{proof}
 
 Further, we consider that the congestion pattern, described by the travel time profile, is such that a traveler will not arrive earlier than anyone who departs earlier than her/him, which is termed as the first-in-first-out (FIFO) rule in literature. Thus, we impose the following assumption regarding the travel time function  $tt_a(t_a)$.
 
@@ -182,6 +219,8 @@ It anyway doesn't lose in generality, and was chosen for simplicity.
 
 \subsection{Minimum of the Cost Function}
 \label{sec:cost_minima}
+
+
 
 Consider hence the cost in \eqref{eq:cost_final},
 and the problem of finding the minimum of it.
