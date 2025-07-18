@@ -330,12 +330,11 @@ Note that this has some trivial implication on the value of the derivative of th
 This follows from the Lemma above:
 if the function \(tt_a\) is differentiable, being the minima computed over an open set,
 if they exist they necessarily satisfy the first order conditions.
-For the early arrivals, they are
-\begin{align*}
-  \diffp{}{{t_a}} \left(tt_a(t_a) - \beta t_a\right) & = 0 \\
-  tt_a'(t_a) & = \beta
-\end{align*}
-The case for late arrival is analogous.
+The function \(tt_a(t_a) - \beta t_a\) is minimized for
+\begin{equation*}
+  tt_a'(t_a) = \beta
+\end{equation*}
+The case for late arrival is analogous.\todo{similarly, for late arrivals we get...}
 
 While not particularly difficult to retrieve,
 the expression in Lemma~\ref{lemma:cost_decoupled} is useful,
@@ -633,8 +632,14 @@ and after which the arrivals can only be late or on-time:
   Let \(tt_a\) be a general travel time function, the parameters \(\beta, \gamma\) be given.
   There exists a critical arrival time \(t_s(\beta, \gamma) \in \bar{\R} = \{\R \cup \pm \infty\}\) that satisfies
   \begin{itemize}
-  \item \(t^{opt}(\beta, \gamma, t^*) \neq t_e^{opt}(\beta, \gamma, t^*)\) if \(t^* > t_s(\beta, \gamma)\)
-  \item \(t^{opt}(\beta, \gamma, t^*) \neq t_l^{opt}(\beta, \gamma, t^*)\) if \(t^* < t_s(\beta, \gamma)\)
+  \item If \(t^* < t_s(\beta, \gamma)\), then no late arrivals are observed:
+    \begin{equation*}
+      t^{opt}(\beta, \gamma, t^*) \neq t_l^{opt}(\beta, \gamma, t^*)
+    \end{equation*}
+  \item If \(t^* > t_s(\beta, \gamma)\), then no early arrivals are observed:
+    \begin{equation*}
+      t^{opt}(\beta, \gamma, t^*) \neq t_e^{opt}(\beta, \gamma, t^*)
+    \end{equation*}
   \end{itemize}
 
   Moreover, when \(t^* = t_s(\beta, \gamma)\) arriving early or late yields the same cost:
@@ -647,11 +652,11 @@ and after which the arrivals can only be late or on-time:
   
   % To prove the first part of the proposition,
   % it is enough to show that if 
-  If there is no point realizing a late arrival, that is
-  \begin{equation*}
-    \nexists\, t^* |\, t^{opt}(t^*) = t_l^{opt}(t^*)\footnote{For the scope of this proposition, how the parameters \(\beta, \gamma\) change is not relevant:
+  If there is no point realizing a late arrival, that is\footnote{For the scope of this proposition, how the parameters \(\beta, \gamma\) change is not relevant:
   for notational simplicity, the dependency of the points \(t^{opt}, t_e^{opt}, t_l^{opt}\) on these parameters are thus hidden,
   and the only dependency to be explicitly denoted will be the one on the desired arrival time \(t^*\).}
+  \begin{equation*}
+    \nexists\, t^* |\, t^{opt}(t^*) = t_l^{opt}(t^*)
   \end{equation*}
   then the proposition is true, for \(t_s = \infty\).
 
