@@ -115,3 +115,69 @@ ax.legend(handles=[*tt_plot, *dtt_plot], loc=3)
 
 fig.savefig("../img/theo_tt.png", dpi=quality)
 fig.show()
+
+#%%
+
+fig, ax = plt.subplots(figsize=(7, 4))
+
+bs = np.r_[8.4, 9.1]
+gs = np.r_[9.6, 10.2]
+
+x = np.linspace(7.5, 11, 400)
+def func(x):
+    if x > bs[0] and x < bs[1]:
+        return bs[0]
+    elif x > gs[0] and x < gs[1]:
+        return gs[1]
+    return x
+y = np.vectorize(func)(x)
+y[np.diff(y, prepend=y[0])>.1] = np.nan
+ax.plot(x, y, c=tt_color, label = r"$t_a(t^*)$")
+
+loc_width = 1.1
+loc_alpha = .6
+ax.hlines(
+    [bs[0], gs[1]],
+    [bs[1], x[0]],
+    [x[-1], gs[0]],
+    color=[early_color, late_color],
+    linestyle="dashed",
+    linewidth=loc_width,
+    alpha=loc_alpha,
+    zorder=1.5
+)
+ax.plot(
+    [bs[0], gs[1]],
+    [bs[0], gs[1]],
+    color=ot_color,
+    linestyle="dashed",
+    linewidth=loc_width,
+    alpha=loc_alpha,
+    zorder=1.5
+    )
+
+ymin = ax.get_ylim()[0]
+ymax = ax.get_ylim()[1]
+alpha = .1
+ax.fill_between([bs[0], bs[1]], [ymin]*2, [ymax]*2, color=early_color, alpha=alpha, label='Early Arrivals')
+ax.fill_between([gs[0], gs[1]], [ymin]*2, [ymax]*2, color=late_color, alpha=alpha, label='Late Arrivals')
+ax.fill_between([gs[1], x[-1]], [ymin]*2, [ymax]*2, color=ot_color, alpha=alpha, label='On-time Arrivals')
+ax.fill_between([x[0], bs[0]], [ymin]*2, [ymax]*2, color=ot_color, alpha=alpha)
+ax.fill_between([bs[1], gs[0]], [ymin]*2, [ymax]*2, color=ot_color, alpha=alpha)
+
+ax.vlines([bs[0], gs[1]], ymin, [bs[0], gs[1]], [early_color, late_color], 'dashed')
+ax.text(bs[0] + .05, 7.6, r"$tt_a'(t^*) = \beta$", color=early_color)
+ax.text(gs[1] + .05, 8, r"$tt_a'(t^*) = -\gamma$", color=late_color)
+
+ax.legend(loc="upper left")
+ax.set_xlabel(r"$t^*$ (h)")
+ax.set_ylabel(r"$t_a$ (h)")
+
+f_form = lambda x, _: mpl.dates.num2date(x/24).strftime("%H:%M")
+formatter = mpl.ticker.FuncFormatter(f_form)
+ax.xaxis.set_major_formatter(formatter)
+ax.yaxis.set_major_formatter(formatter)
+
+fig.savefig("../img/monotone_t_a.png", dpi=quality)
+# fig.show()
+plt.close(fig)
