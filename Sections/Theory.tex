@@ -245,7 +245,7 @@ the two cases are separated, so that they can be studied independently.
   \item The \textbf{optimal arrival} \(t^{opt}\) is the arrival realizing the least cost:
     \begin{equation*}
       t^{opt}(\beta, \gamma ,t^*) = \argmin_{t_a}C(t_a; \beta, \gamma, t^*)
-    \end{equation*}
+    \end{equation*}\todo{Set tie breaking rule}
   \end{itemize}
 \end{definition}
 
@@ -597,7 +597,7 @@ and can be made simpler by assuming the travel time function to have some realis
     tt_a: \R \rightarrow \R
   \end{equation*}
 
-  \(tt_a\) is said a \textbf{general travel time function} if it satisfies the following:
+  \(tt_a\) is said a \textbf{general travel time function} if it satisfies the following\todo{Put this as assumptions}:
   \begin{enumerate}
   \item \(tt_a \in C^1(\R)\)\todo{Add limits to \(\pm\infty\). Adapt later, where it says \textit{first requirement} etc}
   \item \(tt_a'(t_a) < 1\ \forall\, t_a\in \R\)
