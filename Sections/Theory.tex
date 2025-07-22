@@ -45,27 +45,53 @@ Next, we characterize the optimal arrival time for an individual user with given
 
 To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the optimal early arrival time (OEAT) $$t_e^{opt}  = \argmin_{t_a \le  t^*}C(t_a)$$ and the optimal late arrival time (OLAT)$$t_l^{opt} =  \argmin_{t_a \ge  t^*}C(t_a).$$ 
 
+\begin{definition}\label{def:CEA}
+    Given any travel time profile function $tt_a(t_a)$, and \(\beta\),  an interval $[t_e, \bar t_e]$ is termed a critical early arrival (CEA) interval when the following conditions hold:
+    \begin{align}
+         & tt_a(t_e) + \beta (\bar t_e - t_e)   = tt_a(\bar t_e )\\
+    &  tt_a(t_e)  + \beta (t - t_e ) \le  tt_a(t ), \forall t \in [t_e, \bar t_e]\label{eq:concave}
+    \end{align}
+       
+
+\end{definition}
+
+
+
 \begin{definition}
-    Given any travel time profile function $tt_a(t_a)$, \(\beta\), and \( \gamma\),  an interval $[t_e, \bar t_e]$ is termed a critical early arrival (CEA) interval when all the following conditions hold:
-    \begin{enumerate}
-        \item $ tt_a(t_e) + \beta (\bar t_e - t_e)   = tt_a(\bar t_e )$.
-         \item $ tt_a(t_e)  + \beta (t - t_e ) \le  tt_a(t )$ for any $t \in [t_e, \bar t_e]$.
-    \end{enumerate}
-    An interval $[\bar t_l, t_l]$ is termed a critical early arrival (CLA) interval when all the following conditions hold:
-    \begin{enumerate}
-        \item $ tt_a(t_l) + \gamma(\bar t_l - t_l)   = tt_a(\bar t_l )$.
-         \item $ tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t )$ for any $t \in [\bar  t_l, t_l]$.
-    \end{enumerate}
+    Given any travel time profile function $tt_a(t_a)$, and \( \gamma\), an interval $[\bar t_l, t_l]$ is termed a critical early arrival (CLA) interval when the following conditions hold:
+     \begin{align}
+         &  tt_a(t_l) + \gamma(\bar t_l - t_l)   = tt_a(\bar t_l )\\
+        & tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t ), \forall  t \in [\bar  t_l, t_l]
+    \end{align}
     
 \end{definition}
+
 
 Any travelers with the unit early and late arrival costs $\beta$ and $\gamma$ would prefer arriving at time $t_e$ than any time in each CEA interval, and prefer arriving at time $t_l$ than any time in each CLA interval, regardless of their $t^*$. 
 
 
 \begin{prop}
   \label{prop:into-early-late}
-Consider some exogenous  \(\beta\), \( \gamma\), and $t^*$. The optimal early arrival time (OEAT) $t_e^{opt}$ 
+Consider a critical early arrival (CEA) interval $[t_e, \bar t_e]$  under some $\beta$ and $tt_a(t)$ and not contained by any other CEA intervals. Under any desired arrival time $t^* \in [t_e, \bar t_e]$, the minimal early arrival cost (MEAC) is achieved at $t_e$, i.e.,  $C_e^{opt} = C(t_e)$.
+\end{prop}
+\begin{proof}
+Recall that the MEAC $C_e^{opt}$ is defined as $$C_e^{opt} = \min_{t \le t^*} C(t).$$
+To show that $C_e^{opt}$ is achieved at $t_e$, it is equivalent to show that the inequality $C(t) \ge C(t_e) $ holds for any $t \le t^*$. 
 
+First, we show that $C(t) \ge C(t_e)$ for any $t \in [t_e, t^*]$. By Definition \ref{def:CEA}, for any $t \in [t_e, \bar t_e]$, we have  
+\begin{equation}\label{eq:concave}
+    tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ).
+\end{equation} 
+By Equation \eqref{eq:cost_ta}, the trip cost at any arrival time $t \in [t_e, t^*]$ is 
+$$C(t) = tt_a(t) + \beta (t^* - t).$$
+Using \eqref{eq:concave}, we obtain that 
+$$C(t) \ge tt_a(t_e) + \beta (t - t_e ) + \beta (t^* - t) = C(t_e).$$
+
+Second, we show that $C(t) \ge C(t_e)$ for any $t < t_e$ by contradiction. Suppose that there exists some $t< t_e$ such that $C(t) < C(t_e)$. 
+\end{proof}
+
+
+\begin{prop}
 
 Under Assumption \ref{ass:quasiconc}, if the optimal early arrival time (OEAT) $t_e^{opt}$ is not $t^*$, i.e., $t_e^{opt} \neq t^*$,  then the OEAT stays constant for any $t^* \in [t_e^{opt}, t_e^{opt}]$.
 
