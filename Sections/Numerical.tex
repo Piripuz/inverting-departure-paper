@@ -20,14 +20,62 @@ which affects the distributions of \(B, \Gamma, T^*\), is known,
 allowing the actual convergence of the estimation to be evaluated in a simple scenario,
 and the behaviour of the likelihood function to be shown when the dataset is fixed.
 
-An actual distribution for the random variables \(B, \Gamma, T^*\) has now to be assumed.
+\subsection{Choosing the parameters}
 
-We thus consider
-\begin{align*}
+As explained above,
+the first step to be done consists in choosing the travel time function and the distributions of the parameters.
+
+\subsubsection{Travel Time Function}
+
+The travel time function must be chosen accordingly to assumptions \todo{What assumptions?}:
+it hence has to be continuous and with continuous derivative,
+and its derivative upper bounded by \(1\).
+Moreover, it has to satisfy assumption \todo{assumption number},
+that defines when the function is concave and when convex.
+
+A gaussian function satisfies all the assumptions,
+as long as its variance is high enough.
+For better capturing the expected asymmetricity for early and late arrivals,
+two different variances will be considered before and after the peak.
+The considered function will thus be
+\begin{equation}
+  \label{eq:tt_def}
+  tt(t) =
+  \begin{cases}
+    e^{-\frac{(x - \mu)^2}{\sigma_l}} & \text{if } x \leq \mu \\
+    e^{-\frac{(x - \mu)^2}{\sigma_r}} & \text{if } x > \mu
+  \end{cases}
+\end{equation}
+
+The resulting function is shown in figure\todo{Put figure}.
+It satisfies assumption NUMBER,
+since
+\begin{equation*}
+  \lim_{t \rightarrow 0}tt'(t) = 0.
+\end{equation*}
+Moreover, by setting an high enough value for the parameter \(\sigma_l\),
+determining the variance for the left part of the function,
+assumption NUMBER is satisfied as well.
+
+A distribution for the random variables \(B, \Gamma, T^*\) has now to be assumed.
+
+\subsubsection{Parameters Distributions}
+
+For simplicity, we consider the parameters to be normally distributed:
+\begin{align}
+  \label{eq:par-distr}
   B \sim \mathcal{N}(\mu_\beta, \sigma) && \Gamma \sim \mathcal{N}(\mu_\gamma, \sigma) && T^* \sim \mathcal{N}(\mu_t, \sigma_t)
-\end{align*}
+\end{align}
 
-The parameter \(\theta\) will thus be
+The parameters \(B, \Gamma\) are assumed to have the same variance for reducing the parameter space dimensionality when doing the estimation.
+
+Note that, in case the parameters are assumed to be bounded
+(for instance, values of \(\beta, \gamma < 0\) can be excluded),
+the distributions can be truncated where needed.
+
+This choice of the distributions will induce a choice of the parameter \(\theta\),
+the vector of all the parameters appearing in expression~\eqref{eq:par-distr}.
+It will thus be defined as
 \begin{equation*}
   \theta =
   \begin{pmatrix}
