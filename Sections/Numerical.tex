@@ -88,6 +88,45 @@ It will thus be defined as
   \in \R^5
 \end{equation*}
 
+\subsection{Synthetic Dataset}
+
+For creating the synthetic dataset,
+the cost function must be explicitly minimized,
+with parameters sampled accordingly to the distributions of the random variables \(B, \Gamma, T^*\).
+
+At first, the size of the synthetic dataset \(N\) is fixed.
+\(N\) realizations of the random variables \(B, \Gamma, T^*\) are then sampled from the distributions,
+yielding a dataset of triples
+\begin{equation*}
+  \{\beta_i, \gamma_i, t^*_i\}_i
+\end{equation*}
+
+By minimizing the cost function with each one of this triples we are able to generate the dataset of arrival times:
+
+\begin{equation*}
+  t_i = \argmin_t C(t; \beta_i, \gamma_i, t^*_i)
+\end{equation*}
+
+The minimization is done by explicitly finding the (at most) two internal minima,
+which correspond to early and late arrivals,
+without relying on the theory built in section NUMBER\todo{put number}
+(since relying on the model itself is to be avoided when a model is being validated).
+
+The values found in this way are then compared with the only discontinuity of the derivative,
+that is, for \(t = t^*\).
+The global minimum for the cost function is thus found in this way.
+
+For finding the finding the time values corresponding to the internal minima,
+two gradient descent algorithms are used:
+one of them, converging to the late minimum,
+will be initialized at a time point that is unlikely to be before any late arrival time (e. g. \(t = 24\)),
+while the other one will be initialized at a time point unlikely to be after any early arrival time (e. g. \(t = 0\)).
+Since the function is close to linear until the minima occur,
+no acceleration technique is used,
+as the step size could become greater than needed,
+preventing the algorithms from converging at the desired minimum.
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "../main"
