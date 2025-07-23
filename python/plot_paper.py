@@ -132,7 +132,7 @@ def func(x):
     return x
 y = np.vectorize(func)(x)
 y[np.diff(y, prepend=y[0])>.1] = np.nan
-ax.plot(x, y, c=tt_color, label = r"$t_a(t^*)$")
+ax.plot(x, y, c=tt_color, label = r"$t^{opt}(t^*)$")
 
 loc_width = 1.1
 loc_alpha = .6
@@ -171,7 +171,7 @@ ax.text(gs[1] + .05, 8, r"$tt_a'(t^*) = -\gamma$", color=late_color)
 
 ax.legend(loc="upper left")
 ax.set_xlabel(r"$t^*$ (h)")
-ax.set_ylabel(r"$t_a$ (h)")
+ax.set_ylabel(r"$t^{opt}$ (h)")
 
 f_form = lambda x, _: mpl.dates.num2date(x/24).strftime("%H:%M")
 formatter = mpl.ticker.FuncFormatter(f_form)
