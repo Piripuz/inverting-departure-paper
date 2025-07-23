@@ -1,23 +1,24 @@
 \section{Numerical}
 
 In this section, numerical experiments will be conducted to test the developed method,
-and to see wether it can be deployed in a real scenario.
+and to evaluate wether it can be deployed in a real scenario.
 
 The experiment will proceed in the following way:
 in the first place, a profile for a theoretical travel time function will be defined.
-This profile will need to satisfy assumptions\todo{Cite all the assumptions},
+This profile will need to satisfy assumptions NUMBERS\todo{Cite all the assumptions},
 in order to be similar to a profile that could be found in reality.
 
 After the function has been defined,
 shapes for the distributions of the parameters \(B, \Gamma, T^*\) will be fixed,
 dependant on a parameter \(\theta \in \R^d\).
 
-Given all of this, a dataset of synthetic observations can be built accordingly to the model.
-This is done by sampling the parameters \(\beta, \gamma, t^*\) and explicitly minimizing the resulting cost function.
+Given all of this and a value \(\theta_0\) for the shape parameter \(\theta\),
+a dataset of synthetic observations can be built accordingly to the model.
+The dataset is constructed by sampling the parameters \(\beta, \gamma, t^*\) and explicitly minimizing the resulting cost function.
 This yields a dataset for which the real value of the parameter \(\theta\),
-which affects the distributions of \(B, \Gamma, T^*\), is known.
-This allows the actual convergence of the estimation to be evaluated in a simple scenario,
-and the behaviour of the likelihood function to be shown, with a fixed dataset.
+which affects the distributions of \(B, \Gamma, T^*\), is known,
+allowing the actual convergence of the estimation to be evaluated in a simple scenario,
+and the behaviour of the likelihood function to be shown when the dataset is fixed.
 
 An actual distribution for the random variables \(B, \Gamma, T^*\) has now to be assumed.
 
