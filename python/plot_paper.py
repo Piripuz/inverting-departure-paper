@@ -13,6 +13,7 @@ from scripts.travel_times import asymm_gaussian, asymm_gaussian_plateau
 from scripts.generate_data import cost, generate_arrival
 from scripts.utils import TravelTime
 from scripts.find_points import find_bs, find_gs
+from scripts.retrieve_data import total_liks
 #%%
 
 early_color = "green"
@@ -254,11 +255,9 @@ ts = generate_arrival(10000, tt, mu_beta, mu_gamma, mu_t=9.5, sigma=0.1, sigma_t
 b_i = find_bs(mu_beta, tt)[0]
 g_e = find_gs(mu_gamma, tt)[1]
 
-#%%
-
 fig, ax = plt.subplots(figsize=(7, 4))
 
-ax.hist(ts, 100)
+ax.hist(ts, 100, label="Empirical Arrival Times Density")
 h = 1600
 ax.vlines(
     [b_i, g_e],
@@ -291,5 +290,29 @@ ax.set_xlim(6.5, 12.5)
 ax.xaxis.set_major_formatter(formatter)
 ax.set_xlabel("Arrival Time")
 ax.set_ylabel("Number of  Samples")
+
+ax.legend()
+
 fig.savefig("../img/hist_means.png", dpi=quality)
 plt.close()
+
+#%%
+
+x = np.linspace(6.5, 12.5, 400)
+y = total_liks(tt, x)(mu_beta, mu_gamma, 9.5, .1, 1.)
+
+#%%
+fig, ax = plt.subplots(figsize=(7, 4))
+
+ax.hist(ts, 100, label="Empirical Arrival Times Density")
+ax.fill_between(x, y*700, color=cost_color, alpha=.35, label="Likeilhood Function")
+
+ax.set_xlim(6.5, 12.5)
+ax.xaxis.set_major_formatter(formatter)
+ax.set_xlabel("Arrival Time")
+ax.set_ylabel("Number of  Samples")
+
+ax.legend()
+
+fig.savefig("../img/hist_lik.png", dpi=quality)
+fig.show()
