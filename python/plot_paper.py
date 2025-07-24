@@ -10,8 +10,9 @@ from jax import grad, vmap
 from jaxopt import GradientDescent, Bisection
 
 from scripts.travel_times import asymm_gaussian, asymm_gaussian_plateau
-from scripts.generate_data import cost
+from scripts.generate_data import cost, generate_arrival
 from scripts.utils import TravelTime
+from scripts.find_points import find_bs, find_gs
 #%%
 
 early_color = "green"
@@ -196,7 +197,6 @@ star = 9.4
 c = lambda t: cost(tt)(t, beta, gamma, star)
 y = c(x)
 
-#%%
 
 fig, ax = plt.subplots(figsize=(7, 3))
 
@@ -241,4 +241,55 @@ ax.set_xlabel(r"$t$ (h)")
 ax.set_ylabel(r"$C(t)$")
 
 fig.savefig("../img/optimizer_cost.png", dpi=quality, bbox_inches="tight")
+plt.close()
+
+#%% Distribution of sampled arrival times
+
+mu_beta = .6
+mu_gamma = 2.4
+
+tt = TravelTime(asymm_gaussian_plateau(plateau_len=.1, sigma_r = .3))
+ts = generate_arrival(10000, tt, mu_beta, mu_gamma, mu_t=9.5, sigma=0.1, sigma_t=1, seed=123)[3]
+
+b_i = find_bs(mu_beta, tt)[0]
+g_e = find_gs(mu_gamma, tt)[1]
+
+#%%
+
+fig, ax = plt.subplots(figsize=(7, 4))
+
+ax.hist(ts, 100)
+h = 1600
+ax.vlines(
+    [b_i, g_e],
+    0, h,
+    color=[early_color, late_color],
+    linestyle="dashed",
+    zorder=.9
+)
+
+h_off = .1
+
+ax.text(
+    b_i + h_off,
+    h - 40,
+    r"$tt'(t) = \mu_\beta$",
+    color=early_color,
+    ha="left",
+    va = "top"
+    )
+ax.text(
+    g_e + h_off,
+    h - 200,
+    r"$tt'(t) = -\mu_\gamma$",
+    color=late_color,
+    ha="left",
+    va = "top"
+)
+
+ax.set_xlim(6.5, 12.5)
+ax.xaxis.set_major_formatter(formatter)
+ax.set_xlabel("Arrival Time")
+ax.set_ylabel("Number of  Samples")
+fig.savefig("../img/hist_means.png", dpi=quality)
 plt.close()
