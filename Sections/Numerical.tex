@@ -75,7 +75,7 @@ the distributions can be truncated where needed.
 
 This choice of the distributions will induce a choice of the parameter \(\theta\),
 the vector of all the parameters appearing in expression~\eqref{eq:par-distr}.
-It will thus be defined as
+The parameter will thus be defined as
 \begin{equation*}
   \theta =
   \begin{pmatrix}
@@ -101,7 +101,9 @@ yielding a dataset of triples
   \{\beta_i, \gamma_i, t^*_i\}_i
 \end{equation*}
 
-By minimizing the cost function with each one of this triples we are able to generate the dataset of arrival times:
+By minimizing the cost function in which, as parameters,
+each one of these triples is considered,
+we are able to generate the dataset of arrival times:
 
 \begin{equation*}
   t_i = \argmin_t C(t; \beta_i, \gamma_i, t^*_i)
@@ -116,7 +118,7 @@ The values found in this way are then compared with the only discontinuity of th
 that is, for \(t = t^*\).
 The global minimum for the cost function is thus found in this way.
 
-For finding the finding the time values corresponding to the internal minima,
+For finding the time values corresponding to the internal minima,
 two gradient descent algorithms are used:
 one of them, converging to the late minimum,
 will be initialized at a time point that is unlikely to be before any late arrival time (e. g. \(t = 24\)),
