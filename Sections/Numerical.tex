@@ -190,6 +190,50 @@ and are followed (or preceded) by a zone in which the density of arrival times i
 that corresponds to the zone in which on-time arrivals are not convenient,
 into the interval \todo{Specify the interval with new notation}.
 
+\subsection{Numerical Computation of the Likelihood}
+
+After the dataset on which the method can be performed is found,
+the density of the random variable \(T^{opt}\),
+as found in equation~\eqref{eq:lik-final},
+must be computed.
+
+Computing the likelihood presents some challenges,
+that require modern and fast computational frameworks to be utilized.
+The challenges are mostly three:
+\begin{enumerate}
+\item \textbf{Evaluating Critical Points}:
+  the bounds for critical early (and late) arrival intervals have to be precisely estimated,
+  as well as values for the coefficients \(\beta_0, \gamma_0\).
+  This requires inverting the derivative of the travel time function,
+  that is computationally non trivial.
+\item \textbf{Estimating Integral Results}:
+  as can be easily seen in equation~\eqref{eq:lik-final},
+  several integrals have to be approximated.
+  Doing so in a precise and fast way poses another challenge to the method
+\item \textbf{Scalability}:
+  the main challenge is posed by scalability;
+  the likelihood of several thousands of points has to be estimated,
+  and an optimization process performed on the result.
+  The method must thus keep a good precision,
+  while being highly scalable.
+\end{enumerate}
+
+In order to tackle the three problems together,
+we employ accelerated computing frameworks, that are mainly used in Machine Learning.
+
+Using JAX \citep{jax}, a Python library developed by Google for Machine Learning purposes,
+we are able to perform a precise estimation thanks to the automatic differentiation,
+while reaching high scalability thanks to the just-in-time (jit) compilation of the code.
+
+The intervals are hence computed by utilizing iterative algorithms in JAXopt \citep{jaxopt},
+that allows to just-in-time compile gradient descent and bisection algorithms,
+necessary for computing the bounds of the critical intervals\todo{write something more specific here?}.
+
+Lastly, integrals are computed using Gaussian Quadrature \citep{gauss_quad},
+whose implementation in the package quadax allows, again,
+just-in-time compilation and automatic differentiation of the result.
+
+The resulting code is available at \url{github.com/something}.
 
 
 Figure
