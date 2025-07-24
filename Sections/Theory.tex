@@ -22,6 +22,10 @@ where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at 
 
  An implied assumption here is that all travelers arriving at the same destination would always experience the same travel time, which enables the definition of $tt_a(t_a)$. The travel time profile is assumed to be exogenous, which is not affected by an individual traveler's choices.  In addition, we start with a representative congestion pattern such that the travel time profile function is subject to the following assumption. 
 
+\begin{assumption}\label{ass:continous}
+   The travel time profile function $tt_a(t_a)$ is continuous, nonnegative, and bounded. 
+\end{assumption}
+
 
 \begin{assumption}\label{ass:quasiconc}
    The travel time profile function $tt_a(t_a)$ is continuous and unimodal. 
@@ -46,49 +50,101 @@ Next, we characterize the optimal arrival time for an individual user with given
 To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the optimal early arrival time (OEAT) $$t_e^{opt}  = \argmin_{t_a \le  t^*}C(t_a)$$ and the optimal late arrival time (OLAT)$$t_l^{opt} =  \argmin_{t_a \ge  t^*}C(t_a).$$ 
 
 \begin{definition}\label{def:CEA}
-    Given any travel time profile function $tt_a(t_a)$, and \(\beta\),  an interval $[t_e, \bar t_e]$ is termed a critical early arrival (CEA) interval when the following conditions hold:
-    \begin{align}
-         & tt_a(t_e) + \beta (\bar t_e - t_e)   = tt_a(\bar t_e )\\
-    &  tt_a(t_e)  + \beta (t - t_e ) \le  tt_a(t ), \forall t \in [t_e, \bar t_e]\label{eq:concave}
-    \end{align}
-       
-
+    Given any travel time profile function $tt_a(t_a)$ and \(\beta\),  an interval $[t_e, \bar t_e]$ is termed an early arrival (EA) interval when the following condition holds:
+\begin{equation}\label{eq:increase_faster}
+    tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e].
+\end{equation} 
 \end{definition}
+
+\begin{definition}
+    Given any travel time profile function $tt_a(t_a)$ and \( \gamma\), an interval $[\bar t_l, t_l]$ is termed a late arrival (LA) interval when the following conditions hold:
+    \begin{equation}\label{eq:decrease_faster}
+        tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t ), \forall  t \in [\bar  t_l, t_l]
+\end{equation} 
+ 
+\end{definition}
+
+Roughly speaking, congestion increases (respectively, decreases) rapidly with the arrival time within each EA (LA) interval, such that the time savings from arriving earlier (later) outweigh the cost of early arrival. 
 
 
 
 \begin{definition}
-    Given any travel time profile function $tt_a(t_a)$, and \( \gamma\), an interval $[\bar t_l, t_l]$ is termed a critical early arrival (CLA) interval when the following conditions hold:
-     \begin{align}
-         &  tt_a(t_l) + \gamma(\bar t_l - t_l)   = tt_a(\bar t_l )\\
-        & tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t ), \forall  t \in [\bar  t_l, t_l]
-    \end{align}
-    
+ An EA (respectively, LA) interval is said to be a critical EA (CEA) or critical LA (CLA) interval if it is not strictly contained within any other EA (LA) interval.
 \end{definition}
 
-
-Any travelers with the unit early and late arrival costs $\beta$ and $\gamma$ would prefer arriving at time $t_e$ than any time in each CEA interval, and prefer arriving at time $t_l$ than any time in each CLA interval, regardless of their $t^*$. 
-
+Let $E$ denote the set of all critical early arrival (CEA) intervals for a given early arrival penalty $\beta$.
 
 \begin{prop}
-  \label{prop:into-early-late}
-Consider a critical early arrival (CEA) interval $[t_e, \bar t_e]$  under some $\beta$ and $tt_a(t)$ and not contained by any other CEA intervals. Under any desired arrival time $t^* \in [t_e, \bar t_e]$, the minimal early arrival cost (MEAC) is achieved at $t_e$, i.e.,  $C_e^{opt} = C(t_e)$.
+  \label{prop:into-early}
+ Under Assumption \ref{ass:continous}, given any $tt_a(t)$, $\beta$, and $t^*$, the minimal early arrival cost is  
+$$C_e^{opt} = \begin{cases}
+    C(t_e),  \text{if }\exists [t_e, \bar{t}_e] \in E \text{ such that } t^* \in [t_e, \bar{t}_e],\\
+     tt_a(t^*), \text{otherwise}. 
+\end{cases}$$
 \end{prop}
+
+
+% \begin{prop}
+%   \label{prop:into-early}
+% Under Assumption \ref{ass:continous}, if there exists a critical early arrival (CEA) interval $[t_e, \bar{t}_e]$ for a given early arrival penalty $\beta$, then (1) the minimal early arrival cost for any desired arrival time $t^* \in [t_e, \bar{t}_e]$ is attained at $t_e$, i.e., 
+% $C_e^{opt} = C(t_e)$. 
+% \end{prop}
 \begin{proof}
-Recall that the MEAC $C_e^{opt}$ is defined as $$C_e^{opt} = \min_{t \le t^*} C(t).$$
-To show that $C_e^{opt}$ is achieved at $t_e$, it is equivalent to show that the inequality $C(t) \ge C(t_e) $ holds for any $t \le t^*$. 
+Recall that the minimal early arrival cost  $C_e^{opt}$ is defined as $$C_e^{opt} = \min_{t \le t^*} C(t).$$
 
-First, we show that $C(t) \ge C(t_e)$ for any $t \in [t_e, t^*]$. By Definition \ref{def:CEA}, for any $t \in [t_e, \bar t_e]$, we have  
-\begin{equation}\label{eq:concave}
-    tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ).
-\end{equation} 
-By Equation \eqref{eq:cost_ta}, the trip cost at any arrival time $t \in [t_e, t^*]$ is 
+(1) We start by discussing the case when there exists some CEA interval $[t_e, \bar{t}_e]$ such that  $t^* \in [t_e, \bar{t}_e]$.  To show that $C_e^{opt}$ is achieved at $t_e$, it is equivalent to show that $C(t) \ge C(t_e) $ for any $t \le t^*$. We proceed to show that $C(t) \ge C(t_e)$ in two cases with $t \in [t_e, t^*]$ and $t < t_e$, respectively.    
+
+Case 1: $t \in [t_e, t^*]$.  Recall that the trip cost at any $t \in [t_e, t^*]$ is defined as 
 $$C(t) = tt_a(t) + \beta (t^* - t).$$
-Using \eqref{eq:concave}, we obtain that 
-$$C(t) \ge tt_a(t_e) + \beta (t - t_e ) + \beta (t^* - t) = C(t_e).$$
+Using Inequality \eqref{eq:increase_faster} from Definition \ref{def:CEA}, i.e., $tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e]$, we obtain that 
+$$C(t) \ge tt_a(t_e) + \beta (t - t_e ) + \beta (t^* - t) = C(t_e), \forall t \in [t_e, \bar t_e].$$
 
-Second, we show that $C(t) \ge C(t_e)$ for any $t < t_e$ by contradiction. Suppose that there exists some $t< t_e$ such that $C(t) < C(t_e)$. 
+Case 2: $t < t_e$. We prove by contradiction. Suppose that there exists some $t'< t_e$ such that $C(t') < C(t_e)$.  Define a set 
+\begin{equation}\label{eq:def_T}
+    T = \{t \in [t', t_e] \mid tt_a(t')  + \beta (t - t' ) =  tt_a(t )\},
+\end{equation}
+and let $t'' = \max(T).$ Apparently, $C(t) = C(t')$ for any $t \in T$. Next, we will prove that the interval $[t'', \bar{t}_e]$ is a CEA interval, which contains $[t_e, \bar{t}_e]$, contradicting the definition of a critical early arrival interval.
+
+
+To do so, we prove that the following condition holds by Definition \ref{def:CEA}:
+$$ tt_a(t'')  + \beta (t - t'' ) \le  tt_a(t ), \forall t \in [t'', \bar t_e].$$ 
+
+First, we show that $ tt_a(t'')  + \beta (t - t'' ) \le  tt_a(t )$ holds for any $ t \in [t_e, \bar t_e] $. Recall that $[t_e, \bar t_e]$ is a CEA interval, and therefore by definition the following inequality holds:
+$$tt_a(t_e)  + \beta (t - t_e ) \le  tt_a(t ), \forall t \in [t_e, \bar t_e].$$ 
+Given that $C(t') < C(t_e)$ by assumption and $C(t'') = C(t')$ by definition, we have $C(t'') < C(t_e)$.  Thus, we have $$tt_a(t'')  + \beta (t - t'' ) < tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e]. $$
+That is, $$tt_a(t'')  + \beta (t - t'' ) <  tt_a(t ), \forall t \in [t_e, \bar t_e].$$
+
+Second,  we show that $ tt_a(t'')  + \beta (t - t'' ) \le  tt_a(t )$ holds for any $ t \in [t'',  t_e]$.  Let $ f(t)= tt_a(t)  + \beta (t'' - t ) -  tt_a(t'' ) $, which is continuous.  We have shown above that $$tt_a(t'')  + \beta (t_e - t'' ) <  tt_a(t_e),$$
+i.e., $f(t_e) <0$. Also, we have $f(t'') =0$ by definition. 
+
+Suppose that there exists some $t \in (t'',  t_e)$ such that $$tt_a(t)  + \beta (t'' - t ) >  tt_a(t'' ),$$ i.e., $f(t) <0$. By the continuity of $f(t)$, there must be some $t''' \in (t, t_e)$ such that $f(t''')=0,$ i.e., $$tt_a(t''')  + \beta (t'' - t''' ) =  tt_a(t'' ).$$
+Therefore, we have $t''' \in T$ and $t''' > t''$, which contradicts the condition that $t'' =\max(T)$. Thus, we must have $ tt_a(t'')  + \beta (t - t'' ) \le  tt_a(t )$ holds for any $ t \in [t'',  t_e]$. 
+
+(2) Now we turn to discuss the case when $t^*$ does not fall into any CEA intervals. Again, we prove by contradiction. Suppose that there exists some $t' < t^*$ such that $C(t') < C(t^*)$. Redefine a set 
+\begin{equation}\label{eq:def_T_2}
+    T = \{t \in [t', t^*] \mid tt_a(t')  + \beta (t - t' ) =  tt_a(t )\}, 
+\end{equation} 
+and still let $t'' = \max(T)$. Since $C(t') < C(t^*)$, we have 
+$$tt_a(t') + \beta (t^* - t') < tt_a(t^*).$$
+Using that $tt_a(t'')  + \beta (t - t'' )  = tt_a(t')  + \beta (t - t' )  = tt_a(tt') $, we have 
+$$tt_a(t'') + \beta (t^* - t'') < tt_a(t^*).$$
+Also, the following equation naturally holds: 
+$$tt_a(t'') + \beta (t'' - t'') = tt_a(t'').$$
+By continuity and contradiction,  we are able to show that $$tt_a(t'') + \beta (t - t'') \le tt_a(t), \forall t \in [t'', t^*].$$
+That is, $[t'', t^*] $ is an EA interval. And there always exists some CEA interval that contains $[t'', t^*]$. Therefore, $t^*$ would fall into some CEA interval, which contradicts.  The proof is completed.  
+
+
 \end{proof}
+
+In parallel, we can prove the following proposition concerning late arrivals. The proof is similar to the proof for Proposition \ref{prop:into-early} and therefore omitted here. 
+\begin{prop}
+  \label{prop:into-late}
+Under Assumption \ref{ass:continous}, if there exists a critical late arrival (CLA) interval $[\bar t_l, t_l]$ for a given late arrival penalty $\gamma$, then the minimal early arrival cost for any desired arrival time $t^* \in [\bar t_l, t_l]$ is attained at $t_l$, i.e., 
+$C_l^{opt} = C(t_l)$.
+\end{prop}
+
+
+
 
 
 \begin{prop}
