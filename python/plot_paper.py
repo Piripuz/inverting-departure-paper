@@ -10,6 +10,8 @@ from jax import grad, vmap
 from jaxopt import GradientDescent, Bisection
 
 from scripts.travel_times import asymm_gaussian, asymm_gaussian_plateau
+from scripts.generate_data import cost
+from scripts.utils import TravelTime
 #%%
 
 early_color = "green"
@@ -17,6 +19,10 @@ late_color="red"
 ot_color = "blue"
 tt_color = "purple"
 cost_color = "orange"
+
+f_form = lambda x, _: mpl.dates.num2date(x/24).strftime("%H:%M")
+formatter = mpl.ticker.FuncFormatter(f_form)
+
 
 quality = 300
 
@@ -173,11 +179,66 @@ ax.legend(loc="upper left")
 ax.set_xlabel(r"$t^*$ (h)")
 ax.set_ylabel(r"$t^{opt}$ (h)")
 
-f_form = lambda x, _: mpl.dates.num2date(x/24).strftime("%H:%M")
-formatter = mpl.ticker.FuncFormatter(f_form)
 ax.xaxis.set_major_formatter(formatter)
 ax.yaxis.set_major_formatter(formatter)
 
 fig.savefig("../img/monotone_t_a.png", dpi=quality)
 # fig.show()
 plt.close(fig)
+
+#%%
+
+x = np.linspace(-.5, 24.5, 400)
+tt = TravelTime(asymm_gaussian_plateau(plateau_len=.5, sigma_r = .35))
+beta = .6
+gamma = .8
+star = 9.4
+c = lambda t: cost(tt)(t, beta, gamma, star)
+y = c(x)
+
+#%%
+
+fig, ax = plt.subplots(figsize=(7, 3))
+
+cost_plot = ax.plot(x, y, color=cost_color, label=r"Cost function $C(t; \beta, \gamma, t^*)$")
+low_min = GradientDescent(c, acceleration=False, maxiter=4000, stepsize=.05).run(0.).params
+high_min = GradientDescent(c, acceleration=False, maxiter=4000, stepsize=.05).run(24.).params
+ax.scatter(
+    [low_min, high_min], [c(low_min), c(high_min)],
+    color=[early_color, late_color],
+    s=15,
+    zorder=2.1
+)
+
+ax.scatter(
+    [0, 24],
+    [c(0), c(24)],
+    color=[early_color, late_color],
+    zorder=2.1,
+    marker="s"
+)
+
+square_legend = mpl.lines.Line2D(
+    [0], [0],
+    color="w",
+    markerfacecolor="grey",
+    markersize=10,
+    marker="s",
+    label="Optimizer Initialization Points"
+)
+circle_legend = mpl.lines.Line2D(
+    [0], [0],
+    color="w",
+    markerfacecolor="grey",
+    markersize=7,
+    marker="o",
+    label="Optimizer Convergence Points"
+)
+ax.legend(handles=[cost_plot[0], square_legend, circle_legend])
+
+ax.xaxis.set_major_formatter(formatter)
+ax.set_xlabel(r"$t$ (h)")
+ax.set_ylabel(r"$C(t)$")
+
+fig.savefig("../img/optimizer_cost.png", dpi=quality, bbox_inches="tight")
+plt.close()

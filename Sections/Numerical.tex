@@ -126,6 +126,23 @@ no acceleration technique is used,
 as the step size could become greater than needed,
 preventing the algorithms from converging at the desired minimum.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{optimizer_cost}
+  \caption{
+    Cost function,
+    plotted with points corresponding to the optimizers initializations and the minima at which they converge.
+    The optimizer in green converges to the early minimum,
+    while the one in red converges to the late minimum.
+    Comparing the found minima with the cost of arriving on-time the minimizer of the cost is found.
+    Parameter values used for this cost function are \(\beta = 0.6, \gamma = 0.8\).
+  }
+  \label{fig:optimizer-cost}
+\end{figure}
+
+Figure~\ref{fig:optimizer-cost} shows the cost function,
+and depicts how the optimization process is performed.
+
 Figure NUMBER shows distribution,
 figure NUMBER overlap likelihood,
 please note that is good.\todo{complete these sentences}
