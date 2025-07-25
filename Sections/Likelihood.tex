@@ -14,7 +14,7 @@ by doing a Maximum Likelihood Estimation.
 \subsection{Theoretical Prerequisites}
 
 
-The goal of the section is thus to find an analytical expression for the Probability Density Function (pdf)\todo{Is it ok to write pdf or is it informal?} that characterizes the distribution of the outcomes of the function \(t^{opt}\).
+The goal of the section is thus to find an analytical expression for the Probability Density Function that characterizes the distribution of the outcomes of the function \(t^{opt}\).
 To this end, the characterization developed in the preceding section will be employed,
 in a slightly simpler setting, in which some additional hypotheses on the travel time function are made.
 
@@ -112,7 +112,7 @@ This thus leads to
 A graphical representation of the functions \(b_i, b_e, g_i, g_e\) is shown in figure\todo{ref}
 \todo{Here, how \(t_s\) is computed has to be explained. These things are to be put in this or in the theory section?? Maybe theory}
 Once these functions have been defined,
-the pdf that characterizes the distribution of the optimal departure time \(t^{opt}\) can be computed.
+the probability density function that characterizes the distribution of the optimal departure time \(t^{opt}\) can be computed.
 
 \subsection{The Probability Density Function}
 
@@ -126,7 +126,7 @@ A random variable for the optimal arrival will be defined as follows:
   T^{opt} = t^{opt}(B, \Gamma, T^*)
 \end{equation}
 
-The goal of this section will be finding the pdf \(f_{T^{opt}}\) of the variable \(T^{opt}\).
+The goal of this section will be finding the density \(f_{T^{opt}}\) of the variable \(T^{opt}\).
 
 In order to simplify the estimation process, an assumption (which is, indeed, quite restrictive)
 is made on these random variable:
@@ -166,12 +166,13 @@ and takes the value \(-1\) if the optimal arrival is an early arrival,
 \(1\) if it is a late arrival and \(0\) if it is an on-time one.
 
 Since an optimal arrival can only be early, on-time or late,
-by using the sum rule, the pdf for the random variable \(T^{opt}\) can be decomposed into three different parts:
+by using the sum rule,
+the probability density function for the random variable \(T^{opt}\) can be decomposed into three different parts:
 \begin{equation}
   \label{eq:pdf-decomposed-q}
   f_{T^{opt}}(t) = f_{T^{opt}, Q}(t, -1) + f_{T^{opt}, Q}(t, 0) + f_{T^{opt}, Q}(t, 1)
 \end{equation}
-
+\todo{Where \(f_{T^{opt}, Q}\) is...}
 The single addends are easier to describe,
 and will be individually studied in the following.
 
@@ -197,7 +198,7 @@ the two events above are independent and their likelihood can be multiplied:
   \label{eq:on-time-intro}
   f_{T^{opt}, Q}(t, 0) = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma)))
 \end{equation}
-where \(f_{T^*}\) is the pdf of the random variable \(T^*\), and is known.
+where \(f_{T^*}\) is the probability density function of the random variable \(T^*\), and is known.
 
 Expression~\eqref{eq:on-time-intro} leads to a straightforward way of computing the desired value:
 the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\) can indeed be simply evaluated by integration:
@@ -206,7 +207,7 @@ the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma)
   \label{eq:prob-not-intervals}
   \prob( t \not\in (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) = \int_{b\in \R \vert t \not\in (b_i(b), b_e(b))}\int_{g \in \R \vert t \not\in (g_i(g), g_e(g))}f_B(b)f_\Gamma(g)\, dg\, db
 \end{equation}
-where \(f_B, f_\Gamma\) are the pdf of, respectively, the random variables \(B, \Gamma\).
+where \(f_B, f_\Gamma\) are the probability densities of, respectively, the random variables \(B, \Gamma\).
 
 
 It is now possible to take advantage of Proposition\todo{Need to add this proposition somewhere...}:
@@ -229,7 +230,7 @@ The definition of these functions simplifies the integrals in~\eqref{eq:prob-not
 \end{equation}
 
 By exploiting the expression obtained in equation~\eqref{eq:on-time-monot},
-the joint pdf in equation~\eqref{eq:on-time-intro} can be analytically evaluated:
+the joint probability density functions in equation~\eqref{eq:on-time-intro} can be analytically evaluated:
 \begin{equation}
   \label{eq:on-time-final}
   \begin{split}
@@ -263,7 +264,7 @@ and their joint density will be computed via its decomposition in conditional de
   f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
 \end{equation}
 
-The probability density function \(f_{b_i(B)}(t)\) for the transformed random variable \(b_i(B)\) can be simply evaluated by changing variable from the known density \(f_B\):
+The probability density function \(f_{b_i(B)}(t)\) for the transformed random variable \(b_i(B)\) can be simply evaluated by changing variable from the known density \(f_B\):\todo{cite where this expression comes from}
 \begin{equation}
   \label{eq:pdf-b-change-var}
   f_{b_i(B)}(t) = f_B(b_i^{-1}(t)) \left| \diff{}{t}(b_i^{-1}(t)) \right|
@@ -288,7 +289,7 @@ The arrival times out of the image of \(b_i\) are exactly the ones for which the
 },
 that is, \(tt_a''(t) < 0\).
 
-The pdf for the transformed random variable will thus be
+The density function for the transformed random variable will thus be
 \begin{equation}
   \label{eq:pdf-b-changed-var}
   f_{b_i(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
@@ -314,7 +315,7 @@ By substituting these in the original expression, we get
 
 Integrating the random variables,
 and substituting what found in equation~\eqref{eq:pdf-b-changed-var},
-yields an explicit expression for the desired pdf:
+yields an explicit expression for the desired probability density function:
 \begin{equation}
   \label{eq:early-final}
   f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
