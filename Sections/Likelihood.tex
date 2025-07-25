@@ -126,7 +126,7 @@ A random variable for the optimal arrival will be defined as follows:
   T^{opt} = t^{opt}(B, \Gamma, T^*)
 \end{equation}
 
-The goal of this section will be finding the pdf \(f_{t^{opt}}\) of the variable \(T^{opt}\).
+The goal of this section will be finding the pdf \(f_{T^{opt}}\) of the variable \(T^{opt}\).
 
 In order to simplify the estimation process, an assumption (which is, indeed, quite restrictive)
 is made on these random variable:
@@ -141,9 +141,9 @@ remind indeed that, being the parameter \(\alpha\) in equation~\eqref{eq:cost_ta
 the parameters \(\beta, \gamma\) represent the normalized values of the early and late arrival penalties instead of the actual ones,
 and the assumption of independence is thus more realistic than how it was if the parameters were not normalized.
 
-It is, in the first place,
-convenient to distinguish between early, late and on-time arrivals.
-In order to distinguish them, we define another random variable
+In the first place,
+ it is convenient to distinguish between early, late and on-time arrivals.
+In order to make this distinction, we define another random variable:
 \begin{definition}
   Consider the function
   \begin{equation*}
@@ -182,12 +182,12 @@ The value of the function
   f_{T^{opt}, Q}(t, 0)
 \end{equation*}
 will be here computed.
-This represent how likely is a value for the arrival time \(t\) to be an on-time arrival.
+This represents how likely is a value for the arrival time \(t\) to be an on-time arrival.
 
 Note that Observation~\ref{obs:simplified-char} fully characterizes the values of the parameters for which the on-time arrivals are realized:
 we are able, by using this characterization, to better describe the event at issue.
 
-In particular, we note that the arrival time \(t\) is an optimal on-time arrival if and only if two conditions are satisfied:
+In particular, we note that the arrival time \(t\) is an optimal on-time arrival if and only if two conditions are satisfied at the same time:
 the time \(t\) has to be a realization of the desired arrival time \(T^*\),
 and it has to  be out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\).
 
@@ -200,7 +200,7 @@ the two events above are independent and their likelihood can be multiplied:
 where \(f_{T^*}\) is the pdf of the random variable \(T^*\), and is known.
 
 Expression~\eqref{eq:on-time-intro} leads to a straightforward way of computing the desired value:
-the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\) can indeed be simply evaluated by integrating it
+the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\) can indeed be simply evaluated by integration:
 
 \begin{equation}
   \label{eq:prob-not-intervals}
@@ -210,7 +210,7 @@ where \(f_B, f_\Gamma\) are the pdf of, respectively, the random variables \(B, 
 
 
 It is now possible to take advantage of Proposition\todo{Need to add this proposition somewhere...}:
-the monotonicity of the intervals imply that there exist two functions representing the maximum values \(\beta\) and \(\gamma\) can assume while keeping a given point into the defined intervals:
+the monotonicity of the intervals imply that there exist two functions representing the maximum values that \(\beta\) and \(\gamma\) can assume while keeping a given point into the defined intervals:
 \begin{equation}
   \label{eq:def_b_0_g_0}
   \begin{split}
@@ -240,7 +240,7 @@ the joint pdf in equation~\eqref{eq:on-time-intro} can be analytically evaluated
 
 Note that all the functions used in the right hand side can be evaluated.
 This concludes thus the evaluation of the likelihood of being an on-time arrival.
-In the following part, the likelihood of being an early or late arrival will be computed.
+In the following part, the likelihood of being an early or late arrival will be described.
 
 \subsubsection{Early and Late Arrivals}
 
@@ -257,7 +257,7 @@ and it has to be into the interval \((b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})\).
 
 Differently from the last case, the random variable \(B\) appears in both conditions:
 the events are thus not independent anymore,
-and their joint pdf will be computed via its decomposition in conditional densities:
+and their joint density will be computed via its decomposition in conditional densities:
 \begin{equation}
   \label{eq:late-joint-decomp}
   f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
@@ -293,7 +293,7 @@ The pdf for the transformed random variable will thus be
   \label{eq:pdf-b-changed-var}
   f_{b_i(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
-where the employment of the function \([\bullet]^+\) ensures the pdf to be equal to zero where the travel time function is concave.
+where the employment of the function \([\bullet]^+\) ensures the probability density function to be equal to zero where the travel time function is concave.
 
 We will now study the probability
 \begin{equation*}
@@ -345,7 +345,7 @@ this expression allows thus the direct computation of the distribution of the op
 which minimizes the cost faced by the traveller when choosing a departure time.
 
 If we suppose the distributions of the parameters to be parametrized by some parameter \(\theta\),
-this allows a maximum likelihood estimation of the parameter,
+this allows a Maximum Likelihood Estimation of the parameter,
 that will be performed in the following.
 
 \subsection{MLE Configuration}
@@ -355,7 +355,7 @@ to estimate a parameter that has an impact on the distribution of the random var
 
 Suppose thus the distribution of the random variables being dependant on a parameter \(\theta \in \R^d\):
 \begin{align*}
-  B \sim f_B(x; \theta) && \Gamma \sim f_\Gamma(x; \theta) && T^* \sim f_{T^*}(x; \theta)
+  B \sim f_B(x; \theta) && \Gamma \sim f_\Gamma(x; \theta) && T^* \sim f_{T^*}(t; \theta)
 \end{align*}
 
 The probability density function in equation~\eqref{eq:pdf-final} will itself depend on the parameter \(\theta\):
@@ -374,7 +374,7 @@ If a dataset of observations is given
 \begin{equation*}
   T = \{t_i\}_i
 \end{equation*}
-the definition in~\eqref{eq:lik-single} can be extended to the whole dataset:
+the definition of the likelihood given in~\eqref{eq:lik-single} can be extended to the whole dataset:
 \begin{equation}
   \label{eq:lik-final}
   \mathcal{L}(\theta | T) = \prod_i \mathcal{L}(\theta | t_i)
