@@ -25,11 +25,17 @@ The assumptions that simplify the estimation are shown in the following definiti
 
   \(tt_a\) is a \textbf{Proper Travel Time Function} if \(tt_a\) is a General Travel Time Function and,
   on top of this, 
-  two points \(k_1\neq k_2 \in \R\) can be found such that
-  \begin{itemize}
-  \item \(tt_a|_{(k_1, k_2)}\) is concave
-  \item \(tt_a|_{\R\setminus(k_1, k_2)}\) is convex
-  \end{itemize}
+  there exist two time points \(k_1 \neq k_2 \in \R\) such that,
+  in the subsets
+  \begin{align}
+    \label{eq:subs_conc_conv}
+    \mathcal{D}_{conc} = (k_1, k_2) && \mathcal{D}_{conv} = \R \setminus \mathcal{D}_{conc}
+  \end{align}
+  The function \(tt_a\) satisfies the following:
+  \begin{enumerate}
+  \item \(tt_a\) is concave on the domain \(\mathcal{D}_{conc}\)
+  \item \(tt_a\) is convex on the domain \(\mathcal{D}_{conv}\)
+  \end{enumerate}
 \end{definition}
 \todo{Why is proper tt even realistic?}
 
@@ -88,9 +94,12 @@ a point satisfying the conditions above can occur only once:
 given the unimodality,
 the function will be as shown in Figure~\ref{fig:theo_tt}: increasing, with an increasing derivative,
 for \(t < k_1\), and decreasing with an increasing derivative for \(t > k_2\).
-Its derivative will thus be injective on the convex part \(\R \setminus (k_1, k_2)\),
-that is the part we are interested in.
-This shows that the set of possible desired arrival times \(t^*\) for which early arrivals occur is a single interval.
+Its derivative will thus be injective on the convex part \(\mathcal{D}_{conv}\),
+that is the only part in which the second derivative is non-negative.
+
+Being the derivative injective,
+there is at most one point \(t_e\) satisfying the condition \(tt_a(t_e) = \beta\).
+The set \(E\) is thus either empty or a singleton.
 A similar reasoning holds for late arrivals.
 
 Consider thus now the problem of finding the intervals \((t_e, \bar{t_e})\), \((\bar{t_l}, t_l)\).
@@ -101,7 +110,7 @@ The points in which the arrivals occur are now easy to estimate. Let
 
 The following functions are well defined:
 \begin{align*}
-  b_i: (0, \beta_{max}) & \rightarrow (-\infty, k_1)  & g_e: (0, \gamma_{max}) & \rightarrow (k_2, \infty) \\
+  b_i: (0, \beta_{max}) & \rightarrow \mathcal{D}_{conv}  & g_e: (0, \gamma_{max}) & \rightarrow \mathcal{D}_{conv} \\
        \beta & \mapsto (tt_a' |_{(-\infty, k_1)})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{(k_2, \infty)})^{-1}(\gamma)
 \end{align*}
 
