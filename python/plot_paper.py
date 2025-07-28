@@ -112,16 +112,16 @@ plt.show()
 x = np.linspace(8.5, 10.5, 200)
 tt = asymm_gaussian()
 
-fig, ax = plt.subplots(figsize=(6, 4))
+fig, ax = plt.subplots(figsize=(7, 3))
 dtt_plot = ax.plot(mpl.dates.num2date(x/24), vmap(grad(tt))(x), alpha=.5, label=r"Derivative of the Travel Time Function $tt'(t)$")
 tt_plot = ax.plot(mpl.dates.num2date(x/24), tt(x), color=tt_color, label=r"Travel Time Function $tt(t)$")
 
 ax.xaxis.set_major_formatter(mpl.dates.DateFormatter("%H:%M"))
 ax.set_xlabel(r"$t$ (h)")
-ax.set_ylabel("Travel Time (min)")
+ax.set_ylabel("Travel Time")
 ax.legend(handles=[*tt_plot, *dtt_plot], loc=3)
 
-fig.savefig("../img/theo_tt.png", dpi=quality)
+fig.savefig("../img/theo_tt.png", dpi=quality, bbox_inches="tight")
 fig.show()
 
 #%%
@@ -301,7 +301,6 @@ plt.close()
 x = np.linspace(6.5, 12.5, 400)
 y = total_liks(tt, x)(mu_beta, mu_gamma, 9.5, .1, 1.)
 
-#%%
 fig, ax = plt.subplots(figsize=(7, 4))
 
 ax.hist(ts, 100, label="Empirical Arrival Times Density")
@@ -315,4 +314,57 @@ ax.set_ylabel("Number of  Samples")
 ax.legend()
 
 fig.savefig("../img/hist_lik.png", dpi=quality)
-fig.show()
+plt.close()
+
+#%%
+
+x = np.linspace(-2.5, 2.5, 300)
+y = np.exp(-x**2)
+
+fig, ax = plt.subplots(figsize=(7, 3))
+
+ax.plot(x, y)
+
+k_2 = 0.70711
+k_1 = -k_2
+
+ax.axvspan(
+    x[0], k_1,
+    color="orange",
+    ec=None,
+    alpha=.3,
+    label=r"$\mathcal{D}_{conv}$"
+)
+ax.axvspan(
+    k_2, x[-1],
+    color="orange",
+    ec=None,
+    alpha=.3
+)
+ax.axvspan(
+    k_1, k_2,
+    color="purple",
+    ec=None,
+    alpha=.3,
+    label=r"$\mathcal{D}_{conc}$"
+)
+
+ax.vlines(
+    [k_1, k_2],
+    0, 1,
+    color="black",
+    linestyle="dashed",
+    linewidth=.7,
+    transform=ax.get_xaxis_transform()
+    )
+
+ax.set_xticks([k_1, k_2], [r"$k_1$", r"$k_2$"])
+ax.set_yticks([])
+ax.spines["top"].set_visible(False)
+ax.spines["left"].set_visible(False)
+ax.spines["right"].set_visible(False)
+
+ax.legend(loc=2)
+
+fig.savefig("../img/conv_conc_gauss.png", dpi=quality)
+plt.close()
