@@ -231,29 +231,37 @@ The value of the function
   f_{T^{opt}, Q}(t, 0)
 \end{equation*}
 will be here computed.
-This represents how likely is a value for the arrival time \(t\) to be an on-time arrival.
+
+Given a value for the arrival time \(t\),
+the value of the function \(f_{T^{opt}, Q}(t, 0)\) represents how likely is the time \(t\) to be the outcome of an on-time arrival.
 
 Note that Observation~\ref{obs:simplified-char} fully characterizes the values of the parameters for which the on-time arrivals are realized:
 we are able, by using this characterization, to better describe the event at issue.
 
 In particular, we note that the arrival time \(t\) is an optimal on-time arrival if and only if two conditions are satisfied at the same time:
 the time \(t\) has to be a realization of the desired arrival time \(T^*\),
-and it has to  be out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\).
+and it has to  be out from the intervals
+\footnote{
+  Note that \(E(B), L(\Gamma)\) are here sets of intervals rather than intervals.
+  They can be, in this section, treated as intervals:
+  Observation~\ref{obs:simplified-char} shows indeed that they can't contain more than a single interval.
+}
+\(E(B), L(\Gamma)\).
 
 Being the random variable \(T^*\) independent from \(B, \Gamma\),
 the two events above are independent and their likelihood can be multiplied:
 \begin{equation}
   \label{eq:on-time-intro}
-  f_{T^{opt}, Q}(t, 0) = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma)))
+  f_{T^{opt}, Q}(t, 0) = f_{T^*}(t) \cdot \prob(t \notin E(B) \cup L(\Gamma))
 \end{equation}
 where \(f_{T^*}\) is the probability density function of the random variable \(T^*\), and is known.
 
 Expression~\eqref{eq:on-time-intro} leads to a straightforward way of computing the desired value:
-the probability of being out from the intervals \((b_i(B), b_e(B)), (g_i(\Gamma), g_e(\Gamma))\) can indeed be simply evaluated by integration:
+the probability of being out from the intervals \(E(B), L(\Gamma)\) can indeed be simply evaluated by integration:
 
 \begin{equation}
   \label{eq:prob-not-intervals}
-  \prob( t \not\in (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) = \int_{b\in \R \vert t \not\in (b_i(b), b_e(b))}\int_{g \in \R \vert t \not\in (g_i(g), g_e(g))}f_B(b)f_\Gamma(g)\, dg\, db
+  \prob( t \not\in E(B) \cup L(\Gamma)) = \int_{b\in \R \vert t \not\in E(b)}\int_{g \in \R \vert t \not\in L(g)}f_B(b)f_\Gamma(g)\, dg\, db
 \end{equation}
 where \(f_B, f_\Gamma\) are the probability densities of, respectively, the random variables \(B, \Gamma\).
 
@@ -263,10 +271,10 @@ the monotonicity of the intervals imply that there exist two functions represent
 \begin{equation}
   \label{eq:def_b_0_g_0}
   \begin{split}
-    \beta_0:\R&\rightarrow(0, \beta_{max}) \\
-    t&\mapsto \sup\{b | t \in (t_i^e(b), t_f^e(b))\} \\[1em]
-    \gamma_0:\R&\rightarrow(0, \gamma_{max}) \\
-    t&\mapsto \sup\{g | t \in (t_i^l(g), t_f^l(g))\}
+    \beta_0:\R&\rightarrow(0, \beta_{max}] \\
+    t&\mapsto \sup\{b | t \in E(b)\} \\[1em]
+    \gamma_0:\R&\rightarrow(0, \gamma_{max}] \\
+    t&\mapsto \sup\{g | t \in L(g)\}
   \end{split}
 \end{equation}
 
@@ -274,7 +282,7 @@ The definition of these functions simplifies the integrals in~\eqref{eq:prob-not
 
 \begin{equation}
   \label{eq:on-time-monot}
-  \prob( t \not\in (t_i^e(B), t_f^e(B)) \cup (t_i^l(\Gamma), t_f^l(\Gamma))) = \int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
+  \prob( t \not\in E(B) \cup L(\Gamma)) = \int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
 \end{equation}
 
 By exploiting the expression obtained in equation~\eqref{eq:on-time-monot},
@@ -282,7 +290,7 @@ the joint probability density functions in equation~\eqref{eq:on-time-intro} can
 \begin{equation}
   \label{eq:on-time-final}
   \begin{split}
-    f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin (t_i^e(B), t_f^e(B)) \cup (t_i^l(\Gamma), t_f^l(\Gamma))) \\
+    f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin E(B) \cup L(\Gamma)) \\
     & = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
   \end{split}
 \end{equation}
