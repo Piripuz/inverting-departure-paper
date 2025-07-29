@@ -534,3 +534,170 @@ fig.savefig("../img/tang_cond.png", dpi=quality)
 plt.close()
 # fig.show()
 
+#%%
+
+
+tt = TravelTime(asymm_gaussian_plateau(plateau_len=.2))
+beta = .8
+gamma = 2.4
+
+bs = find_bs(beta, tt)
+gs = find_gs(gamma, tt)
+
+b_i, g_e = bs[0], gs[1]
+
+x = np.linspace(8, 10, 200)
+
+fig, ax = plt.subplots(figsize=(7, 4))
+
+ax.plot(x, tt.f(x), color=tt_color, label=r"Travel Time function $tt(t)$")
+
+ax.plot(
+    bs,
+    tt.f(bs),
+    color=early_color,
+    linestyle="solid",
+    linewidth=1.2
+)
+
+early_rect_dist = .2
+late_rect_dist = .05
+rect_len = .1
+
+ax.plot(
+    [
+        b_i + early_rect_dist,
+        b_i + early_rect_dist + rect_len,
+        b_i + early_rect_dist + rect_len
+    ],
+    [
+        tt.f(b_i) + beta*early_rect_dist,
+        tt.f(b_i) + beta*early_rect_dist,
+        tt.f(b_i) + beta*early_rect_dist + beta*rect_len
+    ],
+    color=early_color,
+    linewidth=.9,
+    alpha=.7
+)
+
+ax.text(
+    b_i + early_rect_dist + rect_len + .02,
+    tt.f(b_i) + beta*early_rect_dist - .02,
+    r"slope $\beta$",
+    va="top",
+    ha="center",
+    color=early_color
+)
+
+
+ax.text(
+    b_i + .03,
+    tt.f(b_i) - .3,
+    r"$t_i^e(\beta)$",
+    color=early_color
+)
+
+ax.text(
+    bs[1] - .03,
+    tt.f(b_i) - .1,
+    r"$t_f^e(\beta)$",
+    color=early_color,
+    ha="right"
+)
+
+ax.plot(
+    gs, tt.f(gs),
+    color=late_color,
+    linestyle="solid",
+    linewidth=1.2
+)
+
+ax.plot(
+    [
+        g_e - late_rect_dist,
+        g_e - late_rect_dist - rect_len,
+        g_e - late_rect_dist - rect_len
+    ],
+    [
+        tt.f(g_e) + gamma*late_rect_dist,
+        tt.f(g_e) + gamma*late_rect_dist,
+        tt.f(g_e) + gamma*late_rect_dist + gamma*rect_len
+    ],
+    color=late_color,
+    linewidth=.9,
+    alpha=.7
+)
+
+ax.text(
+    g_e - late_rect_dist - rect_len - .0,
+    tt.f(g_e) + gamma*late_rect_dist - .01,
+    r"slope $\gamma$",
+    va="top",
+    ha="center",
+    color=late_color
+)
+
+
+ax.text(
+    g_e - .02,
+    tt.f(g_e) - .15,
+    r"$t_f^l(\gamma)$",
+    color=late_color,
+    ha="right"
+)
+
+
+ax.text(
+    gs[0] - .01,
+    tt.f(g_e) - .08,
+    r"$t_i^l(\gamma)$",
+    color=late_color,
+    ha="right"
+)
+
+ax.axvspan(
+    *bs,
+    color=early_color,
+    ec=None,
+    alpha=.3,
+    label="Critical Early Arrival Interval"
+)
+ax.axvspan(
+    *gs,
+    color=late_color,
+    ec=None,
+    alpha=.3,
+    label="Critical Late Arrival Interval"
+)
+
+ax.legend(loc=2)
+ax.xaxis.set_major_formatter(formatter)
+
+ax.set_xlabel(r"$t^*$ (h)")
+ax.set_ylabel("Travel Time")
+
+ax.set_yticks([tick for tick in ax.get_yticks() if tick >= 0])
+
+
+ax.set_ylim(*ax.get_ylim())
+
+ax.vlines(
+    bs,
+    ax.get_ylim()[0],
+    tt.f(bs),
+    linestyle="--",
+    color=early_color
+)
+
+ax.vlines(
+    gs,
+    ax.get_ylim()[0],
+    tt.f(gs),
+    linestyle="--",
+    color=late_color
+)
+
+
+fig.savefig("../img/early_late_int.png", dpi=quality)
+plt.close()
+# fig.show()
