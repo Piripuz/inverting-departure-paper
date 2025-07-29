@@ -59,9 +59,9 @@ the following observation shows how.
   Consider the problem of choosing an optimal departure time
   with a proper travel time function, and let \(\beta, \gamma\) be fixed.
 
-  There exist two intervals \((t_e, \bar{t_e}), (\bar{t_l}, t_l)\) such that an on-time arrival \(t^{opt} = t^*\) is realized if and only if
+  There exist two intervals \((t_i^e, t_f^e), (t_i^l, t_f^l)\) such that an on-time arrival \(t^{opt} = t^*\) is realized if and only if
   \begin{equation*}
-    t^* \notin (t_e, \bar{t_e}) \cup (\bar{t_l}, t_l)
+    t^* \notin (t_i^e, t_f^e) \cup  (t_i^l, t_f^l)
   \end{equation*}
 \end{obs}
 
@@ -70,12 +70,12 @@ except for a single detail:
 the intervals are indeed here at most one (for each type of arrival), rather than an arbitrary number.
 
 This is a consequence of the hypothesis on the travel time function:
-the point \(t_e\) must indeed be an eligible early arrival and,
+the point \(t_i^e\) must indeed be an eligible early arrival and,
 as shown in Lemma~\ref{lemma:bounded-der-tt} and~\ref{lemma:cost_decoupled},
 any possible early arrival must satisfy two simple conditions:
 \begin{enumerate}
-\item \(tt_a'(t_e) = \beta\)
-\item \(tt_a''(t_e) \geq 0\)
+\item \(tt_a'(t_i^e) = \beta\)
+\item \(tt_a''(t_i^e) \geq 0\)
 \end{enumerate}
 where the second one derives from being a minimum:
 if the second derivative was negative, the point was indeed a maximum.
@@ -98,7 +98,7 @@ Its derivative will thus be injective on the convex part \(\mathcal{D}_{conv}\),
 that is the only part in which the second derivative is non-negative.
 
 Being the derivative injective,
-there is at most one point \(t_e\) satisfying the condition \(tt_a(t_e) = \beta\).
+there is at most one point \(t_i^e\) satisfying the condition \(tt_a(t_i^e) = \beta\).
 The set \(E\) is thus either empty or a singleton.
 A similar reasoning holds for late arrivals.
 
@@ -110,25 +110,23 @@ The points in which the arrivals occur are now easy to estimate. Let
 
 The following functions are well defined:
 \begin{align*}
-  b_i: (0, \beta_{max}) & \rightarrow \mathcal{D}_{conv}  & g_e: (0, \gamma_{max}) & \rightarrow \mathcal{D}_{conv} \\
-       \beta & \mapsto (tt_a' |_{(-\infty, k_1)})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{(k_2, \infty)})^{-1}(\gamma)
+  t_i^e: (0, \beta_{max}) & \rightarrow \mathcal{D}_{conv}  & t_e^l: (0, \gamma_{max}) & \rightarrow \mathcal{D}_{conv} \\
+       \beta & \mapsto (tt_a' |_{\mathcal{D}_{conv}})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{\mathcal{D}_{conv}})^{-1}(\gamma)
 \end{align*}
 
-Given \(\beta \in (0, \beta_{max})\),
-the time \(b_i(\beta)\) will be the initial point of the interval in which early arrivals occur.
 
-Similarly, given \(\gamma\) the time \(g_e(\gamma)\) will be the ending point of the interval in which the late arrivals occur.
+Figure~\ref{fig:tang-cond} shows the outcomes of these functions on a theoretical proper travel time function
 
-Estimating the remaining point is slightly more difficult.
+The functions \(t_i^e, t_f^l\) compute thus the initial point of the interval that yields early arrivals,
+as well as the final point of the interval that yields late arrivals.
+
+Estimating the remaining points \(t_f^e, t_i^l\) is slightly more difficult.
 The expression in the proof of Proposition~\ref{prop:into-early-late} can anyway be used:
-the function \(b_e(\beta)\) (and \(g_i(\gamma)\))
-are thus defined as the points in which the line tangent to the travel time function in \(b_i(\beta)\) (or, respectively, in \(g_e(\gamma)\)) intersects again with the travel time function.
+the function \(t_f^e(\beta), t_i^l(\gamma)\)
+are thus defined as the points in which the line tangent to the travel time function at the initial points
+(that are, the solid lines in Figure~\ref{fig:tang-cond})
+intersect a second time with the travel time function.
 
-This thus leads to
-\begin{align*}
-  b_i(\beta) & = t_e & g_e(\gamma) & = t_l \\
-  b_e(\beta) & = \bar{t_e} & g_i(\gamma) & = \bar{t_l}
-\end{align*}
 
 A graphical representation of the functions \(b_i, b_e, g_i, g_e\) is shown in figure\todo{ref}
 \todo{Here, how \(t_s\) is computed has to be explained. These things are to be put in this or in the theory section?? Maybe theory}
