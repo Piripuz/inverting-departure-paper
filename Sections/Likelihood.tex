@@ -258,9 +258,9 @@ the monotonicity of the intervals imply that there exist two functions represent
   \label{eq:def_b_0_g_0}
   \begin{split}
     \beta_0:\R&\rightarrow(0, \beta_{max}) \\
-    t&\mapsto \sup\{b | t \in (b_i(b), b_e(b))\} \\[1em]
+    t&\mapsto \sup\{b | t \in (t_i^e(b), t_f^e(b))\} \\[1em]
     \gamma_0:\R&\rightarrow(0, \gamma_{max}) \\
-    t&\mapsto \sup\{g | t \in (g_i(g), g_e(g))\}
+    t&\mapsto \sup\{g | t \in (t_i^l(g), t_f^l(g))\}
   \end{split}
 \end{equation}
 
@@ -268,7 +268,7 @@ The definition of these functions simplifies the integrals in~\eqref{eq:prob-not
 
 \begin{equation}
   \label{eq:on-time-monot}
-  \prob( t \not\in (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) = \int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
+  \prob( t \not\in (t_i^e(B), t_f^e(B)) \cup (t_i^l(\Gamma), t_f^l(\Gamma))) = \int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
 \end{equation}
 
 By exploiting the expression obtained in equation~\eqref{eq:on-time-monot},
@@ -276,7 +276,7 @@ the joint probability density functions in equation~\eqref{eq:on-time-intro} can
 \begin{equation}
   \label{eq:on-time-final}
   \begin{split}
-    f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin (b_i(B), b_e(B)) \cup (g_i(\Gamma), g_e(\Gamma))) \\
+    f_{T^{opt}, Q}(t, 0) & = f_{T^*}(t) \cdot \prob(t \notin (t_i^e(B), t_f^e(B)) \cup (t_i^l(\Gamma), t_f^l(\Gamma))) \\
     & = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db
   \end{split}
 \end{equation}
@@ -295,33 +295,33 @@ Consider now the value of the function
 Observation\todo{an observation on the definition of \(t_s\)} shows that the arrival time \(t\) is an early arrival if and only if two conditions,
 similar to the ones in the preceding case,
 are realized:
-the time \(t\) has to be a realization of the optimal early arrival time \(b_i(B)\),
-and it has to be into the interval \((b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})\).
+the time \(t\) has to be a realization of the optimal early arrival time \(t_i^e(B)\),
+and it has to be into the interval \((t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})\).
 
 Differently from the last case, the random variable \(B\) appears in both conditions:
 the events are thus not independent anymore,
 and their joint density will be computed via its decomposition in conditional densities:
 \begin{equation}
   \label{eq:late-joint-decomp}
-  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right) f_{b_i(B)}(t)
+  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})|\, t = t_i^e(B)\right) f_{t_i^e(B)}(t)
 \end{equation}
 
-The probability density function \(f_{b_i(B)}(t)\) for the transformed random variable \(b_i(B)\) can be simply evaluated by changing variable from the known density \(f_B\):\todo{cite where this expression comes from}
+The probability density function \(f_{t_i^e(B)}(t)\) for the transformed random variable \(t_i^e(B)\) can be simply evaluated by changing variable from the known density \(f_B\):\todo{cite where this expression comes from}
 \begin{equation}
   \label{eq:pdf-b-change-var}
-  f_{b_i(B)}(t) = f_B(b_i^{-1}(t)) \left| \diff{}{t}(b_i^{-1}(t)) \right|
+  f_{t_i^e(B)}(t) = f_B((t_i^e)^{-1}(t)) \left| \diff{}{t}((t_i^e)^{-1}(t)) \right|
 \end{equation}
 
-From the definition of \(b_i\) follows that the function acts,
+From the definition of \(t_i^e\) follows that the function acts,
 on its domain, exactly as the inverse of the derivative of the travel time function \((tt_a')^{-1}\).
 
-From this observation follows that, as long as we don't consider times that are out of the image of the function \(b_i\),
+From this observation follows that, as long as we don't consider times that are out of the image of the function \(t_i^e\),
 we can set
 \begin{equation*}
-  b_i^{-1}(t) = tt_a'(t)
+  (t_i^e)^{-1}(t) = tt_a'(t)
 \end{equation*}
 
-The arrival times out of the image of \(b_i\) are exactly the ones for which the function is concave
+The arrival times out of the image of \(t_i^e\) are exactly the ones for which the function is concave
 \footnote{
   Depending on whether the parameter \(\beta\) is allowed to be negative,
   the interval in which the derivative of the travel time \(tt_a'(t)\) is negative can be considered out of the image as well.
@@ -334,25 +334,25 @@ that is, \(tt_a''(t) < 0\).
 The density function for the transformed random variable will thus be
 \begin{equation}
   \label{eq:pdf-b-changed-var}
-  f_{b_i(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
+  f_{t_i^e(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 where the employment of the function \([\bullet]^+\) ensures the probability density function to be equal to zero where the travel time function is concave.
 
 We will now study the probability
 \begin{equation*}
-  \prob\left(T^* \in (b_i(B), \min\{b_e(B), t_s(B, \Gamma)\})|\, t = b_i(B)\right)
+  \prob\left(T^* \in (t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})|\, t = t_i^e(B)\right)
 \end{equation*}
 
-The condition \(t = b_i(B)\) implies, for the reasons above,
+The condition \(t = t_i^e(B)\) implies, for the reasons above,
 \begin{align*}
-  B & = b_i^{-1}(t) \\
+  B & = (t_i^e)^{-1}(t) \\
     & = tt_a'(t)
 \end{align*}
 
 By substituting these in the original expression, we get
 \begin{equation}
   \label{eq:early-subst}
-  f_{T^{opt}, Q}(t, -1) = \prob(T^* \in (t, \min\{b_e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{b_i(B)}(t)
+  f_{T^{opt}, Q}(t, -1) = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
 \end{equation}
 
 Integrating the random variables,
@@ -360,13 +360,13 @@ and substituting what found in equation~\eqref{eq:pdf-b-changed-var},
 yields an explicit expression for the desired probability density function:
 \begin{equation}
   \label{eq:early-final}
-  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
+  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 
 For the late arrivals, an analogous reasoning finds a similar expression:
 \begin{equation}
   \label{eq:late-final}
-  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
+  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{equation}
 
 This last expression terminates the possible values for the variable \(Q\),
@@ -379,8 +379,8 @@ we find the following:
 \begin{multline}
   \label{eq:pdf-final}
     f_{T^{opt}}(t) = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db \\
-    + \int_0^\infty \int_t^{\min\{b_e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ \\
-    + \int_0^\infty \int_t^{\max\{g_i(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
+    + \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ \\
+    + \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
 \end{multline}
 
 Given the probability density functions according to which the scheduling preferences parameters \(\beta, \gamma\) and the desired arrival time \(t^*\) are distributed,
