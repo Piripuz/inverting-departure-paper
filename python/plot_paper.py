@@ -368,3 +368,169 @@ ax.legend(loc=2)
 
 fig.savefig("../img/conv_conc_gauss.png", dpi=quality)
 plt.close()
+
+#%%
+
+tt = TravelTime(asymm_gaussian_plateau(plateau_len=.2))
+beta = .8
+gamma = 2.4
+
+b_i = find_bs(beta, tt)[0]
+g_e = find_gs(gamma, tt)[1]
+
+b_i_max = find_bs(tt.maxb, tt)[0]
+g_e_max = find_gs(tt.maxg, tt)[1]
+
+
+x = np.linspace(7.5, 10.5, 200)
+
+early_line_len = .4
+late_line_len = .18
+
+fig, ax = plt.subplots(figsize=(7, 4))
+
+ax.plot(x, tt.f(x), color=tt_color, label=r"Travel Time function $tt(t)$")
+
+ax.plot(
+    [b_i - early_line_len, b_i + early_line_len],
+    [tt.f(b_i) - beta*early_line_len, tt.f(b_i) + beta*early_line_len],
+    color=early_color,
+    linestyle="solid",
+    linewidth=1.2
+)
+
+early_rect_dist = .6
+late_rect_dist = .35
+rect_len = .1
+
+ax.plot(
+    [
+        b_i - early_line_len*early_rect_dist,
+        b_i - early_line_len*early_rect_dist,
+        b_i - early_line_len*early_rect_dist - rect_len
+    ],
+    [
+        tt.f(b_i) - beta*early_line_len*early_rect_dist,
+        tt.f(b_i) - beta*early_line_len*early_rect_dist - beta*rect_len,
+        tt.f(b_i) - beta*early_line_len*early_rect_dist - beta*rect_len
+    ],
+    color=early_color,
+    linewidth=.9,
+    alpha=.7
+)
+
+ax.text(
+    b_i - early_line_len*early_rect_dist + .02,
+    tt.f(b_i) - beta*early_line_len*early_rect_dist - beta*rect_len - .02,
+    r"slope $\beta$",
+    va="top",
+    ha="center",
+    color=early_color
+)
+
+
+ax.text(
+    b_i + .03,
+    tt.f(b_i) - .3,
+    r"$t_i^e(\beta)$",
+    color=early_color
+)
+
+
+ax.plot(
+    [g_e - late_line_len, g_e + late_line_len],
+    [tt.f(g_e) + gamma*late_line_len, tt.f(g_e) - gamma*late_line_len],
+    color=late_color,
+    linestyle="solid",
+    linewidth=1.2
+)
+
+ax.plot(
+    [
+        g_e - late_line_len*late_rect_dist,
+        g_e - late_line_len*late_rect_dist - rect_len,
+        g_e - late_line_len*late_rect_dist - rect_len
+    ],
+    [
+        tt.f(g_e) + gamma*late_line_len*late_rect_dist,
+        tt.f(g_e) + gamma*late_line_len*late_rect_dist,
+        tt.f(g_e) + gamma*late_line_len*late_rect_dist + gamma*rect_len
+    ],
+    color=late_color,
+    linewidth=.9,
+    alpha=.7
+)
+
+ax.text(
+    g_e - late_line_len*late_rect_dist - rect_len - .04,
+    tt.f(g_e) + gamma*late_line_len*late_rect_dist - .01,
+    r"slope $\gamma$",
+    va="top",
+    ha="center",
+    color=late_color
+)
+
+
+ax.text(
+    g_e - .02,
+    tt.f(g_e) - .25,
+    r"$t_f^l(\gamma)$",
+    color=late_color,
+    ha="right"
+)
+
+ax.set_xlim(*ax.get_xlim())
+
+ax.axvspan(
+    ax.get_xlim()[0], b_i_max,
+    color="orange",
+    ec=None,
+    alpha=.3,
+    label=r"$\mathcal{D}_{conv}$"
+)
+ax.axvspan(
+    b_i_max, g_e_max,
+    color="purple",
+    ec=None,
+    alpha=.3,
+    label=r"$\mathcal{D}_{conc}$"
+)
+ax.axvspan(
+    g_e_max, ax.get_xlim()[1],
+    color="orange",
+    ec=None,
+    alpha=.3
+)
+
+ax.legend(loc=2)
+ax.xaxis.set_major_formatter(formatter)
+
+ax.set_xlabel(r"$t^*$ (h)")
+ax.set_ylabel("Travel Time")
+
+ax.set_yticks([tick for tick in ax.get_yticks() if tick >= 0])
+
+
+ax.set_ylim(*ax.get_ylim())
+
+ax.vlines(
+    b_i,
+    ax.get_ylim()[0],
+    tt.f(b_i),
+    linestyle="--",
+    color=early_color
+)
+
+ax.vlines(
+    g_e,
+    ax.get_ylim()[0],
+    tt.f(g_e),
+    linestyle="--",
+    color=late_color
+)
+
+
+fig.savefig("../img/tang_cond.png", dpi=quality)
+plt.close()
+# fig.show()
+
