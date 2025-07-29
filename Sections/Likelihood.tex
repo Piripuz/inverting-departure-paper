@@ -1,15 +1,17 @@
 \section{Maximum Likelihood Estimation}
 
 In the current section,
-the parameters \(\beta, \gamma, t^*\) will be considered to be distributed, according to some known distribution.
+the parameters \(\beta, \gamma, t^*\) will be considered to be distributed, according to some known distributions.
 This makes the outcomes of the function \(t^{opt}(\beta, \gamma, t^*)\) defined above to be distributed themselves,
-according to a distribution that can be explicitly characterized,
-by finding an expression for its probability density function.
+according to another probability distribution.
 
-Once the probability density function has been found,
+We explicitly characterize the distribution of the optimal arrival times,
+by finding an expression for its probability density function.
+Once the density of the optimal arrival times \(t^{opt}\) has been found,
 its evaluation can yield an expression for the likelihood of a given dataset of arrival times.
-This allows the estimation of parameters that have an influence on the original distribution,
-by doing a Maximum Likelihood Estimation.
+If the original distributions were parametric,
+the expression allows to perform a Maximum Likelihood Estimation,
+for estimating the value of the parameter the dataset was generated according to.
 
 \subsection{Theoretical Prerequisites}
 
@@ -77,12 +79,12 @@ any possible early arrival must satisfy two simple conditions:
 \item \(tt_a'(t_i^e) = \beta\)
 \item \(tt_a''(t_i^e) \geq 0\)
 \end{enumerate}
-where the second one derives from being a minimum:
-if the second derivative was negative, the point was indeed a maximum.
+where the second one derives from it being a minimum:
+if the second derivative was negative, the point was indeed a local maximum and thus not a minimizer.
 
 \begin{figure}
   \centering
-  \includegraphics[width=.5\textwidth]{theo_tt}
+  \includegraphics[width=.8\textwidth]{theo_tt}
   \caption{
     Example of a proper travel time function \(tt_a(t)\),
   plotted with its derivative.}
@@ -90,9 +92,9 @@ if the second derivative was negative, the point was indeed a maximum.
 \end{figure}
 
 But for a proper travel time function,
-a point satisfying the conditions above can occur only once:
-given the unimodality,
-the function will be as shown in Figure~\ref{fig:theo_tt}: increasing, with an increasing derivative,
+a point satisfying the conditions above can occur only once.
+Given the unimodality,
+the function will indeed be as shown in Figure~\ref{fig:theo_tt}: increasing, with an increasing derivative,
 for \(t < k_1\), and decreasing with an increasing derivative for \(t > k_2\).
 Its derivative will thus be injective on the convex part \(\mathcal{D}_{conv}\),
 that is the only part in which the second derivative is non-negative.
@@ -102,11 +104,13 @@ there is at most one point \(t_i^e\) satisfying the condition \(tt_a(t_i^e) = \b
 The set \(E\) is thus either empty or a singleton.
 A similar reasoning holds for late arrivals.
 
-Consider thus now the problem of finding the intervals \((t_e, \bar{t_e})\), \((\bar{t_l}, t_l)\).
-The points in which the arrivals occur are now easy to estimate. Let
-\begin{equation*}
-  \beta_{max} = \max_t tt_a'(t)\qquad \gamma_{max} = -\min_t tt_a'(t)
-\end{equation*}
+Consider thus now the problem of finding values for the bounds of the intervals \((t_i^e, t_f^e)\), \((t_i^l, t_f^l)\).
+The points in which the arrivals occur are easy to estimate.
+
+Let
+\begin{align*}
+  \beta_{max} = \max_t tt_a'(t) && \gamma_{max} = -\min_t tt_a'(t)
+\end{align*}
 
 The following functions are well defined:
 \begin{align*}
