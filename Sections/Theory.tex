@@ -28,7 +28,7 @@ where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at 
 
 
 \begin{assumption}\label{ass:quasiconc}
-   The travel time profile function $tt_a(t_a)$ is continuous and unimodal. 
+   The travel time profile function $tt_a(t_a)$ is unimodal. 
 \end{assumption}
 
 Roughly speaking, under Assumption \ref{ass:quasiconc}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards. 
@@ -42,31 +42,29 @@ Assumption \ref{ass:twiceDiff} imposes an additional condition on the travel tim
 \subsection{Minimum of the cost function}
 \label{sec:cost_minima}
 
-Next, we characterize the optimal arrival time for an individual user with given scheduling preferences parameterized by $\beta, \gamma$, and $t^*$.  The optimal arrival \(t^{opt}\) time minimizes the travel cost, i.e., 
+Next, we characterize the optimal arrival time for an individual user with given scheduling preferences parameterized by $\beta, \gamma$, and $t^*$. Recall that users choose their arrival times to minimize their individual travel cost, and we define the minimal travel cost $C^{opt}$ as
     \begin{equation*}
-      t^{opt} = \argmin_{t_a \in \mathcal{T}}C(t_a).
+      C^{opt} = \min_{t_a \in \mathcal{T}}C(t_a).
     \end{equation*} 
 
-To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the optimal early arrival time (OEAT) $$t_e^{opt}  = \argmin_{t_a \le  t^*}C(t_a)$$ and the optimal late arrival time (OLAT)$$t_l^{opt} =  \argmin_{t_a \ge  t^*}C(t_a).$$ 
+To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the minimal early arrival cost (MEAC) $$C_e^{opt}  = \min_{t_a \le  t^*}C(t_a)$$ and the minimal late arrival cost (MLAC) $$C_l^{opt} =  \min_{t_a \ge  t^*}C(t_a).$$ 
 
 \begin{definition}\label{def:CEA}
-    Given any travel time profile function $tt_a(t_a)$ and \(\beta\),  an interval $[t_e, \bar t_e]$ is termed an early arrival (EA) interval when the following condition holds:
+    Given any travel time profile function $tt_a(t_a)$ and \(\beta\),  an interval $[t_e, \bar t_e]$ with $\bar t_e > t_e$ is termed an early arrival (EA) interval when the following condition holds:
 \begin{equation}\label{eq:increase_faster}
     tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e].
 \end{equation} 
 \end{definition}
 
 \begin{definition}
-    Given any travel time profile function $tt_a(t_a)$ and \( \gamma\), an interval $[\bar t_l, t_l]$ is termed a late arrival (LA) interval when the following conditions hold:
+    Given any travel time profile function $tt_a(t_a)$ and \( \gamma\), an interval $[\bar t_l, t_l]$ with $t_l >\bar t_l$ is termed a late arrival (LA) interval when the following conditions hold:
     \begin{equation}\label{eq:decrease_faster}
-        tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t ), \forall  t \in [\bar  t_l, t_l]
+        tt_a(t_l)  + \gamma  (t - t_l ) \ge  tt_a(t ), \forall  t \in [\bar  t_l, t_l].
 \end{equation} 
  
 \end{definition}
 
 Roughly speaking, congestion increases (respectively, decreases) rapidly with the arrival time within each EA (LA) interval, such that the time savings from arriving earlier (later) outweigh the cost of early arrival. 
-
-
 
 \begin{definition}
  An EA (respectively, LA) interval is said to be a critical EA (CEA) or critical LA (CLA) interval if it is not strictly contained within any other EA (LA) interval.
@@ -74,11 +72,26 @@ Roughly speaking, congestion increases (respectively, decreases) rapidly with th
 
 Let $E$ denote the set of all critical early arrival (CEA) intervals for a given early arrival penalty $\beta$.
 
-\begin{lemma}
-    Each EA interval corresponds to exactly one critical CEA interval.
+% \begin{lemma}
+%     Each EA interval corresponds to exactly one critical CEA interval.
+% \end{lemma}
+
+\begin{lemma}\label{lemma:disjoint}
+Any two critical CEA intervals are disjoint.
+
+
+
 \end{lemma}
 
-Disjoint 
+\begin{proof}
+Suppose that there are two CEA intervals $[t_e, t_l]$ and $[t_e', t_l']$ overlapping with each other, i.e., $t_e' \le t_l$ and $t_e \le t_l'$. Then for any $t$ in the overlapped part $[t_e', t_l]$, the condition still holds: 
+$$
+tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ).
+$$
+Thus, the interval $[t_e, t_l']$ is an EA interval and it contains  $[t_e, t_l]$ and $[t_e', t_l']$. This contradicts the definition of CEA intervals.
+\end{proof}
+
+By Lemma \ref{lemma:disjoint}, each desired arrival time $t^*$ corresponds to exactly one critical CEA interval, which leads to the following proposition. 
 
 \begin{prop}
   \label{prop:into-early}
@@ -151,7 +164,19 @@ $C_l^{opt} = C(t_l)$.
 
 
 
+\begin{prop}
+   Under Assumptions \ref{ass:continous} - \ref{ass:quasiconc}, given $\beta, \gamma$, and $tt$, if neither of the sets of CEA and CLA intervals is empty, i.e., $E, L \neq \emptyset$, then there exists a time threshold $$\bar t^* = \frac{tt_a(t_L) - tt_a(t_E) + \beta t_E - \gamma t_L}{\beta - \gamma}$$
+   such that 
+$$C^{opt}  = \begin{cases}
+    C^{opt}_e  , t^* < \bar t^*, \\
+     C^{opt}_l, \text{otherwise,}
+\end{cases}$$
+where $t_L$ and $t_E$ are the left and right endpoints of the latest CEA interval and the earliest CLA interval, respectively. 
+\end{prop}
 
+\begin{proof}
+    
+\end{proof}
 
 \begin{prop}
 
