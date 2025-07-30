@@ -113,11 +113,13 @@ Let
 \end{align*}
 
 The following functions are well defined:
-\begin{align*}
-  t_i^e: (0, \beta_{max}) & \rightarrow \mathcal{D}_{conv}  & t_e^l: (0, \gamma_{max}) & \rightarrow \mathcal{D}_{conv} \\
-       \beta & \mapsto (tt_a' |_{\mathcal{D}_{conv}})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{\mathcal{D}_{conv}})^{-1}(\gamma)
-\end{align*}
-
+\begin{equation}
+  \label{eq:def-inv-der}
+  \begin{aligned}
+    t_i^e: (0, \beta_{max}) & \rightarrow \mathcal{D}_{conv}  & t_e^l: (0, \gamma_{max}) & \rightarrow \mathcal{D}_{conv} \\
+    \beta & \mapsto (tt_a' |_{\mathcal{D}_{conv}})^{-1}(\beta) & \gamma & \mapsto(tt_a' |_{\mathcal{D}_{conv}})^{-1}(\gamma)
+  \end{aligned}
+\end{equation}
 \begin{figure}
   \centering
   \includegraphics[width=.9\textwidth]{tang_cond}
@@ -301,63 +303,143 @@ In the following part, the likelihood of being an early or late arrival will be 
 
 \subsubsection{Early and Late Arrivals}
 
-Consider now the value of the function
+Before discussing the case of early and late arrivals,
+the following definition,
+which gives a simpler way to separate the early arrivals from the late arrivals,
+is given:
+
+\begin{definition}
+  \label{def:intervals-tilde}
+  We denote as \(\tilde{E}(\beta, \gamma), \tilde{L}(\beta, \gamma)\) the intervals which yield early or late arrivals:
+  \begin{align*}
+    \tilde{E}(\beta, \gamma) & = (t_i^e(\beta), \min\{t_f^e(\beta), t_s(\beta, \gamma)\})\\
+    \tilde{L}(\beta, \gamma) & = (\max\{t_i^l(\gamma), t_s(\beta, \gamma)\}, t_f^l(\gamma))
+  \end{align*}
+\end{definition}
+
+Note that the intervals are necessarily disjoint,
+since the ending point of the interval \(\tilde{E}\) is lower or equal to the starting point of \(\tilde{L}\).
+
+Moreover,
+the optimal arrival time \(t^{opt}(\beta, \gamma, t^*)\) will be an early (or late) arrival
+if and only if the desired arrival time \(t^*\)
+is in the interval \(\tilde{E}(\beta, \gamma)\) (respectively, \(\tilde{L}(\beta, \gamma)\)).
+
+Another assumption is now made on the distributions of the variables \(B, \Gamma\):
+
+\begin{assumption}
+  \label{ass:domain-rv}
+  The random variables \(B, \Gamma\) are entirely supported, respectively,
+  into the intervals \((0, \beta_{max})\), \((0, \gamma_{max})\),
+  that is
+  \begin{align*}
+    \int_0^{\beta_{max}}f_B(b) db = 1 && \int_0^{\gamma_{max}}f_\Gamma(g) dg = 1
+  \end{align*}
+\end{assumption}
+
+Note that this assumption is quite restrictive,
+and contrasts with recent literature \cite[see][]{hall2024inframarginal}.
+It is anyway useful while developing the theory,
+and will be dropped in a later stage.
+
+Consider thus now the value of the function
 \begin{equation*}
   f_{T^{opt}, Q}(t, -1)
 \end{equation*}
 
-Observation\todo{an observation on the definition of \(t_s\)} shows that the arrival time \(t\) is an early arrival if and only if two conditions,
+Observation NUMBER shows that the arrival time \(t\) is an early arrival if and only if two conditions,
 similar to the ones in the preceding case,
 are realized:
-the time \(t\) has to be a realization of the optimal early arrival time \(t_i^e(B)\),
-and it has to be into the interval \((t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})\).
+the time \(t\) has to be a realization of the optimal early arrival time \(t_i^e(B)\) and,
+on top of this, it has to be into the interval \(\tilde{E}(B, \Gamma)\).
 
-Differently from the last case, the random variable \(B\) appears in both conditions:
+Differently from the case about on-time arrivals,
+the random variable \(B\) appears in both conditions:
 the events are thus not independent anymore,
 and their joint density will be computed via its decomposition in conditional densities:
 \begin{equation}
   \label{eq:late-joint-decomp}
-  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in (t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})|\, t = t_i^e(B)\right) f_{t_i^e(B)}(t)
+  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in \tilde{E}(B, \Gamma)|\, t_i^e(B) = t\right) f_{t_i^e(B)}(t)
 \end{equation}
+where \(f_{t_i^e(B)}(t)\) is the probability density function for the random variable \(t_i^e(B)\).
+The density is computed in the following lemma:
+\begin{lemma}
+  \label{lemma:transformed-B}
+  Let \(t_i^e\) be the function defined in~\eqref{eq:def-inv-der}, \(B\) a random variable with probability density function \(f_B\),
+  satisfying Assumption~\ref{ass:domain-rv}.
+  
+  The probability density function \(f_{t_i^e(B)}\) for the transformed random variable \(t_i^e(B)\) is given by
+  \begin{equation*}
+    f_{t_i^e(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
+  \end{equation*}
+  where
+  \begin{equation*}
+    [x]^+ = \max\{x, 0\}
+  \end{equation*}
+\end{lemma}
 
-The probability density function \(f_{t_i^e(B)}(t)\) for the transformed random variable \(t_i^e(B)\) can be simply evaluated by changing variable from the known density \(f_B\):\todo{cite where this expression comes from}
+\begin{proof}
+  Note at first that the function
+  \begin{equation*}
+    \beta \mapsto t_i^e(\beta)
+  \end{equation*}
+  coincides, on its domain,
+with the inverse of the travel time function derivative, and is thus a bijection.
+In \citet{casella2001statistical}, Theorem 2.1.5 shows how to compute in this case the p.d.f. of the transformed random variable \(t_i^e(B)\):
 \begin{equation}
   \label{eq:pdf-b-change-var}
-  f_{t_i^e(B)}(t) = f_B((t_i^e)^{-1}(t)) \left| \diff{}{t}((t_i^e)^{-1}(t)) \right|
+  f_{t_i^e(B)}(t) =
+  \begin{cases}
+    f_B((t_i^e)^{-1}(t)) \left| \diff{}{t}((t_i^e)^{-1}(t)) \right| & \text{if } t \in t_i^e\left(\text{supp}(f_B)\right) \\
+    0 & \text{otherwise}
+  \end{cases}
 \end{equation}
+where \(\text{supp}(f_B)\) is the support of the probability density function \(f_B\), that is
+\begin{equation*}
+  \text{supp}(f_B) = \{b \in \R |\, f_B(b) > 0 \}
+\end{equation*}
 
-From the definition of \(t_i^e\) follows that the function acts,
-on its domain, exactly as the inverse of the derivative of the travel time function \((tt_a')^{-1}\).
+Note now that Assumption~\ref{ass:domain-rv} holds:
+\(\text{supp}(f_B)\) is thus in the domain of the function \(t_i^e\),
+and equation~\eqref{eq:pdf-b-change-var} is well defined.
 
-From this observation follows that, as long as we don't consider times that are out of the image of the function \(t_i^e\),
+Since times that are out of the image of the function \(t_i^e\) are,
+not considered,
 we can set
 \begin{equation*}
   (t_i^e)^{-1}(t) = tt_a'(t)
 \end{equation*}
 
-The arrival times out of the image of \(t_i^e\) are exactly the ones for which the function is concave
-\footnote{
-  Depending on whether the parameter \(\beta\) is allowed to be negative,
-  the interval in which the derivative of the travel time \(tt_a'(t)\) is negative can be considered out of the image as well.
-  This is not considered relevant herein,
-  since the case in which the parameter \(\beta\) is negative is not considered:
-  the probability that a realization of the random variable \(B\) is negative will indeed be neglectable.
-},
-that is, \(tt_a''(t) < 0\).
-
+Moreover, being the function \(t_i^e\) invertible on its whole domain,
+the two cases in equation~\eqref{eq:pdf-b-change-var} are equally well defined and coincide for \(t = t_i^e(b), f_B(b) = 0\).
 The density function for the transformed random variable will thus be
-\begin{equation}
-  \label{eq:pdf-b-changed-var}
-  f_{t_i^e(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
-\end{equation}
-where the employment of the function \([\bullet]^+\) ensures the probability density function to be equal to zero where the travel time function is concave.
-
-We will now study the probability
 \begin{equation*}
-  \prob\left(T^* \in (t_i^e(B), \min\{t_f^e(B), t_s(B, \Gamma)\})|\, t = t_i^e(B)\right)
+  f_{t_i^e(B)}(t) =
+  \begin{cases}
+    f_B(tt_a'(t)) \left|tt_a''(t)\right| & \text{if } t \in t_i^e\left((0, \beta_{max})\right) \\
+    0 & \text{otherwise}
+  \end{cases}
 \end{equation*}
 
-The condition \(t = t_i^e(B)\) implies, for the reasons above,
+Note now that the second case is necessary only if the travel time function is concave,
+since assumption~\ref{ass:domain-rv} ensures that the two expression coincide for \(tt_a'(t) \leq 0\).
+
+The syntax can thus be simplified by writing
+\begin{equation*}
+  f_{t_i^e(B)}(t) = f_B(tt_a'(t)) [tt_a''(t)]^+
+\end{equation*}
+where the employment of the function \([\bullet]^+\) ensures that,
+when the travel time function is concave (that is, its second derivative \(tt_a''(t)\) is negative),
+the density is equal to zero.
+\end{proof}
+
+An explicit expression for the density \(f_{t_i^e(B)}\) has thus been found.
+In the following, we will study the probability
+\begin{equation*}
+  \prob\left(T^* \in E(B, \Gamma)|\, t_i^e(B) = t\right)
+\end{equation*}
+
+The condition \(t_i^e(B) = t\) implies, by definition of \(t_i^e\),
 \begin{align*}
   B & = (t_i^e)^{-1}(t) \\
     & = tt_a'(t)
@@ -366,11 +448,14 @@ The condition \(t = t_i^e(B)\) implies, for the reasons above,
 By substituting these in the original expression, we get
 \begin{equation}
   \label{eq:early-subst}
-  f_{T^{opt}, Q}(t, -1) = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
+  \begin{split}
+    f_{T^{opt}, Q}(t, -1) & = \prob(T^* \in E(tt_a'(t), \Gamma))f_{t_i^e(B)}\\
+    & = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
+  \end{split}
 \end{equation}
 
 Integrating the random variables,
-and substituting what found in equation~\eqref{eq:pdf-b-changed-var},
+and substituting what found in Lemma~\ref{lemma:transformed-B},
 yields an explicit expression for the desired probability density function:
 \begin{equation}
   \label{eq:early-final}
