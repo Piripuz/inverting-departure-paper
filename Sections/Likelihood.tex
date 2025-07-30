@@ -108,9 +108,10 @@ Consider thus now the problem of finding values for the bounds of the intervals 
 The points in which the arrivals occur are easy to estimate.
 
 Let
-\begin{align*}
+\begin{align}
+  \label{eq:b_max-g_max-def}
   \beta_{max} = \max_t tt_a'(t) && \gamma_{max} = -\min_t tt_a'(t)
-\end{align*}
+\end{align}
 
 The following functions are well defined:
 \begin{equation}
@@ -303,11 +304,13 @@ In the following part, the likelihood of being an early or late arrival will be 
 
 \subsubsection{Early and Late Arrivals}
 
-Before discussing the case of early and late arrivals,
-the following definition,
-which gives a simpler way to separate the early arrivals from the late arrivals,
-is given:
+We will here consider the case of early arrivals.
+In case of late arrival, the reasoning is analogous and will not be covered in detail.
 
+In order to be able to better treat the case,
+some definitions are needed.
+
+The following definition allows to clearly separate early and late arrivals:
 \begin{definition}
   \label{def:intervals-tilde}
   We denote as \(\tilde{E}(\beta, \gamma), \tilde{L}(\beta, \gamma)\) the intervals which yield early or late arrivals:
@@ -325,26 +328,42 @@ the optimal arrival time \(t^{opt}(\beta, \gamma, t^*)\) will be an early (or la
 if and only if the desired arrival time \(t^*\)
 is in the interval \(\tilde{E}(\beta, \gamma)\) (respectively, \(\tilde{L}(\beta, \gamma)\)).
 
-Another assumption is now made on the distributions of the variables \(B, \Gamma\):
+Note now that there are some cases in which early arrivals cannot happen,
+regardless of the value of the desired arrival time \(t^*\).
+The following definition is useful to treat these cases separately:
+\begin{definition}
+  Let \(T^{opt}\) be defined as in~\eqref{eq:rv-opt-arr}, \(\beta_{max}\) as in \eqref{eq:b_max-g_max-def}.
 
-\begin{assumption}
-  \label{ass:domain-rv}
-  The random variables \(B, \Gamma\) are entirely supported, respectively,
-  into the intervals \((0, \beta_{max})\), \((0, \gamma_{max})\),
-  that is
-  \begin{align*}
-    \int_0^{\beta_{max}}f_B(b) db = 1 && \int_0^{\gamma_{max}}f_\Gamma(g) dg = 1
-  \end{align*}
-\end{assumption}
+  We define the random variable \(T_e^{opt}\) as
+  \begin{equation*}
+    T_e^{opt} = T^{opt} |\, B \in (0, \beta_{max}]
+  \end{equation*}
+\end{definition}
 
-Note that this assumption is quite restrictive,
-and contrasts with recent literature \cite[see][]{hall2024inframarginal}.
-It is anyway useful while developing the theory,
-and will be dropped in a later stage.
+When considering early arrivals,
+the random variable \(T_e^{opt}\) corresponds to neglecting every value of \(\beta > \beta_{max}\),
+that is,
+the values for which early arrivals cannot happen.
 
-Consider thus now the value of the function
+Note now that, since early arrivals are impossible when \(B > \beta_{max}\),
+the probability density function for the variable \(T^{opt}\) can be easily retrieved from the density of the variable \(T_e^{opt}\):
+\begin{equation}
+  \label{eq:pdf-T_e^opt}
+  \begin{split}
+    f_{T^{opt}, Q}(t, -1) & = f_{T_e^{opt}, Q}(t, -1) \prob\left(B \in (0, \beta_{max})\right) \\
+                & = f_{T_e^{opt}, Q}(t, -1) F_B(\beta_{max})
+  \end{split}
+\end{equation}
+where \(F_B\) is the cumulative distribution function\footnote{
+  We are here assuming the random variables \(B, \Gamma\) to be supported only in the positive semi-axis.
+  This assumption is not restrictive, since we assume the users not to benefit from early (or late) arrivals.
+}
+for the random variable \(B\),
+and \(f_{T_e^{opt}, Q}\) the joint p.d.f. for the variables \(T_e^{opt}, Q\).
+
+We can now consider the value of the function
 \begin{equation*}
-  f_{T^{opt}, Q}(t, -1)
+  f_{T_e^{opt}, Q}(t, -1)
 \end{equation*}
 
 Observation NUMBER shows that the arrival time \(t\) is an early arrival if and only if two conditions,
@@ -359,14 +378,14 @@ the events are thus not independent anymore,
 and their joint density will be computed via its decomposition in conditional densities:
 \begin{equation}
   \label{eq:late-joint-decomp}
-  f_{T^{opt}, Q}(t, -1) = \prob\left(T^* \in \tilde{E}(B, \Gamma)|\, t_i^e(B) = t\right) f_{t_i^e(B)}(t)
+  f_{T_e^{opt}, Q}(t, -1) = \prob\left(T^* \in \tilde{E}(B, \Gamma)|\, t_i^e(B) = t\right) f_{t_i^e(B)}(t)
 \end{equation}
 where \(f_{t_i^e(B)}(t)\) is the probability density function for the random variable \(t_i^e(B)\).
 The density is computed in the following lemma:
 \begin{lemma}
   \label{lemma:transformed-B}
   Let \(t_i^e\) be the function defined in~\eqref{eq:def-inv-der}, \(B\) a random variable with probability density function \(f_B\),
-  satisfying Assumption~\ref{ass:domain-rv}.
+  exclusively supported in the interval \((0, \beta_{max})\)
   
   The probability density function \(f_{t_i^e(B)}\) for the transformed random variable \(t_i^e(B)\) is given by
   \begin{equation*}
@@ -399,19 +418,19 @@ where \(\text{supp}(f_B)\) is the support of the probability density function \(
   \text{supp}(f_B) = \{b \in \R |\, f_B(b) > 0 \}
 \end{equation*}
 
-Note now that Assumption~\ref{ass:domain-rv} holds:
-\(\text{supp}(f_B)\) is thus in the domain of the function \(t_i^e\),
+Note now that, by hypothesis,
+\(\text{supp}(f_B)\) is in the domain of the function \(t_i^e\),
 and equation~\eqref{eq:pdf-b-change-var} is well defined.
 
-Since times that are out of the image of the function \(t_i^e\) are,
-not considered,
+Since times that are out of the image of the function \(t_i^e\) are not considered,
 we can set
 \begin{equation*}
   (t_i^e)^{-1}(t) = tt_a'(t)
 \end{equation*}
 
 Moreover, being the function \(t_i^e\) invertible on its whole domain,
-the two cases in equation~\eqref{eq:pdf-b-change-var} are equally well defined and coincide for \(t = t_i^e(b), f_B(b) = 0\).
+the two cases in equation~\eqref{eq:pdf-b-change-var} are equally well defined and coincide for \(t = t_i^e(b), f_B(b) = 0\):
+we can thus consider the interval \((0, \beta_{max})\) rather than the set \(\text{supp}(f_B)\).
 The density function for the transformed random variable will thus be
 \begin{equation*}
   f_{t_i^e(B)}(t) =
@@ -421,8 +440,7 @@ The density function for the transformed random variable will thus be
   \end{cases}
 \end{equation*}
 
-Note now that the second case is necessary only if the travel time function is concave,
-since assumption~\ref{ass:domain-rv} ensures that the two expression coincide for \(tt_a'(t) \leq 0\).
+Note now that the second case is necessary only if the travel time function is concave.
 
 The syntax can thus be simplified by writing
 \begin{equation*}
@@ -430,7 +448,7 @@ The syntax can thus be simplified by writing
 \end{equation*}
 where the employment of the function \([\bullet]^+\) ensures that,
 when the travel time function is concave (that is, its second derivative \(tt_a''(t)\) is negative),
-the density is equal to zero.
+the density \(f_{t_i^e(B)}(t)\) is equal to zero.
 \end{proof}
 
 An explicit expression for the density \(f_{t_i^e(B)}\) has thus been found.
@@ -445,11 +463,11 @@ The condition \(t_i^e(B) = t\) implies, by definition of \(t_i^e\),
     & = tt_a'(t)
 \end{align*}
 
-By substituting these in the original expression, we get
+By substituting this in the original expression, we get
 \begin{equation}
   \label{eq:early-subst}
   \begin{split}
-    f_{T^{opt}, Q}(t, -1) & = \prob(T^* \in E(tt_a'(t), \Gamma))f_{t_i^e(B)}\\
+    f_{T_e^{opt}, Q}(t, -1) & = \prob(T^* \in E(tt_a'(t), \Gamma))f_{t_i^e(B)}\\
     & = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
   \end{split}
 \end{equation}
@@ -459,13 +477,13 @@ and substituting what found in Lemma~\ref{lemma:transformed-B},
 yields an explicit expression for the desired probability density function:
 \begin{equation}
   \label{eq:early-final}
-  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+
+  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ F_B(\beta_{max})
 \end{equation}
 
 For the late arrivals, an analogous reasoning finds a similar expression:
 \begin{equation}
   \label{eq:late-final}
-  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
+  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+ F_\Gamma(\gamma_{max})
 \end{equation}
 
 This last expression terminates the possible values for the variable \(Q\),
@@ -478,15 +496,15 @@ we find the following:
 \begin{multline}
   \label{eq:pdf-final}
     f_{T^{opt}}(t) = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db \\
-    + \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ \\
-    + \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_B(tt_a'(t)) [tt_a''(t)]^+
+    + \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+F_B(\beta_{max}) \\
+    + \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+F_\Gamma(\gamma_{max})
 \end{multline}
 
 Given the probability density functions according to which the scheduling preferences parameters \(\beta, \gamma\) and the desired arrival time \(t^*\) are distributed,
 this expression allows thus the direct computation of the distribution of the optimal arrival time \(t^{opt}\),
 which minimizes the cost faced by the traveller when choosing a departure time.
 
-If we suppose the distributions of the parameters to be parametrized by some parameter \(\theta\),
+If we suppose the distributions of the users' characteristics to be parametrized by some parameter \(\theta\),
 this allows a Maximum Likelihood Estimation of the parameter,
 that will be performed in the following.
 
