@@ -243,13 +243,13 @@ we are able, by using this characterization, to better describe the event at iss
 
 In particular, we note that the arrival time \(t\) is an optimal on-time arrival if and only if two conditions are satisfied at the same time:
 the time \(t\) has to be a realization of the desired arrival time \(T^*\),
-and it has to  be out from the intervals
-\footnote{
+and it has to  be out from the intervals\footnote{
   Note that \(E(B), L(\Gamma)\) are here sets of intervals rather than intervals.
   They can be, in this section, treated as intervals:
   Observation~\ref{obs:simplified-char} shows indeed that they can't contain more than a single interval.
 }
-\(E(B), L(\Gamma)\).
+\(E(B), L(\Gamma)\),
+as defined in Propositions~\ref{prop:into-early},~\ref{prop:into-late}.
 
 Being the random variable \(T^*\) independent from \(B, \Gamma\),
 the two events above are independent and their likelihood can be multiplied:
@@ -454,7 +454,7 @@ the density \(f_{t_i^e(B)}(t)\) is equal to zero.
 An explicit expression for the density \(f_{t_i^e(B)}\) has thus been found.
 In the following, we will study the probability
 \begin{equation*}
-  \prob\left(T^* \in E(B, \Gamma)|\, t_i^e(B) = t\right)
+  \prob\left(T^* \in \tilde{E}(B, \Gamma)|\, t_i^e(B) = t\right)
 \end{equation*}
 
 The condition \(t_i^e(B) = t\) implies, by definition of \(t_i^e\),
@@ -467,7 +467,7 @@ By substituting this in the original expression, we get
 \begin{equation}
   \label{eq:early-subst}
   \begin{split}
-    f_{T_e^{opt}, Q}(t, -1) & = \prob(T^* \in E(tt_a'(t), \Gamma))f_{t_i^e(B)}\\
+    f_{T_e^{opt}, Q}(t, -1) & = \prob(T^* \in \tilde{E}(tt_a'(t), \Gamma))f_{t_i^e(B)}(t)\\
     & = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), \bar{t^*}(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
   \end{split}
 \end{equation}
