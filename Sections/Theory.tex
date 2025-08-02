@@ -26,28 +26,15 @@ where $tt_a(t_a)$ denotes the experienced travel time for travelers arriving at 
    The travel time profile function $tt_a(t_a)$ is continuous, nonnegative, and bounded. 
 \end{assumption}
 
-
-\begin{assumption}\label{ass:quasiconc}
-   The travel time profile function $tt_a(t_a)$ is unimodal. 
-\end{assumption}
-
-Roughly speaking, under Assumption \ref{ass:quasiconc}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards. 
- 
-\begin{assumption}\label{ass:twiceDiff}
-  There exists an interval $[t_e, t_l]$ such that the travel time profile function $tt_a(t_a)$ is concave in $[t_e, t_l ]$, and convex otherwise. 
-\end{assumption}
-
-Assumption \ref{ass:twiceDiff} imposes an additional condition on the travel time profile. In other words, it requires the derivative of the travel time to be unimodal both before and after the peak.
-
 \subsection{Minimum of the cost function}
 \label{sec:cost_minima}
 
-Next, we characterize the optimal arrival time for an individual user with given scheduling preferences parameterized by $\beta, \gamma$, and $t^*$. Recall that users choose their arrival times to minimize their individual travel cost, and we define the minimal travel cost $C^{opt}$ as
+Next, we characterize the arrival time preference for an individual user with given scheduling preferences parameterized by $\beta, \gamma$, and $t^*$. Recall that users choose their arrival times to minimize their individual travel cost, and we define the minimal travel cost $C^{opt}$ as
     \begin{equation*}
       C^{opt} = \min_{t_a \in \mathcal{T}}C(t_a).
     \end{equation*} 
 
-To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the minimal early arrival cost (MEAC) $$C_e^{opt}  = \min_{t_a \le  t^*}C(t_a)$$ and the minimal late arrival cost (MLAC) $$C_l^{opt} =  \min_{t_a \ge  t^*}C(t_a).$$ 
+To facilitate our discussion, we introduce two technical terms regarding the conditional minima of the travel cost function $C(t_a)$: the minimal early arrival cost$$C_e^{opt}  = \min_{t_a \le  t^*}C(t_a)$$ and the minimal late arrival cost  $$C_l^{opt} =  \min_{t_a \ge  t^*}C(t_a).$$ 
 
 \begin{definition}\label{def:CEA}
     Given any travel time profile function $tt_a(t_a)$ and \(\beta\),  an interval $[t_e, \bar t_e]$ with $\bar t_e > t_e$ is termed an early arrival (EA) interval when the following condition holds:
@@ -70,28 +57,34 @@ Roughly speaking, congestion increases (respectively, decreases) rapidly with th
  An EA (respectively, LA) interval is said to be a critical EA (CEA) or critical LA (CLA) interval if it is not strictly contained within any other EA (LA) interval.
 \end{definition}
 
-Let $E$ denote the set of all critical early arrival (CEA) intervals for a given early arrival penalty $\beta$.
+The following graph illustrates the CEA and CLA intervals in a general travel time profile function $tt_a$. As we can observe, there are two CEA intervals and two CLA intervals. The first CEA interval overlaps with the first CLA interval, while the second CEA and CLA intervals are disjoint.
+ 
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\textwidth]{illustration.pdf}
+  \caption{An example of the CEA and CLA intervals for a general travel time profile function}
+  \label{fig:illustration}
+\end{figure}
+
 
 % \begin{lemma}
 %     Each EA interval corresponds to exactly one critical CEA interval.
 % \end{lemma}
 
 \begin{lemma}\label{lemma:disjoint}
-Any two critical CEA intervals are disjoint.
-
-
-
+Any two critical early arrival (CEA) intervals or two critical late arrival (CLA) intervals are disjoint.
 \end{lemma}
 
 \begin{proof}
-Suppose that there are two CEA intervals $[t_e, t_l]$ and $[t_e', t_l']$ overlapping with each other, i.e., $t_e' \le t_l$ and $t_e \le t_l'$. Then for any $t$ in the overlapped part $[t_e', t_l]$, the condition still holds: 
+Suppose that there are two CEA intervals $[t_e, \bar t_e]$ and $[t_e', t_l']$ overlapping with each other, i.e., $t_e' \le t_l$ and $t_e \le t_l'$. Then for any $t$ in the overlapped part $[t_e', t_l]$, the condition still holds: 
 $$
 tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ).
 $$
-Thus, the interval $[t_e, t_l']$ is an EA interval and it contains  $[t_e, t_l]$ and $[t_e', t_l']$. This contradicts the definition of CEA intervals.
+Thus, the interval $[t_e, t_l']$ is an EA interval and it contains  $[t_e, t_l]$ and $[t_e', t_l']$. This contradicts the definition of CEA intervals. The proof for CLA intervals is similar and therefore omitted here. 
 \end{proof}
 
-By Lemma \ref{lemma:disjoint}, each desired arrival time $t^*$ corresponds to exactly one critical CEA interval, which leads to the following proposition. 
+By Lemma \ref{lemma:disjoint}, each desired arrival time $t^*$ can fall into at most one CEA (CLA) interval, which leads to the following proposition. 
 
 \begin{prop}
   \label{prop:into-early}
@@ -100,6 +93,7 @@ $$C_e^{opt} = \begin{cases}
     C(t_e),  \text{if }\exists [t_e, \bar{t}_e] \in E \text{ such that } t^* \in [t_e, \bar{t}_e],\\
      tt_a(t^*), \text{otherwise}. 
 \end{cases}$$
+where $E$ denotes the set of all critical early arrival (CEA) intervals.
 \end{prop}
 
 
@@ -111,14 +105,15 @@ $$C_e^{opt} = \begin{cases}
 \begin{proof}
 Recall that the minimal early arrival cost  $C_e^{opt}$ is defined as $$C_e^{opt} = \min_{t \le t^*} C(t).$$
 
-(1) We start by discussing the case when there exists some CEA interval $[t_e, \bar{t}_e]$ such that  $t^* \in [t_e, \bar{t}_e]$.  To show that $C_e^{opt}$ is achieved at $t_e$, it is equivalent to show that $C(t) \ge C(t_e) $ for any $t \le t^*$. We proceed to show that $C(t) \ge C(t_e)$ in two cases with $t \in [t_e, t^*]$ and $t < t_e$, respectively.    
+(1) We start by discussing the case when there exists some CEA interval $[t_e, \bar{t}_e]$ such that  $t^* \in [t_e, \bar{t}_e]$.  To show that $C_e^{opt}$ is achieved at $t_e$, it is equivalent to show that $C(t) \ge C(t_e) $ for any $t \le t^*$. We proceed to show that $C(t) \ge C(t_e)$ in two cases when $t \in [t_e, t^*]$ and $t < t_e$, respectively.    
 
-Case 1: $t \in [t_e, t^*]$.  Recall that the trip cost at any $t \in [t_e, t^*]$ is defined as 
+Case 1: $t \in [t_e, t^*]$.  Recall that the trip cost at any $t \in [t_e, t^*]$ can be written as 
 $$C(t) = tt_a(t) + \beta (t^* - t).$$
-Using Inequality \eqref{eq:increase_faster} from Definition \ref{def:CEA}, i.e., $tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e]$, we obtain that 
+Using Inequality \eqref{eq:increase_faster} from Definition \ref{def:CEA} of CEA intervals, i.e., $$tt_a(t ) \ge tt_a(t_e)  + \beta (t - t_e ), \forall t \in [t_e, \bar t_e],$$ we obtain that 
 $$C(t) \ge tt_a(t_e) + \beta (t - t_e ) + \beta (t^* - t) = C(t_e), \forall t \in [t_e, \bar t_e].$$
+Thus, we have $C(t) \ge C(t_e) $ for any $t \in [t_e, t^*]$.
 
-Case 2: $t < t_e$. We prove by contradiction. Suppose that there exists some $t'< t_e$ such that $C(t') < C(t_e)$.  Define a set 
+Case 2: $t < t_e$. We prove that $C(t) \ge C(t_e) $ for any $t < t_e$ by contradiction. Suppose that there exists some $t'< t_e$ such that $C(t') < C(t_e)$.  Define a set 
 \begin{equation}\label{eq:def_T}
     T = \{t \in [t', t_e] \mid tt_a(t')  + \beta (t - t' ) =  tt_a(t )\},
 \end{equation}
@@ -156,47 +151,85 @@ That is, $[t'', t^*] $ is an EA interval. And there always exists some CEA inter
 \end{proof}
 
 In parallel, we can prove the following proposition concerning late arrivals. The proof is similar to the proof for Proposition \ref{prop:into-early} and therefore omitted here. 
+
+
 \begin{prop}
   \label{prop:into-late}
-Under Assumption \ref{ass:continous}, if there exists a critical late arrival (CLA) interval $[\bar t_l, t_l]$ for a given late arrival penalty $\gamma$, then the minimal early arrival cost for any desired arrival time $t^* \in [\bar t_l, t_l]$ is attained at $t_l$, i.e., 
-$C_l^{opt} = C(t_l)$.
-\end{prop}
-
-
-
-\begin{prop}
-   Under Assumptions \ref{ass:continous} - \ref{ass:quasiconc}, given $\beta, \gamma$, and $tt$, if neither of the sets of CEA and CLA intervals is empty, i.e., $E, L \neq \emptyset$, then there exists a time threshold $$\bar t^* = \frac{tt_a(t_L) - tt_a(t_E) + \beta t_E - \gamma t_L}{\beta - \gamma}$$
-   such that 
-$$C^{opt}  = \begin{cases}
-    C^{opt}_e  , t^* < \bar t^*, \\
-     C^{opt}_l, \text{otherwise,}
+ Under Assumption \ref{ass:continous}, given any $tt_a(t)$, $\gamma$, and $t^*$, the minimal late arrival cost is  
+$$C_l^{opt} = \begin{cases}
+    C(t_l),  \text{if }\exists [\bar{t}_l, t_l] \in L \text{ such that } t^* \in [\bar{t}_l, t_l],\\
+     tt_a(t^*), \text{otherwise}. 
 \end{cases}$$
-where $t_L$ and $t_E$ are the left and right endpoints of the latest CEA interval and the earliest CLA interval, respectively. 
+where $L$ denotes the set of all critical late arrival (CLA) intervals.
 \end{prop}
 
+
+ Propositions \ref{prop:into-early} and \ref{prop:into-late} are used to identify the minimal travel cost $C^{opt}$ by comparing the MEAC $C_e^{opt}$ and the MLAC $C_l^{opt}$. There are four cases to be discussed, of which the first three cases can be directly derived with Propositions \ref{prop:into-early} and \ref{prop:into-late}. 
+
+\begin{corollary}
+     Under Assumption \ref{ass:continous},  if the desired arrival time $t^*$ does not fall into any CEA or CLA intervals, then the minimal travel cost is $C^{opt} = tt_a(t^*)$. 
+\end{corollary}
 \begin{proof}
-    
+    We have $C_e^{opt} = tt_a(t^*)$ by Proposition \ref{prop:into-early} and $C_l^{opt} = tt_a(t^*)$ by Proposition \ref{prop:into-late}. Therefore, the corresponding minimal travel cost is $C^{opt} = tt_a(t^*)$. Namely, it is optimal to arrive on time. 
 \end{proof}
+
+ \begin{itemize}
+     \item Case 1: the desired arrival time $t^*$ does not fall into any CEA or CLA intervals. We have $C_e^{opt} = tt_a(t^*)$ by Proposition \ref{prop:into-early} and $C_l^{opt} = tt_a(t^*)$ by Proposition \ref{prop:into-late}. Therefore, the corresponding minimal travel cost is $C^{opt} = tt_a(t^*)$. Namely, it is optimal to arrive on time. 
+ 
+  \item  Case 2: the desired arrival time  $t^*$ falls into a CEA interval but not any CLA interval. We have $C_e^{opt} \le tt_a(t^*)$ by Proposition \ref{prop:into-early} while $C_l^{opt} = tt_a(t^*)$ by Proposition \ref{prop:into-late}.  Then we can immediately conclude that $C_e^{opt} \le C_l^{opt}$ and therefore the corresponding minimal travel cost is $C^{opt} = C_e^{opt}$. Namely, it is optimal to arrive early.  
+ 
+  \item  Case 3: the desired arrival time $t^*$ falls into a CLA interval but not any CEA interval. Similarly, the corresponding minimal travel cost is $C^{opt} = C_l^{opt}$. Namely, it is optimal to arrive late. 
+ \end{itemize}
+ 
+In Case 4, the desired arrival time $t^*$ falls into both a CEA interval and a CLA interval. The discussion is formalized in the following proposition. 
 
 \begin{prop}
+Suppose that there exists a CEA interval $[t_e, \bar t_e]$ and a CLA interval $[\bar t_l,  t_l]$ such that $t^* \in [t_e, \bar t_e]$ and $t^* \in [\bar t_l,  t_l]$.  Under Assumptions \ref{ass:continous}, there exists a desired arrival time threshold $$\bar t^* = \frac{tt_a(t_l) - tt_a(t_e) + \beta t_e + \gamma t_l}{\beta + \gamma}$$
+   such that 
+$$\begin{cases}
+   C_e^{opt} < C_l^{opt} ,  \text{if } t^* < \bar t^*, \\
+      C_e^{opt} = C_l^{opt}, \text{if }  t^* = \bar t^*, \\
+   C_e^{opt} > C_l^{opt},  \text{if }  t^* > \bar t^*.
+\end{cases}$$
 
-Under Assumption \ref{ass:quasiconc}, if the optimal early arrival time (OEAT) $t_e^{opt}$ is not $t^*$, i.e., $t_e^{opt} \neq t^*$,  then the OEAT stays constant for any $t^* \in [t_e^{opt}, t_e^{opt}]$.
-
-
-there exist two collections of disjoint intervals
-  \begin{align*}
-    E & = \{(t_e^n, \bar{t_e^n})\}_n,\quad n = 1, \dots, N, \\
-    L & = \{(\bar{t_l^m}, t_l^m)\}_m,\quad m = 1, \dots, M.
-  \end{align*}
-  \begin{enumerate}
-      \item If there exists some \(n\) such that \(t^* \in (t_e^n, \bar{t}_e^n)\), the optimal early arrival time (OEAT) will be $t_e^{opt} = t_e^i$. 
-      \item If there exists some \(m\) such that \(t^* \in (\bar{t}_m^j, t_m^j)\), the optimal early arrival time (OLAT) will be $t_l^{opt} = t_l^{m}$.
-  \end{enumerate}
 
 \end{prop}
-\begin{proof}
 
+\begin{proof}
+Note that at the threshold $\bar t^*$, by definition we have $$tt_a(t_e) + \beta(\bar t^* - t_e) = tt_a(t_l) + \gamma(t_l- \bar t^*).$$
+Since $[t_e, \bar t_e]$ is a CEA interval, and $[\bar t_l,  t_l]$ is a CLA interval, by Propositions \ref{prop:into-early} and \ref{prop:into-late}, we have $$C_e^{opt} = C(t_e) = tt_a(t_e) + \beta(t^* - t_e), $$ $$C_l^{opt} = C(t_l) = tt_a(t_l) + \gamma( t_l-t^*).$$
+Thus, we have $C_e^{opt} = C_l^{opt} $ when $t^* = \bar t^*$. Obviously, we have $\partial C_e^{opt}/\partial t^* >0$ and $\partial C_l^{opt}/\partial t^* <0$, which leads to that $\partial (C_e^{opt} -  C_l^{opt}) /\partial t^* <0 $. The proof is completed. 
 \end{proof}
+
+Note that the threshold $\bar t^*$ is not necessarily in the CEA interval or the CLA interval when one of the intervals contains the other.  
+
+\subsection{A representative case}
+
+Now, we continue the analysis based on a typical congestion pattern, subject to the following assumption.
+\begin{assumption}\label{ass:twiceDiff}
+   The travel time profile function $tt_a(t)$ is unimodal and twice differentiable. There exists an interval $   \mathcal{D}_{conc} = [k_1, k_1]$ such that $tt_a(t)$ is concave in $\mathcal{D}_{conc}$, and convex otherwise. 
+\end{assumption}
+
+Roughly speaking, under Assumption \ref{ass:twiceDiff}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards. Additionally, it requires the derivative of the travel time to be unimodal both before and after the peak.
+
+
+
+\begin{prop}
+Under Assumptions \ref{ass:continous} - \ref{ass:twiceDiff}, there exist at most one CEA interval $[t_e, \bar t_e]$ and at most one CLA interval $[\bar t_l, t_l]$ such that $tt_a'(t_e)= \beta$ and $ tt_a'(t_l)= \gamma$.
+\end{prop}
+\begin{proof}
+By Proposition \ref{prop:into-early}, the left endpoint of a CEA interval is a minimum of the cost function, i.e., $C(t_e) = \min_{t \le t^*} C(t)$ with 
+   $$C(t) = tt_a(t) + \beta (t^* - t).$$
+Under Assumption \ref{ass:twiceDiff}, the function $tt_a$ is twice differentiable. Thus, by the optimality condition, we have 
+\begin{align}
+tt_a'(t_i^e) = \beta,\\
+tt_a''(t_i^e) \geq 0.
+\end{align}
+
+By Assumption \ref{ass:twiceDiff}, when $t < k_1$, $tt_a(t)$ is convex and increasing in $t$. Then $tt'_a(t)$ is monotonically increasing in $t$ when $t< k_1$. Thus, there is at most one $t < k_1$ such that $tt_a'(t) = \beta$. When $t \in [k_1, k_2]$,  $tt_a(t)$ is concave and therefore $tt_a''(t) \le 0$. When $t >k_2$,  $tt_a(t)$ is concave and decreasing in $t$, i.e., $tt_a'(t)\le 0$ for all $t > k_2$.  Therefore, there is at most one $t \in \mathcal{T}$ such that $tt_a'(t) = \beta$ and $tt_a''(t) \geq 0$. Namely, there is at most one CEA interval. Similarly, we can show that there is at most one CLA interval. The proof is completed. 
+\end{proof}
+
+
 
 Further, we consider that the congestion pattern, described by the travel time profile, is such that a traveler will not arrive earlier than anyone who departs earlier than her/him, which is termed as the first-in-first-out (FIFO) rule in literature. Thus, we impose the following assumption regarding the travel time function  $tt_a(t_a)$.
 
@@ -207,7 +240,7 @@ The travel time profile function $tt_a(t_a)$ is differentiable, and $tt'_a(t_a) 
 \end{assumption}
 
 
-Under Assumption \ref{ass:FIFO}, the FIFO principle is always satisfied. To see this, it is equivalent to show that the arrival time $t_a$ is weakly increasing in the departure time $t_d$, i.e., $\partial t_d / \partial t_a \ge 0$ under Assumption \ref{ass:FIFO}.  Note that by definition, we have $ t_d = t_a - tt_a(t_a)  $.  Obviously, when $tt'_a(t_a) \le 1$, we have $\partial t_d / \partial t_a = 1 - tt_a'(t_a) \ge 0$. Therefore, a traveler will arrive earlier if she departs earlier. 
+Under Assumption \ref{ass:FIFO}, the FIFO principle is always satisfied. To see this, it is equivalent to show that the arrival time $t_a$ is weakly increasing in the departure time $t_d$, i.e., $\partial t_d / \partial t_a \ge 0$ under Assumption \ref{ass:FIFO}.  Note that by definition, we have $ t_d = t_a - tt_a(t_a)$.  Obviously, when $tt'_a(t_a) \le 1$, we have $\partial t_d / \partial t_a = 1 - tt_a'(t_a) \ge 0$. Therefore, a traveler will arrive earlier if she departs earlier. 
 
 
 
