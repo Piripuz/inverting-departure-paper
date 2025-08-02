@@ -315,8 +315,8 @@ The following definition allows to clearly separate early and late arrivals:
   \label{def:intervals-tilde}
   We denote as \(\tilde{E}(\beta, \gamma), \tilde{L}(\beta, \gamma)\) the intervals which yield early or late arrivals:
   \begin{align*}
-    \tilde{E}(\beta, \gamma) & = (t_i^e(\beta), \min\{t_f^e(\beta), t_s(\beta, \gamma)\})\\
-    \tilde{L}(\beta, \gamma) & = (\max\{t_i^l(\gamma), t_s(\beta, \gamma)\}, t_f^l(\gamma))
+    \tilde{E}(\beta, \gamma) & = (t_i^e(\beta), \min\{t_f^e(\beta), \bar{t^*}(\beta, \gamma)\})\\
+    \tilde{L}(\beta, \gamma) & = (\max\{t_i^l(\gamma), \bar{t^*}(\beta, \gamma)\}, t_f^l(\gamma))
   \end{align*}
 \end{definition}
 
@@ -468,7 +468,7 @@ By substituting this in the original expression, we get
   \label{eq:early-subst}
   \begin{split}
     f_{T_e^{opt}, Q}(t, -1) & = \prob(T^* \in E(tt_a'(t), \Gamma))f_{t_i^e(B)}\\
-    & = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
+    & = \prob(T^* \in (t, \min\{t_f^e(tt_a'(t)), \bar{t^*}(tt_a'(t), \Gamma)\}))f_{t_i^e(B)}(t)
   \end{split}
 \end{equation}
 
@@ -477,13 +477,13 @@ and substituting what found in Lemma~\ref{lemma:transformed-B},
 yields an explicit expression for the desired probability density function:
 \begin{equation}
   \label{eq:early-final}
-  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ F_B(\beta_{max})
+  f_{T^{opt}, Q}(t, -1) = \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), \bar{t^*}(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+ F_B(\beta_{max})
 \end{equation}
 
 For the late arrivals, an analogous reasoning finds a similar expression:
 \begin{equation}
   \label{eq:late-final}
-  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+ F_\Gamma(\gamma_{max})
+  f_{T^{opt}, Q}(t, 1) = \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), \bar{t^*}(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+ F_\Gamma(\gamma_{max})
 \end{equation}
 
 This last expression terminates the possible values for the variable \(Q\),
@@ -496,8 +496,8 @@ we find the following:
 \begin{multline}
   \label{eq:pdf-final}
     f_{T^{opt}}(t) = f_{T^*}(t)\int_{\beta_0(t)}^{\beta_{\text{max}}}\int_{\gamma_0(t)}^{\gamma_{\text{max}}}f_B(b)f_\Gamma(g)\, dg\, db \\
-    + \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), t_s(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+F_B(\beta_{max}) \\
-    + \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), t_s(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+F_\Gamma(\gamma_{max})
+    + \int_0^\infty \int_t^{\min\{t_f^e(tt_a'(t)), \bar{t^*}(tt_a'(t), g)\}}f_{T^*}(s) f_\Gamma(g)\ ds\ dg f_B(tt_a'(t)) [tt_a''(t)]^+F_B(\beta_{max}) \\
+    + \int_0^\infty \int_t^{\max\{t_i^l(-tt_a'(t)), \bar{t^*}(b, -tt_a'(t))\}}f_{T^*}(s) f_B(b)\ ds\ db f_\Gamma(-tt_a'(t)) [tt_a''(t)]^+F_\Gamma(\gamma_{max})
 \end{multline}
 
 Given the probability density functions according to which the scheduling preferences parameters \(\beta, \gamma\) and the desired arrival time \(t^*\) are distributed,
