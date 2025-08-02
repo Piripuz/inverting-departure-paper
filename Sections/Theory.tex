@@ -201,13 +201,75 @@ Since $[t_e, \bar t_e]$ is a CEA interval, and $[\bar t_l,  t_l]$ is a CLA inter
 Thus, we have $C_e^{opt} = C_l^{opt} $ when $t^* = \bar t^*$. Obviously, we have $\partial C_e^{opt}/\partial t^* >0$ and $\partial C_l^{opt}/\partial t^* <0$, which leads to that $\partial (C_e^{opt} -  C_l^{opt}) /\partial t^* <0 $. The proof is completed. 
 \end{proof}
 
-Note that the threshold $\bar t^*$ is not necessarily in the CEA interval or the CLA interval when one of the intervals contains the other.  
+Note that the threshold $\bar t^*$ is not necessarily in the CEA interval or the CLA interval when one of the intervals contains the other.
+
+The following lemma shows that,
+when increasing the value of \(\beta\),
+the intervals in the set \(E(\beta)\) can either shrink or disappear.
+
+\begin{lemma}
+  \label{lemma:increasing-int}
+  Let \(\beta_0 < \beta_1 \in \R\),
+  choose two critical early arrival intervals 
+  \begin{align*}
+    I_0 \in E(\beta_0) && I_1 \in E(\beta_1)
+  \end{align*}
+  
+  If the intervals are disjoint,
+  \begin{equation*}
+    I_0 \cap I_1 = \emptyset
+  \end{equation*}
+  then \(I_1\) is contained into \(I_0\):
+  \begin{equation*}
+    I_1 \subseteq I_0
+  \end{equation*}
+\end{lemma}
+\begin{proof}
+  The claim simply follows from definition~\ref{def:CEA}:
+  let indeed \([t_e^i, t_e^f]\) be an EA interval,
+  for \(\beta = \beta_1\).
+
+  \([t_e^i, t_e^f]\) is an EA interval for \(\beta = \beta_0\) as well.
+
+  Consider indeed a time \(t \in [t_e^i, t_e^f]\).
+  \begin{equation*}
+    \begin{split}
+      tt_a(t) \geq tt_a(t_e^i) + \beta_1(t - t_i^e) \\
+      \geq  tt_a(t_e^i) + \beta_0(t - t_i^e)
+    \end{split}
+  \end{equation*}
+
+  Lemma~\ref{lemma:disjoint} proves the claim,
+  since any early arrival interval is included in exactly one critical early arrival interval.
+\end{proof}
+
+The same holds for late arrivals:
+
+\begin{lemma}
+  \label{lemma:decreasing-int}
+  Let \(\beta_0 < \beta_1 \in \R\),
+  choose two critical early arrival intervals 
+  \begin{align*}
+    I_0 \in E(\beta_0) && I_1 \in E(\beta_1)
+  \end{align*}
+  
+  If the intervals are disjoint,
+  \begin{equation*}
+    I_0 \cap I_1 = \emptyset
+  \end{equation*}
+  then \(I_1\) is contained into \(I_0\):
+  \begin{equation*}
+    I_1 \subseteq I_0
+  \end{equation*}
+\end{lemma}
+
+The proof for Lemma
 
 \subsection{A representative case}
 
 Now, we continue the analysis based on a typical congestion pattern, subject to the following assumption.
 \begin{assumption}\label{ass:twiceDiff}
-   The travel time profile function $tt_a(t)$ is unimodal and twice differentiable. There exists an interval $   \mathcal{D}_{conc} = [k_1, k_1]$ such that $tt_a(t)$ is concave in $\mathcal{D}_{conc}$, and convex otherwise. 
+   The travel time profile function $tt_a(t)$ is unimodal and twice differentiable. There exists an interval $   \mathcal{D}_{conc} = [k_1, k_2]$ such that $tt_a(t)$ is concave in $\mathcal{D}_{conc}$, and convex otherwise. 
 \end{assumption}
 
 Roughly speaking, under Assumption \ref{ass:twiceDiff}, congestion will monotonically increase during the day up until a certain threshold time, and then monotonically decrease afterwards. Additionally, it requires the derivative of the travel time to be unimodal both before and after the peak.
@@ -994,7 +1056,7 @@ eventually, at what time the arrival occurs.
 This will be at the core of the method used in the next section:
 in a slightly simpler setting, the arrival time \(t_s\) will be computed,
 as well as the points \(t_e, \bar{t_e}, t_l, \bar{t_l}\).
-The value of the parameter \(t^*\) will then be compared to these points
+The value of the parameter \(t^*\) will then be compared to these points.
 
 %%% Local Variables:
 %%% mode: LaTeX
